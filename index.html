@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hostel Listings — HostelHub</title>
+
+  <!-- Shared styles (always include these two) -->
+  <link rel="stylesheet" href="/css/global.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+
+  <!-- Page-specific style -->
+  <link rel="stylesheet" href="/css/listings.css" />
+</head>
+<body>
+
+  <!-- Navbar injected here by components.js -->
+  <div id="navbar"></div>
+
+  <!-- ── YOUR PAGE CONTENT GOES HERE ── -->
+  <main class="container">
+    <h1>Browse Hostels</h1>
+    <div id="listings-grid"></div>
+  </main>
+  <!-- ────────────────────────────────── -->
+
+  <!-- Footer injected here by components.js -->
+  <div id="footer"></div>
+
+  <!-- Shared scripts (always include in this order) -->
+  <script src="/js/config.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/components.js"></script>
+
+  <!-- Page-specific script (always last) -->
+  <script src="/js/student/listings.js"></script>
+
+</body>
+</html>
