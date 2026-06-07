@@ -2,11 +2,19 @@ const Utils = {
 
   // Show a toast notification (success or error)
   showToast(message, type = 'success') {
+    // Remove existing toast first if any
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+
     const toast = document.createElement('div');
     toast.className = `toast toast--${type}`;
     toast.textContent = message;
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3500);
+    setTimeout(() => {
+      toast.style.transition = 'opacity 0.5s ease';
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 500);
+    }, 3500);
   },
 
   // Format a date string nicely
@@ -38,4 +46,14 @@ const Utils = {
       `<span class="star ${i < rating ? 'star--filled' : ''}">★</span>`
     ).join('');
   },
+
+  // Sync aria-invalid with the visual state for accessibility
+  syncAria(input) {
+    if (!input || !input.setAttribute) return;
+    const isInvalid = input.matches(':user-invalid') || 
+                      input.closest('.form-group--error') !== null ||
+                      input.classList.contains('user-invalid-fallback');
+    
+    input.setAttribute('aria-invalid', isInvalid ? 'true' : 'false');
+  }
 };

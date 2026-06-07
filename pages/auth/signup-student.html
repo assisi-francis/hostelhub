@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create a free student account on HostelHub and start browsing verified hostel listings near your school." />
+  <title>Create your account — HostelHub</title>
+
+  <!-- Shared stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+
+  <!-- Page-specific styling -->
+  <link rel="stylesheet" href="../../css/auth.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    
+    <!-- LEFT PANEL: Brand Image and Overlaid Marketing Banner -->
+    <section class="auth-left" aria-label="Hostel sunset background">
+      <div class="auth-left-content">
+        <h1 class="auth-left-title" id="auth-left-title">Your new hostel is just a few details away</h1>
+        <p class="auth-left-text" id="auth-left-text">
+          Create a free account and start browsing verified hostel listings near your school in minutes.
+        </p>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: Sign up form -->
+    <section class="auth-right" aria-label="Sign up form panel">
+      <div class="auth-form-container">
+        
+        <!-- Back Arrow -->
+        <a href="login.html" class="auth-back-btn" aria-label="Go back to login page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+
+        <h2 class="auth-heading">Create your account</h2>
+
+        <form id="signup-form" novalidate>
+          
+          <!-- Full Name Field Group -->
+          <div class="form-group" id="fullname-group">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              class="form-input"
+              placeholder="e.g. Amaka Osei"
+              required
+              aria-describedby="fullname-error"
+            />
+            <div id="fullname-error" class="form-error" aria-live="polite"></div>
+          </div>
+
+          <!-- Email Field Group -->
+          <div class="form-group" id="email-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="e.g. amaka@example.com"
+              autocomplete="email"
+              required
+              aria-describedby="email-error"
+            />
+            <div id="email-error" class="form-error" aria-live="polite"></div>
+          </div>
+
+          <!-- Phone Number Field Group -->
+          <div class="form-group" id="phone-group">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-input"
+              placeholder="e.g. 08012345678"
+              required
+              aria-describedby="phone-error"
+            />
+            <div id="phone-error" class="form-error" aria-live="polite"></div>
+          </div>
+
+          <!-- Password Field Group -->
+          <div class="form-group" id="password-group">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-input"
+                placeholder="Min 8 chars, uppercase, number, special char"
+                autocomplete="new-password"
+                required
+                aria-describedby="password-hint password-error"
+              />
+              <button
+                type="button"
+                id="password-toggle"
+                class="password-toggle-btn"
+                aria-label="Toggle password visibility"
+              >
+                <!-- Slashed eye (default state) -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
+            </div>
+            <p id="password-hint" class="form-hint">Must be 8+ characters with uppercase, lowercase, a number, and a special character.</p>
+            <div id="password-error" class="form-error" aria-live="polite"></div>
+          </div>
+
+          <!-- School / University Field Group -->
+          <div class="form-group" id="school-group">
+            <label for="school" class="form-label">School / University</label>
+            <input
+              type="text"
+              id="school"
+              name="school"
+              class="form-input"
+              placeholder="e.g. University of Lagos"
+              required
+              aria-describedby="school-error"
+            />
+            <div id="school-error" class="form-error" aria-live="polite"></div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn--primary btn--full">Create Account</button>
+
+        </form>
+
+        <p class="auth-footer">
+          Already have an account?
+          <a href="login.html" class="auth-footer-link">Log In</a>
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Central script resources loaded in team-mandated order -->
+  <script src="../../js/config.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/api.js"></script>
+  <script src="../../js/auth.js"></script>
+  <script src="../../js/components.js"></script>
+
+</body>
+</html>

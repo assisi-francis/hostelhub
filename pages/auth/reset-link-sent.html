@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A password reset link has been sent to your email." />
+  <title>Check your email — HostelHub</title>
+
+  <!-- Shared stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+
+  <!-- Page-specific styling -->
+  <link rel="stylesheet" href="../../css/auth.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    
+    <!-- LEFT PANEL: Brand Image and Overlaid Marketing Banner -->
+    <section class="auth-left" aria-label="Hostel sunset background">
+      <div class="auth-left-content">
+        <h1 class="auth-left-title">Check your inbox and click the link</h1>
+        <p class="auth-left-text">
+          The reset link is valid for 15 minutes. After clicking it you'll be guided to create a new, secure password.
+        </p>
+      </div>
+    </section>
+
+    <!-- RIGHT PANEL: Success screen -->
+    <section class="auth-right" aria-label="Reset link sent panel">
+      <div class="auth-form-container" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        
+        <!-- Back Arrow -->
+        <a href="forgot-password.html" class="auth-back-btn" aria-label="Go back to forgot password page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+
+        <!-- 3D Envelope Badge -->
+        <div style="margin-bottom: var(--space-xl); text-align: center;">
+          <img src="../../assets/images/email_sent.png" alt="Email Sent Badge" style="width: 140px; height: 140px; display: block; margin: 0 auto; filter: drop-shadow(0px 8px 16px rgba(94, 23, 227, 0.15));" />
+        </div>
+
+        <h2 class="auth-heading" style="margin-bottom: var(--space-md); font-size: 2rem; width: 100%; text-align: center;">Check your email</h2>
+        
+        <p id="reset-description" style="font-size: var(--font-size-base); color: var(--color-text-muted); line-height: 1.6; margin-bottom: var(--space-xl); max-width: 340px; text-align: center;">
+          We have sent a reset link to <span id="target-email" style="font-weight: 600; color: var(--color-text);">danielomaka@example.com</span>. It expires in 15 minutes.
+        </p>
+
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); text-align: center;">
+          Did not receive the email?
+        </p>
+
+        <button id="resend-btn" class="btn btn--primary btn--full" style="text-align: center;">Resend Link</button>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Central script resources loaded in team-mandated order -->
+  <script src="../../js/config.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/components.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const emailSpan = document.getElementById('target-email');
+      const resendBtn = document.getElementById('resend-btn');
+      
+      // Get the email from URL query parameter
+      const emailParam = Utils.getParam('email');
+      if (emailParam) {
+        emailSpan.textContent = emailParam;
+      }
+      
+      // Wire up resend button
+      if (resendBtn) {
+        resendBtn.addEventListener('click', () => {
+          const originalText = resendBtn.textContent;
+          resendBtn.disabled = true;
+          resendBtn.textContent = 'Resending...';
+          
+          setTimeout(() => {
+            Utils.showToast('Reset link resent successfully!', 'success');
+            resendBtn.disabled = false;
+            resendBtn.textContent = originalText;
+          }, 1000);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
