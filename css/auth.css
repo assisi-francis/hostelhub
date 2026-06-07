@@ -1,0 +1,212 @@
+/* ── AUTHENTICATION SPLIT-SCREEN LAYOUT ── */
+.auth-page {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ── LEFT PANE: BRAND IMAGE ── */
+.auth-left {
+  position: relative;
+  background-image: url('../assets/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-2xl);
+}
+
+/* Dark gradient overlay to make text highly readable */
+.auth-left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 1;
+}
+
+.auth-left-content {
+  position: relative;
+  z-index: 2;
+  color: var(--color-white);
+  max-width: 520px;
+  margin-bottom: var(--space-xl);
+}
+
+.auth-left-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.02em;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.auth-left-text {
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* ── RIGHT PANE: FORM CONTAINER ── */
+.auth-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-white);
+  padding: var(--space-2xl);
+}
+
+.auth-form-container {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  padding-top: var(--space-xl); /* leaves space for back button */
+}
+
+/* Back navigation button */
+.auth-back-btn {
+  position: absolute;
+  top: -24px;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--color-text);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-back-btn:hover {
+  background-color: #f1f5f9;
+  transform: translateX(-4px);
+}
+
+.auth-heading {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: var(--space-xl);
+  letter-spacing: -0.025em;
+}
+
+/* Form inputs styling customization */
+.auth-form-container form {
+  display: block;
+  width: 100%;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: var(--space-xl);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.auth-footer-link {
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-left: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.auth-footer-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.auth-footer-signup {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 4px;
+}
+
+.auth-footer-or {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Password / field hint text */
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--color-text-muted, #8b95a5);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Sub-label text (e.g. "(include State and Local Govt)") */
+.form-label-sub {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--color-text-muted, #8b95a5);
+  margin-left: 4px;
+}
+
+/* ── GLOBAL FORM BANNER (empty-submit error) ── */
+.form-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md, 8px);
+  border: 1.5px solid #fca5a5;
+  background-color: #fff5f5;
+  color: var(--color-danger, #dc2626);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  margin-bottom: var(--space-xl);
+  line-height: 1.4;
+  animation: bannerSlideIn 0.25s ease;
+}
+
+.form-banner svg {
+  flex-shrink: 0;
+  color: var(--color-danger, #dc2626);
+}
+
+.form-banner--hidden {
+  display: none;
+}
+
+@keyframes bannerSlideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE STYLING ── */
+@media (max-width: 1024px) {
+  .auth-page {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .auth-left-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-left {
+    display: none; /* Hide brand image on smaller devices to focus purely on input */
+  }
+
+  .auth-right {
+    padding: var(--space-xl);
+  }
+}

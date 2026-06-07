@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 :root {
   /* Colors */
-  --color-primary:     #2563eb;
-  --color-primary-dark:#1d4ed8;
+  --color-primary:     #5E17EB; /* Royal purple from screenshots */
+  --color-primary-dark:#4f11c8;
   --color-success:     #16a34a;
   --color-danger:      #dc2626;
   --color-warning:     #d97706;
@@ -10,6 +12,7 @@
   --color-border:      #e5e7eb;
   --color-bg:          #f9fafb;
   --color-white:       #ffffff;
+  --color-error-bg:    #fff5f5; /* Light red bg for validation errors */
 
   /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -18,6 +21,7 @@
   --font-size-lg:   1.125rem;
   --font-size-xl:   1.25rem;
   --font-size-2xl:  1.5rem;
+  --font-size-3xl:  2rem;
 
   /* Spacing */
   --space-xs:  0.25rem;
@@ -38,14 +42,25 @@
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
 
 body {
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
   color: var(--color-text);
   background: var(--color-bg);
-  line-height: 1.6;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
@@ -54,6 +69,17 @@ body {
   padding: 0 var(--space-lg);
 }
 
-img { max-width: 100%; display: block; }
-a  { color: inherit; text-decoration: none; }
-ul { list-style: none; }
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+ul {
+  list-style: none;
+}

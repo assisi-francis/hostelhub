@@ -2,40 +2,783 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hostel Listings — HostelHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HostelHub — Discover verified accommodations near your university. Safe, reliable, and hassle-free." />
+  <title>HostelHub — Find Your Perfect Hostel</title>
 
-  <!-- Shared styles (always include these two) -->
-  <link rel="stylesheet" href="/css/global.css" />
-  <link rel="stylesheet" href="/css/components.css" />
-
-  <!-- Page-specific style -->
-  <link rel="stylesheet" href="/css/listings.css" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/landing.css" />
 </head>
 <body>
 
-  <!-- Navbar injected here by components.js -->
-  <div id="navbar"></div>
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
 
-  <!-- ── YOUR PAGE CONTENT GOES HERE ── -->
-  <main class="container">
-    <h1>Browse Hostels</h1>
-    <div id="listings-grid"></div>
-  </main>
-  <!-- ────────────────────────────────── -->
+      <!-- Logo -->
+      <a href="index.html" class="navbar__logo" aria-label="HostelHub Home">
+        <div class="navbar__logo-icon" aria-hidden="true">
+          <img src="assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+        </div>
+        <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+      </a>
 
-  <!-- Footer injected here by components.js -->
-  <div id="footer"></div>
+      <!-- Desktop nav -->
+      <nav class="navbar__nav" aria-label="Main navigation">
+        <a href="#home"         class="navbar__link active">Home</a>
+        <a href="#about"        class="navbar__link">About Us</a>
+        <a href="#contact"      class="navbar__link">Contact Us</a>
+      </nav>
 
-  <!-- Shared scripts (always include in this order) -->
-  <script src="/js/config.js"></script>
-  <script src="/js/utils.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/api.js"></script>
-  <script src="/js/components.js"></script>
+      <!-- CTA icon-text links -->
+      <div class="navbar__actions">
+        <a href="pages/auth/login.html" id="btn-for-students" class="navbar__cta-link">
+          <!-- user-check icon -->
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <polyline points="16 11 18 13 22 9"/>
+          </svg>
+          For Students
+        </a>
+        <a href="pages/auth/login.html" id="btn-for-landlords" class="navbar__cta-link">
+          <!-- building icon -->
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="1"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+          For Landlords
+        </a>
+      </div>
 
-  <!-- Page-specific script (always last) -->
-  <script src="/js/student/listings.js"></script>
+      <!-- Mobile hamburger -->
+      <button class="navbar__hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar__drawer" id="nav-drawer" aria-hidden="true">
+      <a href="#home"         class="navbar__link">Home</a>
+      <a href="#about"        class="navbar__link">About Us</a>
+      <a href="#contact"      class="navbar__link">Contact Us</a>
+      <a href="pages/auth/login.html" class="navbar__cta-link w-full">For Students</a>
+      <a href="pages/auth/login.html" class="navbar__cta-link w-full">For Landlords</a>
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section id="home" class="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__inner">
+
+      <!-- Left: headline block -->
+      <div class="hero__text">
+        <span class="hero__trust-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Trusted by students. loved by landlords.
+        </span>
+        <h1 class="hero__title">Find Your Perfect Hostel</h1>
+        <p class="hero__subtitle">
+          Discover verified accommodations near your<br>
+          university. Safe, reliable, and hassle-free.
+        </p>
+      </div>
+
+      <!-- Right: floating search card -->
+      <div class="hero__search-card" role="search">
+        <p class="hero__search-label">Find homes near your university</p>
+        <div class="hero__search-box">
+          <input
+            type="text"
+            id="hero-search"
+            class="hero__search-input"
+            placeholder="Enter your university or school"
+            aria-label="Search for hostels near your university"
+          />
+          <a href="pages/auth/login.html" class="hero__search-btn" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       STATS BAR
+  ═══════════════════════════════════════════ -->
+  <section class="stats-bar" aria-label="Platform statistics">
+    <div class="container stats-bar__grid">
+
+      <!-- 10,000+ Genuine Properties -->
+      <div class="stat-item">
+        <div class="stat-item__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="stat-item__text">
+          <strong>10,000+</strong>
+          <span>Genuine Properties</span>
+        </div>
+      </div>
+
+      <!-- 25,000+ Students -->
+      <div class="stat-item">
+        <div class="stat-item__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="stat-item__text">
+          <strong>25,000+</strong>
+          <span>Students</span>
+        </div>
+      </div>
+
+      <!-- 2,000+ Landlords -->
+      <div class="stat-item">
+        <div class="stat-item__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <polyline points="16 11 18 13 22 9"/>
+          </svg>
+        </div>
+        <div class="stat-item__text">
+          <strong>2,000+</strong>
+          <span>Landlords</span>
+        </div>
+      </div>
+
+      <!-- 24/7 Support -->
+      <div class="stat-item">
+        <div class="stat-item__icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="stat-item__text">
+          <strong>24/7</strong>
+          <span>Support</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       OUR STORY
+  ═══════════════════════════════════════════ -->
+  <section id="about" class="section our-story">
+    <div class="container our-story__grid">
+
+      <!-- Left: text -->
+      <div class="our-story__text">
+        <h2 class="our-story__title">Our Story</h2>
+        <h3 class="our-story__subtitle">Bridging the Gap, Building Trust</h3>
+        <p class="our-story__body">
+          Finding a hostel off-campus shouldn't mean risking your school fees to
+          fake house agents or trekking for hours just to inspect a room. At the
+          same time, landlords struggle to reach students directly because they
+          don't live near the campus.
+        </p>
+        <p class="our-story__body">
+          HostelHub was created to solve this exact problem. We are a trusted
+          digital marketplace built specifically for the student community. We
+          bring transparency back to accommodation by allowing students to
+          browse verified listings, read real student reviews, and speak directly to
+          property owners
+        </p>
+      </div>
+
+      <!-- Right: 2×2 stat grid -->
+      <div class="our-story__numbers">
+        <div class="number-card">
+          <strong class="number-card__value number-card__value--blue">24</strong>
+          <span class="number-card__label">GLOBAL CITIES</span>
+        </div>
+        <div class="number-card">
+          <strong class="number-card__value number-card__value--blue">4.9</strong>
+          <span class="number-card__label">AVG. RATING</span>
+        </div>
+        <div class="number-card">
+          <strong class="number-card__value number-card__value--green">12k+</strong>
+          <span class="number-card__label">RESIDENTS</span>
+        </div>
+        <div class="number-card">
+          <strong class="number-card__value number-card__value--green">98%</strong>
+          <span class="number-card__label">RETENTION</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════════════════ -->
+  <section id="how-it-works" class="section how-it-works">
+    <div class="container">
+      <h2 class="how-it-works__title">How it works</h2>
+
+      <div class="how-it-works__grid">
+
+        <!-- ── Left: detailed browser mockup ── -->
+        <div class="browser-mockup" aria-hidden="true">
+
+          <!-- Browser chrome bar -->
+          <div class="browser-bar">
+            <div class="browser-bar__dots">
+              <span class="bdot bdot--red"></span>
+              <span class="bdot bdot--yellow"></span>
+              <span class="bdot bdot--green"></span>
+            </div>
+            <div class="browser-bar__url">hostelhub.ng/explore</div>
+            <div class="browser-bar__actions">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+
+          <!-- Mocked app UI -->
+          <div class="mock-app">
+
+            <!-- App Navbar -->
+            <div class="mock-nav">
+              <div class="mock-nav__logo">
+                <div class="mock-logo-icon">
+                  <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <span>HostelHub</span>
+              </div>
+              <div class="mock-nav__links">
+                <a class="mock-nav__link mock-nav__link--active">Explore</a>
+                <a class="mock-nav__link">Saved</a>
+                <a class="mock-nav__link">Messages</a>
+              </div>
+              <div class="mock-nav__icons">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+
+            <!-- Hero image area -->
+            <div class="mock-hero">
+              <img src="assets/images/hero.jpg" alt="" />
+              <div class="mock-hero__overlay"></div>
+              <div class="mock-hero__content">
+                <p class="mock-hero__greeting">Welcome back, Adeola</p>
+                <h3 class="mock-hero__title">Find Your Perfect Hostel</h3>
+                <div class="mock-search-bar">
+                  <span class="mock-search-bar__text">Wanderer</span>
+                  <button class="mock-search-bar__btn">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Filter tabs -->
+            <div class="mock-filters">
+              <span class="mock-filter mock-filter--active">All</span>
+              <span class="mock-filter">Self-con</span>
+              <span class="mock-filter">Mini Flat</span>
+              <span class="mock-filter">2-Bed Flat</span>
+              <span class="mock-filter">Studio</span>
+            </div>
+
+            <!-- Featured hostels row -->
+            <div class="mock-section">
+              <div class="mock-section__header">
+                <span class="mock-section__label">Featured hostel</span>
+                <span class="mock-section__link">View All Hostels</span>
+              </div>
+              <div class="mock-cards">
+                <div class="mock-card">
+                  <div class="mock-card__img mock-card__img--1">
+                    <span class="mock-badge">Available</span>
+                    <button class="mock-like">♡</button>
+                  </div>
+                  <div class="mock-card__info">
+                    <p class="mock-card__name">The Wanderer's Den</p>
+                    <p class="mock-card__loc">📍 Yaba, Lagos &nbsp;·&nbsp; 5 min to gate</p>
+                    <p class="mock-card__price">₦50,000/yr</p>
+                    <button class="mock-card__btn">View Details</button>
+                  </div>
+                </div>
+                <div class="mock-card">
+                  <div class="mock-card__img mock-card__img--2">
+                    <span class="mock-badge">Available</span>
+                    <button class="mock-like">♡</button>
+                  </div>
+                  <div class="mock-card__info">
+                    <p class="mock-card__name">Edu-Inn</p>
+                    <p class="mock-card__loc">📍 Yaba, Lagos &nbsp;·&nbsp; 5 min to gate</p>
+                    <p class="mock-card__price">₦50,000/yr</p>
+                    <button class="mock-card__btn">View Details</button>
+                  </div>
+                </div>
+                <div class="mock-card">
+                  <div class="mock-card__img mock-card__img--3">
+                    <span class="mock-badge">Available</span>
+                    <button class="mock-like">♡</button>
+                  </div>
+                  <div class="mock-card__info">
+                    <p class="mock-card__name">Bright-Brigade</p>
+                    <p class="mock-card__loc">📍 Yaba, Lagos &nbsp;·&nbsp; 5 min to gate</p>
+                    <p class="mock-card__price">₦50,000/yr</p>
+                    <button class="mock-card__btn">View Details</button>
+                  </div>
+                </div>
+                <div class="mock-card">
+                  <div class="mock-card__img mock-card__img--4">
+                    <span class="mock-badge">Available</span>
+                    <button class="mock-like">♡</button>
+                  </div>
+                  <div class="mock-card__info">
+                    <p class="mock-card__name">Emerald Co...</p>
+                    <p class="mock-card__loc">📍 Yaba, Lagos &nbsp;·&nbsp; 5 min to gate</p>
+                    <p class="mock-card__price">₦50,000/yr</p>
+                    <button class="mock-card__btn">View Details</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /mock-app -->
+        </div><!-- /browser-mockup -->
+
+        <!-- ── Right: 5 steps ── -->
+        <ol class="hiw-steps">
+
+          <li class="hiw-step">
+            <div class="hiw-step__icon">
+              <!-- user-list icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <line x1="19" y1="8" x2="23" y2="8"/>
+                <line x1="19" y1="12" x2="23" y2="12"/>
+              </svg>
+            </div>
+            <div class="hiw-step__body">
+              <h3 class="hiw-step__title">Create an Account</h3>
+              <p class="hiw-step__desc">Sign up as a Student looking for accommodation or a Landlord listing available rooms or apartments. Your dashboard is personalized based on your role.</p>
+            </div>
+          </li>
+
+          <li class="hiw-step">
+            <div class="hiw-step__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <div class="hiw-step__body">
+              <h3 class="hiw-step__title">Explore</h3>
+              <ul class="hiw-step__list">
+                <li>Students can browse verified listings, compare prices, view details, and save favorites.</li>
+                <li>Landlords can upload property details, images, pricing, and availability in just a few steps.</li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="hiw-step">
+            <div class="hiw-step__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <div class="hiw-step__body">
+              <h3 class="hiw-step__title">Connect Easily</h3>
+              <p class="hiw-step__desc">Once you find a match, students can send inquiries or booking requests, and landlords can respond directly through the platform.</p>
+            </div>
+          </li>
+
+          <li class="hiw-step">
+            <div class="hiw-step__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <div class="hiw-step__body">
+              <h3 class="hiw-step__title">Verify &amp; Secure</h3>
+              <p class="hiw-step__desc">To ensure trust, listings and users go through a simple verification process before final confirmation.</p>
+            </div>
+          </li>
+
+          <li class="hiw-step">
+            <div class="hiw-step__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </div>
+            <div class="hiw-step__body">
+              <h3 class="hiw-step__title">Move In</h3>
+              <p class="hiw-step__desc">After approval and agreement, students secure their accommodation and landlords confirm bookings — all in one streamlined process.</p>
+            </div>
+          </li>
+
+        </ol>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       GET IN TOUCH
+  ═══════════════════════════════════════════ -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="contact__title">Get In Touch</h2>
+      
+      <div class="contact__grid">
+        <!-- Left: Form Card -->
+        <div class="contact__form-card">
+          <h3 class="contact__form-title">Send a Message</h3>
+          <form id="contact-form" class="contact-form" novalidate>
+            <div class="contact-form__row">
+              <input type="text" class="contact-form__input" placeholder="Adeola Rotimi" />
+              <input type="email" class="contact-form__input" placeholder="adeolarotimi@gmail.com" />
+            </div>
+            <div class="contact-form__row">
+              <input type="text" class="contact-form__input" placeholder="Adeola Rotimi" />
+              <input type="email" class="contact-form__input" placeholder="adeolarotimi@gmail.com" />
+            </div>
+            <div class="contact-form__row">
+              <input type="text" class="contact-form__input" placeholder="Booking Inquiry" />
+            </div>
+            <div class="contact-form__field">
+              <label class="contact-form__label">Message</label>
+              <textarea class="contact-form__textarea" placeholder="How can we help you" rows="6"></textarea>
+            </div>
+            <button type="submit" class="contact-form__submit">Send Message</button>
+          </form>
+        </div>
+
+        <!-- Right: Info Cards -->
+        <div class="contact__info">
+          
+          <div class="contact-info__card">
+            <div class="contact-info__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-info__content">
+              <h4>Email Support</h4>
+              <p>Our support team is available 24/7 for urgent<br>matters.</p>
+              <a href="mailto:support@hostelhub.com">support@hostelhub.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-info__card">
+            <div class="contact-info__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div class="contact-info__content">
+              <h4>Phone</h4>
+              <p>Mon-Fri from 8am to 6pm PST.</p>
+              <a href="tel:+2348012345678">+234 8012345678</a>
+            </div>
+          </div>
+
+          <div class="contact-info__card">
+            <div class="contact-info__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-info__content">
+              <h4>Office Address</h4>
+              <p>The Innovation &amp; Growth Hub, 500<br>Victoria Island, Lagos 94105</p>
+            </div>
+          </div>
+
+          <div class="contact-info__map">
+            <img src="assets/images/dark_map.png" alt="Map" />
+            <div class="contact-info__map-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Headquarters
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════ -->
+  <section id="faq" class="section faq">
+    <div class="container faq__inner">
+      <h2 class="faq__title">Frequently Asked Questions</h2>
+      <p class="faq__sub">Quick answers to the questions we get most often.</p>
+
+      <div class="faq__list" role="list">
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__trigger" aria-expanded="false" id="faq-1-btn" aria-controls="faq-1-panel">
+            <span>Who can use this platform?</span>
+            <div class="faq-item__icon-wrap">
+              <svg class="faq-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="faq-icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="faq-item__panel" id="faq-1-panel" role="region" aria-labelledby="faq-1-btn" hidden>
+            <p>HostelHub is open to university students looking for off-campus accommodation and landlords who want to list verified hostel properties near campuses. Admins manage the platform to ensure quality and safety.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__trigger" aria-expanded="false" id="faq-2-btn" aria-controls="faq-2-panel">
+            <span>Is it free to use?</span>
+            <div class="faq-item__icon-wrap">
+              <svg class="faq-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="faq-icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="faq-item__panel" id="faq-2-panel" role="region" aria-labelledby="faq-2-btn" hidden>
+            <p>Yes! Creating an account and browsing hostel listings is completely free for students. Landlords can list their properties at no cost during our launch period.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__trigger" aria-expanded="false" id="faq-3-btn" aria-controls="faq-3-panel">
+            <span>How do I book a hostel?</span>
+            <div class="faq-item__icon-wrap">
+              <svg class="faq-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="faq-icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="faq-item__panel" id="faq-3-panel" role="region" aria-labelledby="faq-3-btn" hidden>
+            <p>Once you find a suitable listing, click the "Contact Landlord" or "Book Now" button on the property page to initiate the process directly with the owner.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__trigger" aria-expanded="false" id="faq-4-btn" aria-controls="faq-4-panel">
+            <span>Are hostel listings verified?</span>
+            <div class="faq-item__icon-wrap">
+              <svg class="faq-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="faq-icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="faq-item__panel" id="faq-4-panel" role="region" aria-labelledby="faq-4-btn" hidden>
+            <p>Yes, all hostels go through a multi-step verification where landlords submit ownership documents before properties are published.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__trigger" aria-expanded="false" id="faq-5-btn" aria-controls="faq-5-panel">
+            <span>Is it safe to use this platform?</span>
+            <div class="faq-item__icon-wrap">
+              <svg class="faq-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="faq-icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="faq-item__panel" id="faq-5-panel" role="region" aria-labelledby="faq-5-btn" hidden>
+            <p>Safety is our priority. We verify landlords, review all listings, and allow students to report suspicious activity.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__trigger" aria-expanded="false" id="faq-6-btn" aria-controls="faq-6-panel">
+            <span>What if I have a problem with a hostel?</span>
+            <div class="faq-item__icon-wrap">
+              <svg class="faq-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="faq-icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="faq-item__panel" id="faq-6-panel" role="region" aria-labelledby="faq-6-btn" hidden>
+            <p>Use the "Report" feature on any hostel listing to flag an issue. Our admin team reviews all reports within 48 hours.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" role="listitem">
+          <button class="faq-item__trigger" aria-expanded="false" id="faq-7-btn" aria-controls="faq-7-panel">
+            <span>How do I report a listing?</span>
+            <div class="faq-item__icon-wrap">
+              <svg class="faq-icon-plus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg class="faq-icon-minus" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+          </button>
+          <div class="faq-item__panel" id="faq-7-panel" role="region" aria-labelledby="faq-7-btn" hidden>
+            <p>Navigate to the hostel listing page and click the "Report" button. Fill in the reason and submit. You'll need a student account to report a listing.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER TRUST BADGES
+  ═══════════════════════════════════════════ -->
+  <section class="trust-bar" aria-label="Trust indicators">
+    <div class="container trust-bar__grid">
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <strong>Verified Only</strong>
+        <p>Every hostel is physically inspected for safety and quality.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <strong>Student Safe</strong>
+        <p>Strict focus on student-safe and scholar-friendly environments.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <strong>Fair Pricing</strong>
+        <p>Direct-to-hostel pricing with no hidden brokerage fees.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+        <strong>500+ Campus</strong>
+        <p>Wide network covering all major academic hubs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__left">
+        <a href="index.html" class="navbar__logo site-footer__logo">
+          <div class="site-footer__logo-icon">
+            <img src="assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+          </div>
+          <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+        </a>
+        <p class="site-footer__copyright">&copy; 2026 Hostel Hub. All rights reserved.</p>
+      </div>
+
+      <div class="site-footer__center">
+        <a href="#">Terms, Privacy & Policies</a>
+        <a href="#">Contact Support</a>
+        <a href="#">About Us</a>
+      </div>
+
+      <div class="site-footer__right">
+        <svg class="site-footer__globe" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // ── Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('navbar--scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Mobile hamburger
+    const hamburger = document.getElementById('hamburger-btn');
+    const drawer    = document.getElementById('nav-drawer');
+    hamburger.addEventListener('click', () => {
+      const open = drawer.classList.toggle('navbar__drawer--open');
+      hamburger.setAttribute('aria-expanded', open);
+      drawer.setAttribute('aria-hidden', !open);
+    });
+
+    // ── Close drawer on link click
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('navbar__drawer--open');
+        hamburger.setAttribute('aria-expanded', false);
+        drawer.setAttribute('aria-hidden', true);
+      });
+    });
+
+    // ── Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.navbar__link');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.navbar__link[href="#${entry.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+
+    // ── FAQ accordion
+    document.querySelectorAll('.faq-item__trigger').forEach(btn => {
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      
+      const toggleFAQ = () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        // Close all
+        document.querySelectorAll('.faq-item__trigger').forEach(b => {
+          b.setAttribute('aria-expanded', 'false');
+          b.closest('.faq-item').classList.remove('faq-item--open');
+          const p = document.getElementById(b.getAttribute('aria-controls'));
+          if (p) p.hidden = true;
+        });
+        // Toggle current
+        if (!expanded) {
+          btn.setAttribute('aria-expanded', 'true');
+          btn.closest('.faq-item').classList.add('faq-item--open');
+          if (panel) panel.hidden = false;
+        }
+      };
+
+      btn.addEventListener('click', toggleFAQ);
+      // Close when clicking on the answer text itself
+      if (panel) {
+        panel.addEventListener('click', toggleFAQ);
+      }
+    });
+
+    // ── Contact form (demo)
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      Utils.showToast('Message sent! We\'ll get back to you shortly.', 'success');
+      e.target.reset();
+    });
+
+    // ── Hero search → login
+    document.querySelector('.hero__search-box').addEventListener('submit', (e) => {
+      e.preventDefault();
+      window.location.href = 'pages/auth/login.html';
+    });
+    document.getElementById('hero-search').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') window.location.href = 'pages/auth/login.html';
+    });
+  </script>
 
 </body>
 </html>
