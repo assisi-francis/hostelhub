@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms & Privacy – HostelHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      
+      --brand-dark: #3A0BB5;
+      --text-dark:  #1A1A2E;
+      --text-muted: #6B7A99;
+      --bg-modal:   #F4F5FA;
+      --bg-body:    #E8EAF2;
+      --radius:     16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-weight: 400;
+    }
+
+    /* ── Modal shell ── */
+    .modal {
+      background: var(--bg-modal);
+      border-radius: var(--radius);
+      width: 125%;
+      max-width: 900px;
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+      animation: slideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Header ── */
+    .modal-header {
+      padding: 28px 28px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-shrink: 0;
+    }
+
+    .modal-header-text h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .modal-header-text p {
+      margin-top: 4px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .close-btn {
+      
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .close-btn:hover {  transform: scale(1.1); }
+    .close-btn svg   { width: 20px; height: 30px;stroke: var(--text-muted); stroke-width: 2.8; stroke: 3;}
+
+    /* ── Scrollable body ── */
+    .modal-body {
+      padding: 50px 50px 16px;
+      overflow-y: auto;
+      flex: 1;
+      scroll-behavior: smooth;
+    }
+
+    .modal-body::-webkit-scrollbar { width: 4px; }
+    .modal-body::-webkit-scrollbar-track { background: transparent; }
+    .modal-body::-webkit-scrollbar-thumb { background: rgba(75,15,219,0.25); border-radius: 4px; }
+
+    /* ── Content sections ── */
+    .last-updated {
+      font-size: 0.78rem;
+      font-weight: 600;
+      
+      letter-spacing: 0.01em;
+      margin-bottom: 6px;
+    }
+
+    .intro-text {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 4px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      
+      margin-bottom: 2px;
+    }
+
+    section {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(107,122,153,0.14);
+    }
+
+    section:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+
+    section h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    section p,
+    section li {
+      font-size: 0.875rem;
+      line-height: 1.65;
+    }
+
+    section ul {
+      list-style: none;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    section ul li {
+      padding-left: 18px;
+      position: relative;
+    }
+
+    section ul li::before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand-dark);
+      opacity: 0.6;
+    }
+
+    a.email {
+      text-decoration: none;
+      font-weight: 500;
+    }
+    a.email:hover { text-decoration: underline; }
+
+    /* ── Footer / CTA ── */
+    .modal-footer {
+      padding: 16px 28px 24px;
+      flex-shrink: 0;
+    }
+
+    .agree-btn {
+      width: 100%;
+      padding: 17px;
+      background: var(--brand-dark);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(75,15,219,0.35);
+    }
+
+    .agree-btn:hover {
+      background: var(--brand-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 32px rgba(75,15,219,0.45);
+    }
+
+    .agree-btn:active { transform: translateY(0); }
+
+    /* ── Confirmed state ── */
+    .modal.confirmed .agree-btn {
+      background: #16a34a;
+      box-shadow: 0 6px 24px rgba(22,163,74,0.35);
+    }
+  </style>
+</head>
+<body>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+
+  <!-- Header -->
+  <div class="modal-header">
+    <div class="modal-header-text">
+      <h1 id="modal-title">Terms &amp; Privacy</h1>
+      <p>Stay updated with our latest Terms and Privacy Conditions</p>
+    </div>
+    <button class="close-btn" id="closeBtn" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="6" x2="6" y2="20"/>
+        <line x1="6" y1="6" x2="20" y2="20"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scrollable content -->
+  <div class="modal-body">
+
+    <section>
+      <p class="last-updated">Last Updated: [Date]</p>
+      <p class="intro-text">By creating an account or using this platform, you agree to the following <br> Information We Collect
+      <p class="intro-text">We collect information such as your name, email address, phone number, booking details, and payment information to provide our services.</p>
+    </section>
+
+    <section>
+      <h2>How We Use Your Information</h2>
+      <p>Your information is used to:</p>
+      <ul>
+        <li>Create and manage your account</li>
+        <li>Process bookings and payments</li>
+        <li>Improve platform performance</li>
+        <li>Provide customer support</li>
+        <li>Send important updates</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Data Protection</h2>
+      <p>We take reasonable measures to protect your personal information. However, no online service can guarantee complete security.</p>
+    </section>
+
+    <section>
+      <h2>User Responsibilities</h2>
+      <p>By using this platform, you agree to:</p>
+      <ul>
+        <li>Provide accurate information</li>
+        <li>Keep your login credentials secure</li>
+        <li>Use the platform lawfully and respectfully</li>
+        <li>Avoid fraudulent or misleading activities</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Account Suspension</h2>
+      <p class="intro-text">We may suspend or remove accounts that violate platform policies or engage in fraudulent activities.<br>
+      Changes to This Policy
+      We may update these terms from time to time. Continued use of the platform indicates acceptance of any updates.</p>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <p>For questions or support, contact:<br>
+        <a href="mailto:support@hostelhub.com" class="email">support@hostelhub.com</a>
+      </p>
+    </section>
+
+  </div><!-- /modal-body -->
+
+  <!-- Footer CTA -->
+  <div class="modal-footer">
+    <button class="agree-btn" id="agreeBtn">Agree &amp; Continue</button>
+  </div>
+
+</div><!-- /modal -->
+
+<script>
+  const modal    = document.getElementById('modal');
+  const closeBtn = document.getElementById('closeBtn');
+  const agreeBtn = document.getElementById('agreeBtn');
+
+  // Close button: hide the modal with a fade-out
+  closeBtn.addEventListener('click', () => {
+    modal.style.transition = 'opacity 0.25s, transform 0.25s';
+    modal.style.opacity    = '0';
+    modal.style.transform  = 'translateY(20px)';
+    setTimeout(() => { modal.style.display = 'none'; }, 260);
+  });
+
+  // Agree button: show confirmation state
+  agreeBtn.addEventListener('click', () => {
+    if (modal.classList.contains('confirmed')) return;
+    modal.classList.add('confirmed');
+    agreeBtn.textContent = '✓ Terms Accepted';
+    agreeBtn.disabled = true;
+
+    // Optionally hide after short delay
+    setTimeout(() => {
+      modal.style.transition = 'opacity 0.35s, transform 0.35s';
+      modal.style.opacity    = '0';
+      modal.style.transform  = 'translateY(20px) scale(0.97)';
+      setTimeout(() => { modal.style.display = 'none'; }, 360);
+    }, 900);
+  });
+
+  // Close on backdrop click (outside modal)
+  document.addEventListener('click', (e) => {
+    if (!modal.contains(e.target)) {
+      closeBtn.click();
+    }
+  });
+
+  // Keyboard: Escape closes
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeBtn.click();
+  });
+</script>
+
+</body>
+</html>

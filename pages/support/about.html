@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HostelHub – Your Campus Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  <style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:    #5B21FA;
+      --purple-l:  #7C4DFF;
+      --purple-d:  #3D0DBF;
+      --teal:      #0ABFA3;
+      --ink:       #111118;
+      --ink-mid:   #3C3C50;
+      --ink-soft:  #7A7A96;
+      --bg:        #F7F7FB;
+      --white:     #FFFFFF;
+      --border:    #E2E2EE;
+      --radius:    14px;
+      --shadow:    0 2px 20px rgba(91,33,250,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ──────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 60px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 32px;
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+
+    .nav-inner {
+      width: 100%; max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 1.1rem; color: var(--ink); text-decoration: none;
+    }
+    .logo-icon {
+      width: 30px; height: 30px; background: var(--purple);
+      border-radius: 8px; display: grid; place-items: center;
+    }
+    .logo-icon svg { width: 16px; height: 16px; fill: #fff; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500; color: var(--ink-soft);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a.active { color: var(--purple); border-bottom: 2px solid var(--purple); padding-bottom: 2px; }
+    .nav-links a:hover { color: var(--purple); }
+
+    .nav-icons { display: flex; align-items: center; gap: 14px; }
+    .nav-icons button {
+      background: none; border: none; cursor: pointer;
+      color: var(--ink-mid); display: grid; place-items: center;
+      transition: color .2s;
+    }
+    .nav-icons button:hover { color: var(--purple); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; cursor: pointer; background: none; border: none;
+      padding: 4px; z-index: 200;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--ink); border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 199;
+      background: var(--white); padding: 80px 32px 32px;
+      flex-direction: column; gap: 28px;
+      transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.6rem;
+      color: var(--ink); text-decoration: none; transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--purple); }
+    .mobile-menu-divider { height: 1px; background: var(--border); }
+
+    /* ─── HERO ─────────────────────────────────── */
+    .hero {
+      margin-top: 60px;
+      position: relative; min-height: 550px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,10,30,.55) 0%, rgba(10,10,30,.7) 100%),
+        url('assets/images/hero.jpg') center/cover no-repeat;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 640px; padding: 0 24px;
+      animation: heroIn .8s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-content h1 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(4rem, 5.5vw, 4rem);
+      color: #fff; line-height: 1.18; margin-bottom: 16px;
+    }
+    .hero-content p {
+      font-size: clamp(.88rem, 2.2vw, 1rem);
+      color: rgba(255,255,255,.85); line-height: 1.7; margin-bottom: 28px;
+    }
+    .hero-content p span.highlight { color: var(--teal); font-weight: 600; }
+
+    .hero-btns { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 12px 26px; background: var(--purple); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .9rem;
+      text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--purple-d); transform: translateY(-2px); }
+
+    .btn-ghost {
+      padding: 12px 26px; background: transparent;
+      color: #fff; border: 1.5px solid rgba(255,255,255,.55);
+      border-radius: 8px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: .9rem;
+      text-decoration: none; display: flex; align-items: center; gap: 8px;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+    .btn-ghost svg { width: 16px; height: 16px; fill: #fff; }
+
+    /* ─── OUR STORY ────────────────────────────── */
+    .story-section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 72px 24px 64px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start;
+    }
+    .story-text h2 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 10px;
+    }
+    .story-text h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1rem; color: var(--purple); margin-bottom: 18px;
+    }
+    .story-text p {
+      font-size: .9rem; color: var(--ink-mid); line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    /* Stats grid */
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .stat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 20px;
+      text-align: center; box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(91,33,250,.12); }
+    .stat-card .num {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 2rem; margin-bottom: 4px;
+    }
+    .stat-card:nth-child(1) .num { color: var(--purple); }
+    .stat-card:nth-child(2) .num { color: var(--teal); }
+    .stat-card:nth-child(3) .num { color: var(--purple); }
+    .stat-card:nth-child(4) .num { color: var(--teal); }
+    .stat-card .label {
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--ink-soft);
+    }
+
+    /* ─── WHAT WE STAND FOR ────────────────────── */
+    .values-section {
+      background: var(--white);
+      padding: 72px 24px;
+    }
+    .values-inner { max-width: 1100px; margin: 0 auto; }
+    .values-inner h2 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      text-align: center; margin-bottom: 48px;
+    }
+
+    .values-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .value-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 24px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .value-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(91,33,250,.1);
+      border-color: rgba(91,33,250,.2);
+    }
+    .value-icon {
+      flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px;
+      background: #EEE8FF; display: grid; place-items: center;
+    }
+    .value-icon.teal { background: #D9FBF7; }
+    .value-icon svg {
+      width: 20px; height: 20px; stroke: var(--purple); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .value-icon.teal svg { stroke: var(--teal); }
+    .value-body h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: .95rem; margin-bottom: 8px; color: var(--ink);
+    }
+    .value-body p { font-size: .85rem; color: var(--ink-soft); line-height: 1.7; }
+
+    /* ─── CTA ──────────────────────────────────── */
+    .cta-section {
+      padding: 88px 24px;
+      text-align: center;
+      background: var(--bg);
+    }
+    .cta-inner { max-width: 540px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 14px;
+    }
+    .cta-inner p {
+      font-size: .9rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 28px;
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 36px; background: var(--purple); color: #fff;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+      text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .btn-cta:hover { background: var(--purple-d); transform: translateY(-2px); }
+
+    /* ─── FOOTER ───────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border); background: var(--white);
+      padding: 24px 32px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+    }
+    .footer-left { display: flex; flex-direction: column; gap: 6px; }
+    .footer-logo { display: flex; align-items: center; gap: 8px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: .95rem; color: var(--ink); }
+    .copyright { font-size: .76rem; color: var(--ink-soft); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: .8rem; color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--purple); }
+    .footer-globe { color: var(--ink-soft); cursor: pointer; }
+
+    /* ─── SCROLL REVEAL ─────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+    .reveal-delay-4 { transition-delay: .4s; }
+
+    /* ─── RESPONSIVE ────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links, .nav-icons { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+
+      .hero { height: 380px; }
+      .hero-content h1 { font-size: 1.8rem; }
+
+      .story-section {
+        grid-template-columns: 1fr;
+        gap: 36px; padding: 48px 16px;
+      }
+
+      .values-grid { grid-template-columns: 1fr; }
+      .values-section { padding: 48px 16px; }
+
+      .cta-section { padding: 56px 16px; }
+
+      footer {
+        flex-direction: column; align-items: flex-start;
+        padding: 20px 16px; gap: 16px;
+      }
+      .footer-links { gap: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .stat-card { padding: 18px 12px; }
+      .stat-card .num { font-size: 1.6rem; }
+      .hero-btns { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-ghost { text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+    <img src="assets/images/logo.svg" alt="HostelHub Logo">
+</a>
+
+    <ul class="nav-links">
+      <li><a href="#" class="active">Explore</a></li>
+      <li><a href="#">Saved</a></li>
+      <li><a href="#">Messages</a></li>
+    </ul>
+
+    <div class="nav-icons">
+      <button aria-label="Notifications">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+        </svg>
+      </button>
+      <button aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+      </button>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#">Explore</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">Saved</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">Messages</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">Notifications</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">My Account</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <h1>Your Campus Home,Minus &nbsp;the Stress</h1>
+    <p>
+      HostelHub connects students directly with verified landlords. No fake agents,
+      hidden fees — just safe, affordable off-campus housing close to school.
+    </p>
+    <div class="hero-btns">
+      <a href="#" class="btn-primary">Explore our Spaces</a>
+      <a href="#" class="btn-ghost">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        Watch our Story
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── OUR STORY ── -->
+<section>
+  <div class="story-section">
+    <div class="story-text reveal">
+      <h2>Our Story</h2>
+      <h3>Bridging the Gap, Building Trust</h3>
+      <p>
+        Finding a hostel off-campus shouldn't mean risking your school fees to fake house agents or trekking for hours just to inspect a room. At the same time, landlords struggle to reach students directly because they don't live near the campus.
+      </p>
+      <p>
+        HostelHub was created to solve this exact problem. We are a trusted digital marketplace built specifically for the student community. We bring transparency back to accommodation by allowing students to browse verified listings, read real student reviews, and speak directly to property owners.
+      </p>
+    </div>
+
+    <div class="stats-grid reveal reveal-delay-1">
+      <div class="stat-card">
+        <div class="num" data-target="24">0</div>
+        <div class="label">Global Cities</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" data-target="4.9" data-decimal="1">0</div>
+        <div class="label">Avg. Rating</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" data-target="12000" data-suffix="k+">0</div>
+        <div class="label">Residents</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" data-target="98" data-suffix="%">0</div>
+        <div class="label">Retention</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT WE STAND FOR ── -->
+<section class="values-section">
+  <div class="values-inner">
+    <h2 class="reveal">What We Stand For</h2>
+    <div class="values-grid">
+
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="value-body">
+          <h3>Zero Agent Extortion</h3>
+          <p>We eliminate the middleman. Students negotiate directly with landlords, ensuring you only pay the actual house rent without arbitrary markups.</p>
+        </div>
+      </div>
+
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon teal">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="value-body">
+          <h3>100% Verified Listings</h3>
+          <p>Community isn't accidental; it's engineered. We curate diverse environments that bring together thinkers, creators, and leaders, creating a network that lasts far beyond graduation.</p>
+        </div>
+      </div>
+
+      <div class="value-card reveal reveal-delay-1">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="value-body">
+          <h3>Student-Led Transparency</h3>
+          <p>No surprises. Read honest reviews and ratings from fellow students about the environment, utilities, and room quality before making your choice.</p>
+        </div>
+      </div>
+
+      <div class="value-card reveal reveal-delay-2">
+        <div class="value-icon teal">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="value-body">
+          <h3>Proximity Focused</h3>
+          <p>Cut down your daily transportation costs. Easily filter and discover secure accommodation options closest to your campus gates.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <h2>Ready for a better habitat?</h2>
+    <p>Join thousands of students and young professionals who have found their focus with us.</p>
+    <a href="#" class="btn-cta">Get Started Today</a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo">
+        <a class="logo" href="#">
+    <img src="assets/images/logo.svg" alt="HostelHub Logo">
+</a>
+    </div>
+    <p class="copyright">© 2026 Hostel Hub. All rights reserved.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#">Terms, Privacy &amp; Policies</a>
+    <a href="#">Contact Support</a>
+    <a href="#">About Us</a>
+  </div>
+  <div class="footer-globe">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+      <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+    </svg>
+  </div>
+</footer>
+
+<script>
+  /* ── Hamburger ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ── Nav shadow on scroll ── */
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  /* ── Scroll reveal ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── Counter animation ── */
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const decimal = parseInt(el.dataset.decimal || 0);
+    const suffix = el.dataset.suffix || '';
+    const isThousands = target >= 1000;
+    const displayTarget = isThousands ? target / 1000 : target;
+    const duration = 1600;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = displayTarget * eased;
+      const formatted = decimal > 0
+        ? current.toFixed(decimal)
+        : Math.floor(current);
+      el.textContent = isThousands ? formatted + 'k+' : formatted + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const statNums = document.querySelectorAll('.stat-card .num');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => counterObserver.observe(el));
+</script>
+</body>
+</html>

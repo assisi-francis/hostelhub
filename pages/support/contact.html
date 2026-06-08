@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HostelHub – Get in Touch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple:   #5B21FA;
+      --purple-l: #7C4DFF;
+      --purple-d: #3D0DBF;
+      --ink:      #111118;
+      --ink-mid:  #3C3C50;
+      --ink-soft: #7A7A96;
+      --bg:       #F7F7FB;
+      --white:    #FFFFFF;
+      --border:   #E2E2EE;
+      --map-bg:   #1A1A2E;
+      --radius:   12px;
+      --shadow:   0 2px 16px rgba(91,33,250,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+    font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 32px;
+    }
+
+    .nav-inner {
+      width: 100%; max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: 1.1rem; color: var(--ink); text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 30px; height: 30px; background: var(--purple);
+      border-radius: 8px; display: grid; place-items: center;
+    }
+    .logo-icon svg { width: 16px; height: 16px; fill: #fff; }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .9rem; font-weight: 500; color: var(--ink-soft);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a.active, .nav-links a:hover { color: var(--purple); }
+    .nav-links a.active { border-bottom: 2px solid var(--purple); padding-bottom: 2px; }
+
+    .nav-icons { display: flex; align-items: center; gap: 16px; }
+    .nav-icons button {
+      background: none; border: none; cursor: pointer;
+      color: var(--ink-mid); display: grid; place-items: center;
+      transition: color .2s;
+    }
+    .nav-icons button:hover { color: var(--purple); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; cursor: pointer; background: none; border: none;
+      padding: 4px; z-index: 200;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--ink); border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: var(--white); padding: 80px 32px 32px;
+      flex-direction: column; gap: 28px;
+      transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.6rem;
+      color: var(--ink); text-decoration: none; transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--purple); }
+    .mobile-menu-divider { height: 1px; background: var(--border); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      text-align: center; padding: 90px 20px 48px;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3rem); color: var(--ink); margin-bottom: 12px;
+    }
+    .hero p {
+      max-width: 460px; margin: 0 auto;
+      font-size: .95rem; color: var(--ink-soft); line-height: 1.7;
+    }
+
+    /* ── MAIN GRID ───────────────────────────────────── */
+    .contact-grid {
+      max-width: 1100px; margin: 0 auto; padding: 0 24px 80px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+      align-items: start;
+    }
+
+    /* ── CARD BASE ───────────────────────────────────── */
+    .card {
+      background: var(--white); border-radius: var(--radius);
+      border: 1px solid var(--border); padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    /* ── FORM ────────────────────────────────────────── */
+    .form-card h2 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: 1.1rem; margin-bottom: 24px; color: var(--ink);
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label { font-size: .78rem; font-weight: 500; color: var(--ink-soft); }
+
+    input, select, textarea {
+      width: 100%; padding: 11px 14px; border: 1px solid var(--border);
+      border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      color: var(--ink); background:#ffffff; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input::placeholder, textarea::placeholder { color: var(--ink-soft); }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--purple); box-shadow: 0 0 0 3px rgba(91,33,250,.12);
+    }
+
+    .mb14 { margin-bottom: 14px; }
+    textarea { resize: vertical; min-height: 110px; }
+
+    .btn-send {
+      width: 100%; padding: 14px; background: var(--purple);
+      color: #fff; border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Syne', sans-serif; font-weight: 700; font-size: .95rem;
+      letter-spacing: .02em; margin-top: 8px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-send:hover { background: var(--purple-d); transform: translateY(-1px); }
+    .btn-send:active { transform: translateY(0); }
+
+    /* ── RIGHT PANEL ─────────────────────────────────── */
+    .right-panel { display: flex; flex-direction: column; gap: 16px; }
+
+    /* info cards */
+    .info-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      display: flex; align-items: flex-start; gap: 14px;
+      box-shadow: var(--shadow);
+    }
+    .info-icon {
+      flex-shrink: 0; width: 38px; height: 38px; border-radius: 10px;
+      background: #C7DBFF;
+    color: #000; display: grid; place-items: center;
+    }
+    .info-icon svg { width: 18px; height: 18px; stroke: #000; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .info-body h3 {
+      font-family: 'Syne', sans-serif; font-weight: 700;
+      font-size: .9rem; margin-bottom: 4px; color: var(--ink);
+    }
+    .info-body p { font-size: .82rem; color: var(--ink-soft); line-height: 1.5; }
+    .info-body a {
+      display: inline-block; margin-top: 4px;
+      font-size: .82rem; font-weight: 500; color: var(--purple);
+      text-decoration: none;
+    }
+    .info-body a:hover { text-decoration: underline; }
+
+    /* map */
+    .map-card {
+      border-radius: var(--radius); overflow: hidden;
+      background: var(--map-bg); height: 200px; position: relative;
+      box-shadow: var(--shadow);
+    }
+    .map-card iframe {
+      width: 100%; height: 100%; border: none; filter: invert(.85) hue-rotate(200deg) saturate(1.6);
+    }
+    .map-pin {
+      position: absolute; bottom: 14px; right: 14px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(6px);
+      border-radius: 20px; padding: 5px 12px;
+      font-size: .78rem; font-weight: 600; color: var(--ink);
+      display: flex; align-items: center; gap: 5px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.2);
+    }
+    .map-pin svg { width: 12px; height: 12px; fill: var(--purple); }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-section { max-width: 900px; margin: auto; padding: 0 24px 80px; }
+    .faq-section h2 {
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 2rem); text-align: center; margin-bottom: 8px;
+    }
+    .faq-section .sub {
+      text-align: center; color: var(--ink-soft); font-size: .9rem; margin-bottom: 32px;
+    }
+
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .faq-item {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: box-shadow .2s;
+    }
+    .faq-item:hover { box-shadow: 0 4px 24px rgba(91,33,250,.1); }
+
+    .faq-q {
+      width: 100%; padding: 16px 20px; background: none; border: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+      font-family: 'DM Sans', sans-serif; font-size: .9rem; font-weight: 500;
+      color: var(--ink); text-align: left; gap: 12px;
+    }
+    .faq-q .icon {
+      flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+      background: var(--bg); border: 1.5px solid var(--border);
+      display: grid; place-items: center; transition: background .2s, border-color .2s;
+    }
+    .faq-q .icon svg { width: 12px; height: 12px; stroke: var(--ink-soft); stroke-width: 2.5; transition: transform .3s; }
+    .faq-item.open .faq-q .icon { background: var(--purple); border-color: var(--purple); }
+    .faq-item.open .faq-q .icon svg { stroke: #fff; transform: rotate(45deg); }
+
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .35s;
+      padding: 0 20px;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 20px 16px; }
+    .faq-a p { font-size: .87rem; color: var(--ink-soft); line-height: 1.7; }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border); background: var(--white);
+      padding: 24px 32px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 8px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: .95rem; color: var(--ink); }
+    .copyright { font-size: .78rem; color: var(--ink-soft); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: .8rem; color: var(--ink-soft); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--purple); }
+    .footer-globe { color: var(--ink-soft); cursor: pointer; }
+
+    /* ── TOAST ───────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: var(--ink); color: #fff; padding: 12px 24px;
+      border-radius: 8px; font-size: .88rem; font-weight: 500;
+      box-shadow: 0 4px 24px rgba(0,0,0,.25); z-index: 999;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+      white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links, .nav-icons { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+
+      .hero { padding: 48px 20px 32px; }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        padding: 0 16px 60px;
+      }
+      .form-row { grid-template-columns: 1fr; }
+
+      .faq-section { padding: 0 16px 60px; }
+
+      footer {
+        flex-direction: column; align-items: flex-start;
+        padding: 20px 16px; gap: 16px;
+      }
+      .footer-links { gap: 14px; }
+    }
+
+    @media (max-width: 420px) {
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">
+    <img src="assets/images/logo.svg" alt="HostelHub Logo">
+</a>
+
+    <ul class="nav-links">
+      <li><a href="#" class="active">Explore</a></li>
+      <li><a href="#">Saved</a></li>
+      <li><a href="#">Messages</a></li>
+    </ul>
+
+    <div class="nav-icons">
+      <button aria-label="Notifications">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/>
+        </svg>
+      </button>
+      <button aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+      </button>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#">Explore</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">Saved</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">Messages</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">Notifications</a>
+  <div class="mobile-menu-divider"></div>
+  <a href="#">My Account</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <h1>Get in Touch</h1>
+  <p>We're here to help you navigate the future of premium living. Whether you're a student or a landlord, our team is ready to assist.</p>
+</section>
+
+<!-- ── CONTACT GRID ── -->
+<div class="contact-grid">
+
+  <!-- FORM -->
+  <div class="card form-card">
+    <h2>Send a Message</h2>
+    <form id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" placeholder="Adeola Rotimi" id="fname" required />
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Rotimi" id="lname" />
+        </div>
+      </div>
+      <div class="form-row mb14">
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="adeolarotimi@gmail.com" id="email" required />
+        </div>
+        <div class="field">
+          <label>Phone (optional)</label>
+          <input type="tel" placeholder="+234 801 2345 678" id="phone" />
+        </div>
+      </div>
+      <div class="field mb14">
+        <label>Subject</label>
+        <input type="text" placeholder="Booking Inquiry" id="subject" />
+      </div>
+      <div class="field mb14">
+        <label>Message</label>
+        <textarea placeholder="How can we help you…" id="message" required></textarea>
+      </div>
+      <button type="submit" class="btn-send">Send Message</button>
+    </form>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <div class="info-card">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <div class="info-body">
+        <h3>Email Support</h3>
+        <p>Our support team is available 24/7 for urgent matters.</p>
+        <a href="mailto:support@hostelhub.com">support@hostelhub.com</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <div class="info-body">
+        <h3>Phone</h3>
+        <p>Mon–Fri from 8am to 6pm PST.</p>
+        <a href="tel:+2348012345678">+234 801 2345678</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="info-body">
+        <h3>Office Address</h3>
+        <p>The Innovation &amp; Growth Hub, 500 Victoria Island, Lagos 94105</p>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div class="map-card">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=3.38%2C6.41%2C3.46%2C6.47&layer=mapnik"
+        allowfullscreen loading="lazy" title="Headquarters map">
+      </iframe>
+      <div class="map-pin">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Headquarters
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <p class="sub">Quick answers to the questions we get most often.</p>
+
+  <div class="faq-list" id="faqList">
+    <div class="faq-item">
+      <button class="faq-q">Who can use this platform?
+        <span class="icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+      </button>
+      <div class="faq-a"><p>HostelHub is open to students looking for affordable accommodation and landlords or property managers wanting to list their spaces. Anyone 18+ can create an account and start exploring listings.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is it free to use?
+        <span class="icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+      </button>
+      <div class="faq-a"><p>Browsing and searching for hostels is completely free. Students can message landlords at no cost. Landlords pay a small listing fee only when they publish a property.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How do I book a hostel?
+        <span class="icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+      </button>
+      <div class="faq-a"><p>Search listings by location, filter by price and amenities, then click "Book Now" on any listing you like. You'll be guided through a secure checkout and receive a confirmation email instantly.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Are hostel listings verified?
+        <span class="icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+      </button>
+      <div class="faq-a"><p>Yes. Our team manually reviews each listing for accuracy, and landlords must upload valid property documents. Verified listings display a blue checkmark badge.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is it safe to use this platform?
+        <span class="icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+      </button>
+      <div class="faq-a"><p>We use end-to-end encryption for all messages and payments. We never share your personal data with third parties, and our fraud detection runs 24/7 to keep the platform safe.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">What if I have a problem with a hostel?
+        <span class="icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+      </button>
+      <div class="faq-a"><p>Contact our support team within 48 hours of check-in. We'll mediate between you and the landlord and, if the listing was misrepresented, issue a full refund under our Booking Protection Policy.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How do I report a listing?
+        <span class="icon"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+      </button>
+      <div class="faq-a"><p>Open the listing page and click the "…" menu, then select "Report Listing". Fill in the reason and submit. Our moderation team reviews all reports within 24 hours.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <div class="footer-logo">
+      <a class="logo" href="#">
+    <img src="assets/images/logo.svg" alt="HostelHub Logo">
+</a>
+    </div>
+    <p class="copyright" style="margin-top:6px;">© 2026 Hostel Hub. All rights reserved.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#">Terms, Privacy &amp; Policies</a>
+    <a href="#">Contact Support</a>
+    <a href="#">About Us</a>
+  </div>
+  <div class="footer-globe">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+      <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+    </svg>
+  </div>
+</footer>
+
+<!-- ── TOAST ── -->
+<div id="toast">✅ Message sent! We'll get back to you soon.</div>
+
+<script>
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // FAQ accordion
+  document.getElementById('faqList').addEventListener('click', e => {
+    const btn = e.target.closest('.faq-q');
+    if (!btn) return;
+    const item = btn.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+
+  // Form submit
+  const toast = document.getElementById('toast');
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const fname = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!fname || !email || !message) {
+      toast.textContent = '⚠️ Please fill in all required fields.';
+      showToast();
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.textContent = '⚠️ Please enter a valid email address.';
+      showToast();
+      return;
+    }
+
+    toast.textContent = '✅ Message sent! We\'ll get back to you soon.';
+    showToast();
+    e.target.reset();
+  });
+
+  function showToast() {
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+</script>
+</body>
+</html>
