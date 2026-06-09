@@ -200,6 +200,156 @@
   text-decoration: underline;
 }
 
+/* ── TRUST BAR ────────────────────────────────────── */
+.trust-bar {
+  background: #5E17EB; /* Deep vibrant purple */
+  color: #fff;
+  padding: 80px 0;
+}
+
+.trust-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.trust-item__icon {
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.trust-item strong {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.trust-item p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+/* ── FOOTER ───────────────────────────────────────── */
+.site-footer {
+  background: #fafafa;
+  border-top: 1px solid #e5e7eb;
+  padding: 40px 0;
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.site-footer__left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.site-footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  text-decoration: none;
+}
+
+.site-footer__logo-icon {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-footer__copyright {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.site-footer__center {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.site-footer__center a {
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.site-footer__center a:hover {
+  color: #111827;
+}
+
+.site-footer__right {
+  display: flex;
+  align-items: center;
+}
+
+.site-footer__globe {
+  color: #5E17EB;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.site-footer__globe:hover {
+  opacity: 0.8;
+}
+
+/* ── RESPONSIVE ───────────────────────────────────── */
+@media (max-width: 1024px) {
+  .trust-bar__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .site-footer__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .site-footer__left,
+  .site-footer__center {
+    align-items: center;
+  }
+
+  .site-footer__center {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .trust-bar__grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
 /* ── TOAST NOTIFICATIONS ── */
 .toast {
   position: fixed;
