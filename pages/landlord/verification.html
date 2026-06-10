@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verification | HostelHub</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/student-dashboard.css" />
+  <link rel="stylesheet" href="../../css/landlord-dashboard.css" />
+  
+  <!-- Intl-tel-input CSS for precise phone validation by country code -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+  <style>
+    body {
+      background-color: #f8f9fa; /* Light grey background for the main content area */
+      margin: 0;
+    }
+    
+    .db-navbar {
+      background-color: #ffffff;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .ld-verification-top {
+      background-color: #ffffff;
+      padding: 60px 5% 60px;
+    }
+
+    .ld-verification-hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .ld-verification-hero h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    
+    .ld-verification-hero p {
+      font-size: 1.05rem;
+      color: #6b7280;
+    }
+
+    .ld-verification-main {
+      padding: 80px 5% 100px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ld-verification-main h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .ld-verification-main p {
+      color: #8c93a1;
+      font-size: 1rem;
+      max-width: 450px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+    
+    .ld-verification-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto 64px;
+      text-align: left;
+    }
+
+    .ld-verification-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #8c93a1;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .ld-verification-list-item svg {
+      color: #10b981; /* Green check */
+      flex-shrink: 0;
+    }
+
+    .ld-verification-btn {
+      width: 100%;
+      max-width: 500px;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .ld-verification-btn:hover {
+      background: var(--color-primary-dark);
+    }
+    
+    .site-footer {
+      background-color: #ffffff;
+      border-top: 1px solid #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="db-navbar">
+    <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;">
+      <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="28" height="28" />
+      <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+    </a>
+
+    <nav class="db-navbar__center">
+      <a href="dashboard.html" class="db-nav-link">Home</a>
+      <a href="listings.html" class="db-nav-link">Listings</a>
+      <a href="messages.html" class="db-nav-link">Messages</a>
+      <a href="verification.html" class="db-nav-link db-nav-link--active">Verification</a>
+    </nav>
+
+    <div class="db-navbar__right">
+      <button class="db-icon-btn" aria-label="Notifications">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </button>
+      <div class="db-profile-dropdown" style="position: relative;">
+        <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="ld-verification-top">
+      <div class="ld-verification-hero">
+        <h1>Verification</h1>
+        <p>Verify your identity to build trust today.</p>
+      </div>
+    </div>
+
+    <div class="ld-verification-main">
+      <h2>Become a Verified Landlord</h2>
+      <p>Get a verification badge to build trust with students and increase your listing visibility.</p>
+      
+      <div class="ld-verification-list">
+        <div class="ld-verification-list-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <polyline points="9 12 12 15 16 9"></polyline>
+          </svg>
+          Build Student Trust
+        </div>
+        <div class="ld-verification-list-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <polyline points="9 12 12 15 16 9"></polyline>
+          </svg>
+          Higher Listing Visibility
+        </div>
+        <div class="ld-verification-list-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <polyline points="9 12 12 15 16 9"></polyline>
+          </svg>
+          Reduce Scam Concerns
+        </div>
+        <div class="ld-verification-list-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <polyline points="9 12 12 15 16 9"></polyline>
+          </svg>
+          Priority Support
+        </div>
+      </div>
+
+      <button class="ld-verification-btn" onclick="startVerification()">Start Verification</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__left">
+        <a href="../../index.html" class="navbar__logo site-footer__logo">
+          <div class="site-footer__logo-icon">
+            <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+          </div>
+          <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+        </a>
+        <p class="site-footer__copyright">&copy; 2026 Hostel Hub. All rights reserved.</p>
+      </div>
+
+      <div class="site-footer__center">
+        <a href="../../terms.html">Terms, Privacy & Policies</a>
+        <a href="../../contact.html">Contact Support</a>
+        <a href="../../about.html">About Us</a>
+      </div>
+
+      <div class="site-footer__right">
+        <svg class="site-footer__globe" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Verification Modal -->
+  <div class="ld-verify-modal" id="verificationModal">
+    <div class="ld-verify-modal-content" onclick="event.stopPropagation()">
+      <button class="ld-verify-modal-close" onclick="closeVerificationModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="ld-verify-modal-header">
+        <h2>Particulars Verification</h2>
+        <p>To get verified, please complete the requirements below.</p>
+      </div>
+
+      <div class="ld-verify-list">
+        <!-- Item 1 -->
+        <div class="ld-verify-item" id="itemNationalId" onclick="openUploadIdModal()">
+          <div class="ld-verify-item-left">
+            <div class="ld-verify-item-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="6" width="18" height="12" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="12" r="1.5"></circle>
+                <line x1="13" y1="11" x2="19" y2="11"></line>
+                <line x1="13" y1="14" x2="19" y2="14"></line>
+              </svg>
+            </div>
+            <div class="ld-verify-item-text">
+              <h4>National ID</h4>
+              <p>Government issued ID card</p>
+            </div>
+          </div>
+          <button class="ld-verify-action-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="ld-verify-item" id="itemPropertyProof" onclick="openUploadPropertyProofModal()">
+          <div class="ld-verify-item-left">
+            <div class="ld-verify-item-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <div class="ld-verify-item-text">
+              <h4>Property Proof</h4>
+              <p>Proof of ownership</p>
+            </div>
+          </div>
+          <button class="ld-verify-action-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="ld-verify-item" id="itemPhoneNumber" onclick="openEnterPhoneModal()">
+          <div class="ld-verify-item-left">
+            <div class="ld-verify-item-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div class="ld-verify-item-text">
+              <h4>Phone Number</h4>
+              <p>Verify your phone number</p>
+            </div>
+          </div>
+          <button class="ld-verify-action-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="ld-verify-item" id="itemSelfie" onclick="openSelfieModal()">
+          <div class="ld-verify-item-left">
+            <div class="ld-verify-item-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M3 17v2a2 2 0 0 0 2 2h2M21 17v2a2 2 0 0 1-2 2h-2"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+                <path d="M8 18c0-2.2 1.8-4 4-4s4 1.8 4 4"></path>
+              </svg>
+            </div>
+            <div class="ld-verify-item-text">
+              <h4>Selfie Verification</h4>
+              <p>Take a live selfie</p>
+            </div>
+          </div>
+          <button class="ld-verify-action-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <button class="ld-verify-continue-btn" onclick="submitVerification()">Continue</button>
+    </div>
+  </div>
+
+  <!-- Upload ID Modal -->
+  <div class="ld-verify-modal" id="uploadIdModal">
+    <div class="ld-verify-modal-content" onclick="event.stopPropagation()">
+      
+      <!-- Top Row: Back button & Progress -->
+      <div class="ld-upload-top">
+        <button class="ld-verify-back-btn" onclick="openVerificationModalFromUpload()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+
+        <div class="ld-upload-progress-container">
+          <div class="ld-upload-progress-track">
+            <div class="ld-upload-progress-fill" style="width: 25%;"></div>
+          </div>
+          <span class="ld-upload-progress-text">25%</span>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="ld-verify-modal-header" style="text-align: center; margin-top: 48px;">
+        <h2>Upload National ID</h2>
+        <p>Upload clear and valid documents.</p>
+      </div>
+
+      <!-- Upload Card -->
+      <div class="ld-upload-card">
+        <div class="ld-upload-card-header">
+          <h4>National ID</h4>
+          <p>Upload front and back</p>
+        </div>
+
+        <!-- File Item -->
+        <label class="ld-upload-file-item">
+          <input type="file" class="ld-upload-input" style="display: none;" accept="image/*" onchange="handleFileUpload(event)" />
+          <div class="ld-upload-file-left">
+            <div class="ld-upload-file-icon">
+              <!-- Upload Cloud Icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </div>
+            <span class="ld-upload-file-name" id="uploadFileName">Click to upload image</span>
+          </div>
+          <div class="ld-upload-file-right" id="uploadFileCheckmark" style="display: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #10b981;">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <button class="ld-verify-continue-btn" onclick="finishNationalIdUpload()">Next</button>
+    </div>
+  </div>
+
+  <!-- Upload Property Proof Modal -->
+  <div class="ld-verify-modal" id="uploadPropertyProofModal">
+    <div class="ld-verify-modal-content" onclick="event.stopPropagation()">
+      
+      <!-- Top Row: Back button & Progress -->
+      <div class="ld-upload-top">
+        <button class="ld-verify-back-btn" onclick="openVerificationModalFromPropertyProof()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+
+        <div class="ld-upload-progress-container">
+          <div class="ld-upload-progress-track">
+            <div class="ld-upload-progress-fill" style="width: 50%;"></div>
+          </div>
+          <span class="ld-upload-progress-text">50%</span>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="ld-verify-modal-header" style="text-align: center; margin-top: 48px;">
+        <h2>Upload Property Proof</h2>
+        <p>Upload clear and valid documents.</p>
+      </div>
+
+      <!-- Upload Card 1 -->
+      <div class="ld-upload-card" style="margin-top: 32px; margin-bottom: 24px;">
+        <div class="ld-upload-card-header">
+          <h4>Property Proof</h4>
+          <p>Utility bill</p>
+        </div>
+
+        <label class="ld-upload-file-item">
+          <input type="file" class="ld-upload-input" style="display: none;" accept="application/pdf,image/*" onchange="handleUtilityBillUpload(event)" />
+          <div class="ld-upload-file-left">
+            <div class="ld-upload-file-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </div>
+            <span class="ld-upload-file-name" id="uploadUtilityBillName">Click to upload document</span>
+          </div>
+          <div class="ld-upload-file-right" id="uploadUtilityBillCheckmark" style="display: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #10b981;">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <!-- Upload Card 2 -->
+      <div class="ld-upload-card" style="margin-top: 0;">
+        <div class="ld-upload-card-header">
+          <h4>Property Photo</h4>
+          <p>Photo of hostel building</p>
+        </div>
+
+        <label class="ld-upload-file-item" style="justify-content: center;" id="propertyPhotoArea">
+          <input type="file" class="ld-upload-input" style="display: none;" accept="image/*" onchange="handlePropertyPhotoUpload(event)" />
+          <div class="ld-upload-file-left" style="gap: 12px;">
+            <div class="ld-upload-file-icon" id="propertyPhotoIcon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            </div>
+            <span class="ld-upload-file-name" id="uploadPropertyPhotoName">Upload Photo</span>
+          </div>
+          <div class="ld-upload-file-right" id="uploadPropertyPhotoCheckmark" style="display: none;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #10b981;">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+        </label>
+      </div>
+
+      <button class="ld-verify-continue-btn" onclick="finishPropertyProofUpload()">Next</button>
+    </div>
+  </div>
+
+  <!-- Enter Phone Number Modal -->
+  <div class="ld-verify-modal" id="enterPhoneModal">
+    <div class="ld-verify-modal-content" onclick="event.stopPropagation()">
+      <div class="ld-upload-top">
+        <button class="ld-verify-back-btn" onclick="openVerificationModalFromPhone()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <div class="ld-upload-progress-container">
+          <div class="ld-upload-progress-track">
+            <div class="ld-upload-progress-fill" style="width: 75%;"></div>
+          </div>
+          <span class="ld-upload-progress-text">75%</span>
+        </div>
+      </div>
+
+      <div class="ld-verify-modal-header" style="text-align: center; margin-top: 48px;">
+        <h2>Phone Number</h2>
+        <p>Enter your phone number for verification.</p>
+      </div>
+
+      <div style="margin-top: 32px; margin-bottom: 32px; text-align: left;">
+        <label for="phoneNumberInput" style="display: block; font-size: 0.95rem; font-weight: 500; color: #374151; margin-bottom: 8px;">Phone Number</label>
+        <input type="tel" id="phoneNumberInput" placeholder="e.g. +1 234 567 8900" style="width: 100%; padding: 16px; padding-left: 60px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='#e5e7eb'" oninput="document.getElementById('phoneError').style.display='none'" />
+        <span id="phoneError" style="display: none; color: #ef4444; font-size: 0.85rem; margin-top: 8px;">Please enter a valid phone number.</span>
+      </div>
+
+      <button class="ld-verify-continue-btn" onclick="openVerifyPhoneModal()">Next</button>
+    </div>
+  </div>
+
+  <!-- Verify Phone Number Modal (OTP) -->
+  <div class="ld-verify-modal" id="verifyPhoneModal">
+    <div class="ld-verify-modal-content" onclick="event.stopPropagation()">
+      
+      <div class="ld-upload-top">
+        <button class="ld-verify-back-btn" onclick="backToEnterPhoneModal()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="ld-verify-modal-header" style="text-align: center; margin-top: 48px;">
+        <h2>Verify Phone Number</h2>
+        <p>Enter the 4 digit pin sent to your phone</p>
+      </div>
+
+      <div class="ld-otp-container">
+        <input type="text" class="ld-otp-input" maxlength="1" />
+        <input type="text" class="ld-otp-input" maxlength="1" />
+        <input type="text" class="ld-otp-input" maxlength="1" />
+        <input type="text" class="ld-otp-input" maxlength="1" />
+      </div>
+
+      <button class="ld-verify-continue-btn" onclick="finishPhoneVerification()">Next</button>
+    </div>
+  </div>
+
+  <!-- Success / Under Review Modal -->
+  <div class="ld-verify-modal" id="underReviewModal">
+    <div class="ld-verify-modal-content" onclick="event.stopPropagation()">
+      <div class="ld-upload-top">
+        <h3 style="margin: 0; color: #64748b; font-size: 1.1rem; font-weight: 500;">Success</h3>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin-top: 48px; margin-bottom: 32px;">
+        <img src="../../assets/images/under_review.png" alt="Under Review" style="width: 200px; height: 200px; object-fit: contain; margin-bottom: 24px;" />
+        <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 8px;">Under Review</h2>
+        <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6;">Your verification request is under review.<br>You will be notified once the review is complete.</p>
+      </div>
+
+      <button class="ld-verify-continue-btn" onclick="window.location.href='dashboard.html'">Back to Listings</button>
+    </div>
+  </div>
+
+  <!-- Selfie Verification Modal -->
+  <div class="ld-verify-modal" id="selfieVerificationModal">
+    <div class="ld-verify-modal-content" onclick="event.stopPropagation()">
+      <div class="ld-upload-top">
+        <button class="ld-verify-back-btn" onclick="backFromSelfieModal()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <div class="ld-upload-progress-container">
+          <div class="ld-upload-progress-track">
+            <div class="ld-upload-progress-fill" id="selfieProgressFill" style="width: 75%;"></div>
+          </div>
+          <span class="ld-upload-progress-text" id="selfieProgressText">75%</span>
+        </div>
+      </div>
+
+      <div class="ld-verify-modal-header" style="text-align: center; margin-top: 48px;">
+        <h2>Selfie Verification</h2>
+        <p>Take a clear selfie to verify your identity.</p>
+      </div>
+
+      <div class="ld-selfie-area" style="display: flex; justify-content: center; align-items: center; height: 200px; margin-top: 32px; margin-bottom: 24px;">
+        <!-- State 1: Icon -->
+        <div id="selfieIconState" style="color: #64748b;">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 4h4v2H6v2H4V4zm16 0h-4v2h2v2h2V4zM4 20h4v-2H6v-2H4v4zm16 0h-4v-2h2v-2h2v4z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+            <path d="M12 14c-3.33 0-6 2.67-6 6h2c0-2.21 1.79-4 4-4s4 1.79 4 4h2c0-3.33-2.67-6-6-6z"></path>
+          </svg>
+        </div>
+
+        <!-- State 2: Camera Feed -->
+        <video id="selfieVideoFeed" autoplay playsinline style="display: none; width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"></video>
+
+        <!-- State 3: Captured Image -->
+        <img id="selfieCapturedImg" style="display: none; width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);" />
+        
+        <canvas id="selfieCanvas" style="display: none;"></canvas>
+      </div>
+
+      <div class="ld-selfie-checklist" style="max-width: 240px; margin: 0 auto 32px auto; color: #64748b; font-size: 0.95rem; line-height: 1.8;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>Ensure good lighting</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>Remove glasses or hat</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>Look directly at the camera</span>
+        </div>
+      </div>
+
+      <button class="ld-verify-continue-btn" id="selfieActionBtn" onclick="handleSelfieAction()">Next</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script>
+    function startVerification() {
+      const modal = document.getElementById('verificationModal');
+      if (modal) modal.classList.add('show');
+    }
+
+    function submitVerification() {
+      const completedCount = document.querySelectorAll('.ld-verify-item.completed').length;
+      if (completedCount < 4) {
+        alert("Please complete all verification steps before continuing.");
+        return;
+      }
+      
+      const mainModal = document.getElementById('verificationModal');
+      const underReviewModal = document.getElementById('underReviewModal');
+      
+      if (mainModal) mainModal.classList.remove('show');
+      if (underReviewModal) underReviewModal.classList.add('show');
+    }
+
+    function updateModalProgress(modalId) {
+      const completedCount = document.querySelectorAll('.ld-verify-item.completed').length;
+      let currentProgress = (completedCount * 25) + 25;
+      if (currentProgress > 100) currentProgress = 100;
+
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        const fills = modal.querySelectorAll('.ld-upload-progress-fill');
+        const texts = modal.querySelectorAll('.ld-upload-progress-text');
+        fills.forEach(fill => fill.style.width = currentProgress + '%');
+        texts.forEach(text => text.textContent = currentProgress + '%');
+      }
+      return currentProgress;
+    }
+
+    function closeVerificationModal() {
+      const verifyModal = document.getElementById('verificationModal');
+      const uploadModal = document.getElementById('uploadIdModal');
+      const proofModal = document.getElementById('uploadPropertyProofModal');
+      const enterPhoneModal = document.getElementById('enterPhoneModal');
+      const verifyPhoneModal = document.getElementById('verifyPhoneModal');
+      if (verifyModal) verifyModal.classList.remove('show');
+      if (uploadModal) uploadModal.classList.remove('show');
+      if (proofModal) proofModal.classList.remove('show');
+      if (enterPhoneModal) enterPhoneModal.classList.remove('show');
+      if (verifyPhoneModal) verifyPhoneModal.classList.remove('show');
+    }
+
+    function openUploadIdModal() {
+      const verifyModal = document.getElementById('verificationModal');
+      const uploadModal = document.getElementById('uploadIdModal');
+      if (verifyModal) verifyModal.classList.remove('show');
+      if (uploadModal) {
+        uploadModal.classList.add('show');
+        updateModalProgress('uploadIdModal');
+      }
+    }
+
+    function openVerificationModalFromUpload() {
+      const verifyModal = document.getElementById('verificationModal');
+      const uploadModal = document.getElementById('uploadIdModal');
+      if (uploadModal) uploadModal.classList.remove('show');
+      if (verifyModal) verifyModal.classList.add('show');
+    }
+
+    function finishNationalIdUpload() {
+      const verifyModal = document.getElementById('verificationModal');
+      const uploadModal = document.getElementById('uploadIdModal');
+      const nationalIdItem = document.getElementById('itemNationalId');
+      
+      if (uploadModal) uploadModal.classList.remove('show');
+      if (verifyModal) verifyModal.classList.add('show');
+      if (nationalIdItem) nationalIdItem.classList.add('completed');
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('uploadFileName').textContent = file.name;
+        document.getElementById('uploadFileCheckmark').style.display = 'block';
+      }
+    }
+
+    function openUploadPropertyProofModal() {
+      const verifyModal = document.getElementById('verificationModal');
+      const proofModal = document.getElementById('uploadPropertyProofModal');
+      if (verifyModal) verifyModal.classList.remove('show');
+      if (proofModal) {
+        proofModal.classList.add('show');
+        updateModalProgress('uploadPropertyProofModal');
+      }
+    }
+
+    function openVerificationModalFromPropertyProof() {
+      const verifyModal = document.getElementById('verificationModal');
+      const proofModal = document.getElementById('uploadPropertyProofModal');
+      if (proofModal) proofModal.classList.remove('show');
+      if (verifyModal) verifyModal.classList.add('show');
+    }
+
+    function finishPropertyProofUpload() {
+      const verifyModal = document.getElementById('verificationModal');
+      const proofModal = document.getElementById('uploadPropertyProofModal');
+      const propertyProofItem = document.getElementById('itemPropertyProof');
+      
+      if (proofModal) proofModal.classList.remove('show');
+      if (verifyModal) verifyModal.classList.add('show');
+      if (propertyProofItem) propertyProofItem.classList.add('completed');
+    }
+
+    function handleUtilityBillUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('uploadUtilityBillName').textContent = file.name;
+        document.getElementById('uploadUtilityBillCheckmark').style.display = 'block';
+      }
+    }
+
+    function handlePropertyPhotoUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        document.getElementById('uploadPropertyPhotoName').textContent = file.name;
+        document.getElementById('propertyPhotoIcon').style.display = 'none';
+        document.getElementById('uploadPropertyPhotoCheckmark').style.display = 'block';
+        document.getElementById('propertyPhotoArea').style.justifyContent = 'space-between';
+      }
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+      const verifyModal = document.getElementById('verificationModal');
+      const uploadModal = document.getElementById('uploadIdModal');
+      const proofModal = document.getElementById('uploadPropertyProofModal');
+      const enterPhoneModal = document.getElementById('enterPhoneModal');
+      const verifyPhoneModal = document.getElementById('verifyPhoneModal');
+      const selfieModal = document.getElementById('selfieVerificationModal');
+      
+      if (verifyModal && verifyModal.classList.contains('show') && event.target === verifyModal) {
+        closeVerificationModal();
+      }
+      if (uploadModal && uploadModal.classList.contains('show') && event.target === uploadModal) {
+        closeVerificationModal();
+      }
+      if (proofModal && proofModal.classList.contains('show') && event.target === proofModal) {
+        closeVerificationModal();
+      }
+      if (enterPhoneModal && enterPhoneModal.classList.contains('show') && event.target === enterPhoneModal) {
+        closeVerificationModal();
+      }
+      if (verifyPhoneModal && verifyPhoneModal.classList.contains('show') && event.target === verifyPhoneModal) {
+        closeVerificationModal();
+      }
+      if (selfieModal && selfieModal.classList.contains('show') && event.target === selfieModal) {
+        closeVerificationModal();
+      }
+    });
+
+    function openEnterPhoneModal() {
+      const verifyModal = document.getElementById('verificationModal');
+      const enterModal = document.getElementById('enterPhoneModal');
+      if (verifyModal) verifyModal.classList.remove('show');
+      if (enterModal) {
+        enterModal.classList.add('show');
+        updateModalProgress('enterPhoneModal');
+      }
+    }
+
+    function openVerificationModalFromPhone() {
+      const verifyModal = document.getElementById('verificationModal');
+      const enterModal = document.getElementById('enterPhoneModal');
+      if (enterModal) enterModal.classList.remove('show');
+      if (verifyModal) verifyModal.classList.add('show');
+    }
+
+    function openVerifyPhoneModal() {
+      const phoneError = document.getElementById('phoneError');
+      
+      if (!window.iti || !window.iti.isValidNumber()) {
+        if (phoneError) phoneError.style.display = 'block';
+        return;
+      }
+
+      const enterModal = document.getElementById('enterPhoneModal');
+      const verifyModal = document.getElementById('verifyPhoneModal');
+      if (enterModal) enterModal.classList.remove('show');
+      if (verifyModal) {
+        verifyModal.classList.add('show');
+        updateModalProgress('verifyPhoneModal');
+      }
+    }
+
+    function backToEnterPhoneModal() {
+      const enterModal = document.getElementById('enterPhoneModal');
+      const verifyModal = document.getElementById('verifyPhoneModal');
+      if (verifyModal) verifyModal.classList.remove('show');
+      if (enterModal) enterModal.classList.add('show');
+    }
+
+    function finishPhoneVerification() {
+      const mainVerifyModal = document.getElementById('verificationModal');
+      const otpModal = document.getElementById('verifyPhoneModal');
+      const phoneItem = document.getElementById('itemPhoneNumber');
+      
+      if (otpModal) otpModal.classList.remove('show');
+      if (mainVerifyModal) mainVerifyModal.classList.add('show');
+      if (phoneItem) phoneItem.classList.add('completed');
+    }
+
+    function setupOtpInputs() {
+      const inputs = document.querySelectorAll('.ld-otp-input');
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', (e) => {
+          if (e.target.value.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        });
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+            inputs[index - 1].focus();
+          }
+        });
+      });
+    }
+    document.addEventListener('DOMContentLoaded', setupOtpInputs);
+
+    let selfieState = 'instructions'; // 'instructions' | 'camera' | 'preview'
+    let selfieStream = null;
+
+    function openSelfieModal() {
+      const verifyModal = document.getElementById('verificationModal');
+      const selfieModal = document.getElementById('selfieVerificationModal');
+      
+      selfieState = 'instructions';
+      updateSelfieUI();
+
+      if (verifyModal) verifyModal.classList.remove('show');
+      if (selfieModal) {
+        selfieModal.classList.add('show');
+        updateModalProgress('selfieVerificationModal');
+      }
+    }
+
+    function backFromSelfieModal() {
+      const verifyModal = document.getElementById('verificationModal');
+      const selfieModal = document.getElementById('selfieVerificationModal');
+      
+      stopSelfieCamera();
+      
+      if (selfieModal) selfieModal.classList.remove('show');
+      if (verifyModal) verifyModal.classList.add('show');
+    }
+
+    function updateSelfieUI() {
+      const icon = document.getElementById('selfieIconState');
+      const video = document.getElementById('selfieVideoFeed');
+      const img = document.getElementById('selfieCapturedImg');
+      const btn = document.getElementById('selfieActionBtn');
+
+      if (selfieState === 'instructions') {
+        icon.style.display = 'block';
+        video.style.display = 'none';
+        img.style.display = 'none';
+        btn.textContent = 'Next';
+      } else if (selfieState === 'camera') {
+        icon.style.display = 'none';
+        video.style.display = 'block';
+        img.style.display = 'none';
+        btn.textContent = 'Take Photo';
+      } else if (selfieState === 'preview') {
+        icon.style.display = 'none';
+        video.style.display = 'none';
+        img.style.display = 'block';
+        btn.textContent = 'Next';
+      }
+    }
+
+    async function handleSelfieAction() {
+      if (selfieState === 'instructions') {
+        selfieState = 'camera';
+        updateSelfieUI();
+        await startSelfieCamera();
+      } else if (selfieState === 'camera') {
+        captureSelfie();
+        selfieState = 'preview';
+        updateSelfieUI();
+        stopSelfieCamera();
+      } else if (selfieState === 'preview') {
+        finishSelfieVerification();
+      }
+    }
+
+    async function startSelfieCamera() {
+      try {
+        selfieStream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const video = document.getElementById('selfieVideoFeed');
+        video.srcObject = selfieStream;
+      } catch (err) {
+        console.error("Error accessing webcam: ", err);
+        alert("Could not access webcam. Please ensure permissions are granted.");
+      }
+    }
+
+    function stopSelfieCamera() {
+      if (selfieStream) {
+        selfieStream.getTracks().forEach(track => track.stop());
+        selfieStream = null;
+      }
+    }
+
+    function captureSelfie() {
+      const video = document.getElementById('selfieVideoFeed');
+      const canvas = document.getElementById('selfieCanvas');
+      const img = document.getElementById('selfieCapturedImg');
+      
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      img.src = canvas.toDataURL('image/png');
+    }
+
+    function finishSelfieVerification() {
+      const mainVerifyModal = document.getElementById('verificationModal');
+      const selfieModal = document.getElementById('selfieVerificationModal');
+      const selfieItem = document.getElementById('itemSelfie');
+      
+      if (selfieModal) selfieModal.classList.remove('show');
+      if (mainVerifyModal) mainVerifyModal.classList.add('show');
+      if (selfieItem) selfieItem.classList.add('completed');
+    }
+
+    // Initialize Intl-tel-input
+    document.addEventListener('DOMContentLoaded', () => {
+      const phoneInputField = document.querySelector("#phoneNumberInput");
+      if (phoneInputField) {
+        window.iti = window.intlTelInput(phoneInputField, {
+          utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+          preferredCountries: ["ng", "us", "gb", "gh", "ke"],
+        });
+      }
+    });
+  </script>
+</body>
+</html>

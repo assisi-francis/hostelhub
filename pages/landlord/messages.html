@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages - HostelHub</title>
+
+  <!-- Shared stylesheets -->
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  
+  <!-- Dashboard base styles for navbar/footer -->
+  <link rel="stylesheet" href="../../css/student-dashboard.css" />
+  <link rel="stylesheet" href="../../css/landlord-dashboard.css" />
+
+  <!-- Page-specific styling -->
+  <link rel="stylesheet" href="../../css/student-messages.css" />
+</head>
+<body class="msg-page">
+
+  <!-- Navbar -->
+  <header class="db-navbar">
+    <!-- Left: Logo -->
+    <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;">
+      <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="28" height="28" />
+      <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+    </a>
+
+    <!-- Center: Navigation Links -->
+    <nav class="db-navbar__center">
+      <a href="dashboard.html" class="db-nav-link">Home</a>
+      <a href="listings.html" class="db-nav-link">Listings</a>
+      <a href="messages.html" class="db-nav-link db-nav-link--active">Messages</a>
+      <a href="verification.html" class="db-nav-link">Verification</a>
+    </nav>
+
+    <!-- Right: Icons -->
+    <div class="db-navbar__right">
+      <button class="db-icon-btn" aria-label="Notifications">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </button>
+      <!-- User Profile Dropdown Container -->
+      <div class="db-profile-dropdown" style="position: relative;">
+        <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <!-- Dropdown Menu -->
+        <div class="db-profile-menu" id="profileMenu">
+          <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showProfileModal();">
+            <span>Profile</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showSettingsModal();">
+            <span>Settings</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showLogoutModal();">
+            <span>Log Out</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="msg-container">
+    
+    <!-- Search Bar Section -->
+    <div class="msg-search-wrapper">
+      <div class="msg-search-input-group">
+        <input type="text" class="msg-search-input" placeholder="Search messages, names, or properties..." aria-label="Search messages" />
+        <svg class="msg-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+      <button class="msg-filter-btn" aria-label="Filter Messages">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="21" x2="4" y2="14"></line>
+          <line x1="4" y1="10" x2="4" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12" y2="3"></line>
+          <line x1="20" y1="21" x2="20" y2="16"></line>
+          <line x1="20" y1="12" x2="20" y2="3"></line>
+          <line x1="1" y1="14" x2="7" y2="14"></line>
+          <line x1="9" y1="8" x2="15" y2="8"></line>
+          <line x1="17" y1="16" x2="23" y2="16"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Page Header -->
+    <header class="msg-header">
+      <h1 class="msg-title">Messages</h1>
+      <p class="msg-subtitle">Communicate directly with interested students and potential tenants.</p>
+    </header>
+
+    <!-- Messaging Interface -->
+    <div class="msg-interface">
+      
+      <!-- LEFT PANE: Sidebar -->
+      <aside class="msg-sidebar">
+        <div class="msg-sidebar-header">
+          <h2>Conversations</h2>
+          <button class="msg-icon-btn" aria-label="New Message" style="width: 32px; height: 32px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          </button>
+        </div>
+        
+        <div class="msg-list">
+          <!-- Active Conversation -->
+          <div class="msg-list-item active" onclick="switchChat('chat-amaka', this)">
+            <img src="../../assets/images/avatar_amaka_1780953216948.png" alt="Mrs. Amaka" class="msg-avatar" />
+            <div class="msg-item-content">
+              <div class="msg-item-top">
+                <span class="msg-item-name">Mrs. Amaka O.</span>
+                <span class="msg-item-time">10:42 AM</span>
+              </div>
+              <div class="msg-item-preview">The Wanderer's Den</div>
+              <div class="msg-item-preview unread">Yes, the inspection is scheduled.</div>
+            </div>
+          </div>
+
+          <!-- Other Conversations -->
+          <div class="msg-list-item" onclick="switchChat('chat-ibrahim', this)">
+            <img src="../../assets/images/avatar_ibrahim_1780953228386.png" alt="Mr. Ibrahim" class="msg-avatar" />
+            <div class="msg-item-content">
+              <div class="msg-item-top">
+                <span class="msg-item-name">Ibrahim K.</span>
+                <span class="msg-item-time">Yesterday</span>
+              </div>
+              <div class="msg-item-preview">Edu-Inn</div>
+              <div class="msg-item-preview">Okay, looking forward to it.</div>
+            </div>
+          </div>
+
+          <div class="msg-list-item" onclick="switchChat('chat-maryam', this)">
+            <img src="../../assets/images/avatar_maryam_1780953240891.png" alt="Maryam K." class="msg-avatar" />
+            <div class="msg-item-content">
+              <div class="msg-item-top">
+                <span class="msg-item-name">Maryam K.</span>
+                <span class="msg-item-time">Mon</span>
+              </div>
+              <div class="msg-item-preview">Bright-Brigade</div>
+              <div class="msg-item-preview">Can you send the tenancy agreement?</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT PANE: Chat Amaka -->
+      <section class="msg-chat chat-pane" id="chat-amaka">
+        <header class="msg-chat-header">
+          <img src="../../assets/images/avatar_amaka_1780953216948.png" alt="Mrs. Amaka" class="msg-avatar" />
+          <div class="msg-chat-info">
+            <h2>Mrs. Amaka O.</h2>
+            <p>The Wanderer's Den</p>
+          </div>
+          <div class="msg-chat-actions">
+            <button class="msg-icon-btn" aria-label="Call Student"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
+            <button class="msg-icon-btn" aria-label="More Options"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
+          </div>
+        </header>
+        <div class="msg-chat-body">
+          <div class="msg-date-divider"><span>Today</span></div>
+          <div class="msg-bubble-wrap outgoing"><div class="msg-bubble">Hello Mrs. Amaka, I'm interested in the self-con at The Wanderer's Den. Is it still available for physical inspection?</div><div class="msg-time">09:15 AM</div></div>
+          <div class="msg-bubble-wrap incoming"><div class="msg-bubble">Good morning! Yes, it is still available. When would you like to come over?</div><div class="msg-time">09:42 AM</div></div>
+          <div class="msg-bubble-wrap outgoing"><div class="msg-bubble">Can I come by tomorrow around 2 PM?</div><div class="msg-time">10:05 AM</div></div>
+          <div class="msg-bubble-wrap incoming"><div class="msg-bubble">Yes, the inspection is scheduled. See you then!</div><div class="msg-time">10:42 AM</div></div>
+        </div>
+        <footer class="msg-chat-footer">
+          <button class="msg-icon-btn" aria-label="More Actions" style="border: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+          <div class="msg-input-wrap"><input type="text" class="msg-input" placeholder="Type your message..." /><button class="msg-attach-btn" aria-label="Attach File"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg></button></div>
+          <button class="msg-send-btn" aria-label="Send Message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+        </footer>
+      </section>
+
+      <!-- RIGHT PANE: Chat Ibrahim -->
+      <section class="msg-chat chat-pane" id="chat-ibrahim" style="display: none;">
+        <header class="msg-chat-header">
+          <img src="../../assets/images/avatar_ibrahim_1780953228386.png" alt="Mr. Ibrahim" class="msg-avatar" />
+          <div class="msg-chat-info">
+            <h2>Ibrahim K.</h2>
+            <p>Edu-Inn</p>
+          </div>
+          <div class="msg-chat-actions">
+            <button class="msg-icon-btn" aria-label="Call Student"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
+            <button class="msg-icon-btn" aria-label="More Options"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
+          </div>
+        </header>
+        <div class="msg-chat-body">
+          <div class="msg-date-divider"><span>Yesterday</span></div>
+          <div class="msg-bubble-wrap incoming"><div class="msg-bubble">Hello, are you still moving in this weekend?</div><div class="msg-time">04:30 PM</div></div>
+          <div class="msg-bubble-wrap outgoing"><div class="msg-bubble">Yes sir, I'll be there by Saturday morning. Should I call when I'm close?</div><div class="msg-time">05:15 PM</div></div>
+          <div class="msg-bubble-wrap incoming"><div class="msg-bubble">Okay, looking forward to it. Just give me a ring when you reach the junction.</div><div class="msg-time">05:20 PM</div></div>
+        </div>
+        <footer class="msg-chat-footer">
+          <button class="msg-icon-btn" aria-label="More Actions" style="border: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+          <div class="msg-input-wrap"><input type="text" class="msg-input" placeholder="Type your message..." /><button class="msg-attach-btn" aria-label="Attach File"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg></button></div>
+          <button class="msg-send-btn" aria-label="Send Message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+        </footer>
+      </section>
+
+      <!-- RIGHT PANE: Chat Maryam -->
+      <section class="msg-chat chat-pane" id="chat-maryam" style="display: none;">
+        <header class="msg-chat-header">
+          <img src="../../assets/images/avatar_maryam_1780953240891.png" alt="Maryam K." class="msg-avatar" />
+          <div class="msg-chat-info">
+            <h2>Maryam K.</h2>
+            <p>Bright-Brigade</p>
+          </div>
+          <div class="msg-chat-actions">
+            <button class="msg-icon-btn" aria-label="Call Student"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
+            <button class="msg-icon-btn" aria-label="More Options"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
+          </div>
+        </header>
+        <div class="msg-chat-body">
+          <div class="msg-date-divider"><span>Monday</span></div>
+          <div class="msg-bubble-wrap incoming"><div class="msg-bubble">Hi, thanks for reaching out. The room is available for 150k.</div><div class="msg-time">01:10 PM</div></div>
+          <div class="msg-bubble-wrap outgoing"><div class="msg-bubble">Great! Does the price include the agency fee?</div><div class="msg-time">01:45 PM</div></div>
+          <div class="msg-bubble-wrap incoming"><div class="msg-bubble">Yes, there are no extra hidden charges.</div><div class="msg-time">02:00 PM</div></div>
+          <div class="msg-bubble-wrap outgoing"><div class="msg-bubble">Can you send the tenancy agreement?</div><div class="msg-time">02:30 PM</div></div>
+        </div>
+        <footer class="msg-chat-footer">
+          <button class="msg-icon-btn" aria-label="More Actions" style="border: none;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+          <div class="msg-input-wrap"><input type="text" class="msg-input" placeholder="Type your message..." /><button class="msg-attach-btn" aria-label="Attach File"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg></button></div>
+          <button class="msg-send-btn" aria-label="Send Message"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+        </footer>
+      </section>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__left">
+        <a href="../../index.html" class="navbar__logo site-footer__logo">
+          <div class="site-footer__logo-icon">
+            <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+          </div>
+          <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+        </a>
+        <p class="site-footer__copyright">&copy; 2026 Hostel Hub. All rights reserved.</p>
+      </div>
+
+      <div class="site-footer__center">
+        <a href="../../terms.html">Terms, Privacy & Policies</a>
+        <a href="../../contact.html">Contact Support</a>
+        <a href="../../about.html">About Us</a>
+      </div>
+
+      <div class="site-footer__right">
+        <svg class="site-footer__globe" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Terms & Privacy Modal -->
+  <div class="terms-modal-overlay" id="termsModal">
+    <div class="terms-modal-content">
+      <button class="terms-modal-close" aria-label="Close Modal" onclick="closeTermsModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="terms-modal-header">
+        <h2 class="terms-modal-title">Terms & Privacy</h2>
+        <p class="terms-modal-subtitle">Stay updated with our latest Terms and Privacy Conditions</p>
+      </div>
+      <div class="terms-modal-body">
+        <div class="terms-section">
+          <h3>Last Updated: [Date]</h3>
+          <p>By creating an account or using this platform, you agree to the following:<br>
+          Information We Collect<br>
+          We collect information such as your name, email address, phone number, booking details, and payment information to provide our services.</p>
+        </div>
+        <div class="terms-section">
+          <h3>How We Use Your Information</h3>
+          <p>Your information is used to:</p>
+          <ul>
+            <li>Create and manage your account</li>
+            <li>Process bookings and payments</li>
+            <li>Improve platform performance</li>
+            <li>Provide customer support</li>
+            <li>Send important updates</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Data Protection</h3>
+          <p>We take reasonable measures to protect your personal information. However, no online service can guarantee complete security.</p>
+        </div>
+        <div class="terms-section">
+          <h3>User Responsibilities</h3>
+          <p>By using this platform, you agree to:</p>
+          <ul>
+            <li>Provide accurate information</li>
+            <li>Keep your login credentials secure</li>
+            <li>Use the platform lawfully and respectfully</li>
+            <li>Avoid fraudulent or misleading activities</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Account Suspension</h3>
+          <p>We may suspend or remove accounts that violate platform policies or engage in fraudulent activities.<br>
+          Changes to This Policy<br>
+          We may update these terms from time to time. Continued use of the platform indicates acceptance of any updates.</p>
+        </div>
+        <div class="terms-section">
+          <h3>Contact Us</h3>
+          <p>For questions or support, contact:<br>
+          support@hostelhub.com</p>
+        </div>
+      </div>
+      <div class="terms-modal-footer">
+        <button class="terms-modal-btn" onclick="closeTermsModal()">Agree & Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script for switching chats -->
+  <script>
+    function switchChat(chatId, listItem) {
+      // Hide all chat panes
+      const chatPanes = document.querySelectorAll('.chat-pane');
+      chatPanes.forEach(pane => pane.style.display = 'none');
+
+      // Show the selected chat pane
+      const targetPane = document.getElementById(chatId);
+      if (targetPane) {
+        targetPane.style.display = 'flex';
+      }
+
+      // Remove active class from all list items
+      const listItems = document.querySelectorAll('.msg-list-item');
+      listItems.forEach(item => item.classList.remove('active'));
+
+      // Add active class to clicked item
+      listItem.classList.add('active');
+    }
+  </script>
+  <!-- Profile Modal -->
+  <div class="db-modal-overlay" id="profileModalOverlay" onclick="if(event.target === this) closeProfileModal()">
+    <div class="db-profile-modal-content">
+      <div class="db-profile-modal-header">
+        <div>
+          <h2 class="db-profile-modal-title">Profile</h2>
+          <p class="db-profile-modal-subtitle">Manage your profile details and preference settings.</p>
+        </div>
+        <button class="db-modal-close" aria-label="Close Modal" onclick="closeProfileModal()">×</button>
+      </div>
+      
+      <div class="db-profile-tabs">
+        <button class="db-profile-tab active" onclick="switchProfileTab('personal')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          Personal Info
+        </button>
+        <button class="db-profile-tab" onclick="switchProfileTab('settings')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Settings
+        </button>
+      </div>
+
+      <div class="db-profile-modal-body">
+        <!-- Personal Info Tab Content -->
+        <div id="tab-personal" class="profile-tab-content" style="display: block;">
+          <div class="db-profile-photo-section">
+          <img src="../../assets/images/avatar_adeola.png" alt="Profile Photo" class="db-profile-photo-large" id="profilePhotoImg" />
+          <div class="db-profile-photo-info">
+            <h3>Profile Photo</h3>
+            <p>PNG, JPG or GIF. Max 5MB.</p>
+            <div class="db-profile-photo-actions">
+              <!-- Hidden file input -->
+              <input type="file" id="profileImageInput" accept="image/*" style="display: none;" />
+              <button class="db-btn-primary" onclick="document.getElementById('profileImageInput').click()">Upload New</button>
+              <button class="db-btn-light-danger" onclick="document.getElementById('profilePhotoImg').src = '../../assets/images/avatar_adeola.png'">Delete</button>
+            </div>
+          </div>
+        </div>
+
+        <form class="db-profile-form">
+          <div class="db-form-group">
+            <label>Full Name</label>
+            <input type="text" value="Adeola Rotimi" readonly />
+          </div>
+          <div class="db-form-group">
+            <label>Email Address</label>
+            <input type="email" value="adeolarotimi@gmail.com" readonly />
+          </div>
+          <div class="db-form-group">
+            <label>Phone Number</label>
+            <input type="text" value="0801234567" readonly />
+          </div>
+          <div class="db-form-group">
+            <label>University / School</label>
+            <input type="text" value="University of Lagos" readonly />
+          </div>
+        </form>
+        </div>
+
+        <!-- Settings Tab Content -->
+        <div id="tab-settings" class="profile-tab-content" style="display: none;">
+          <h3 class="db-settings-section-title">Notifications</h3>
+          
+          <div class="db-settings-card">
+            <div class="db-settings-item">
+              <div class="db-settings-text">
+                <h4>Email Notifications</h4>
+                <p>Receive updates about new listings and messages.</p>
+              </div>
+              <label class="db-toggle-switch">
+                <input type="checkbox" checked />
+                <span class="db-slider round"></span>
+              </label>
+            </div>
+            
+            <div class="db-settings-divider"></div>
+            
+            <div class="db-settings-item">
+              <div class="db-settings-text">
+                <h4>SMS Alerts</h4>
+                <p>Urgent notifications regarding viewing requests.</p>
+              </div>
+              <label class="db-toggle-switch">
+                <input type="checkbox" checked />
+                <span class="db-slider round"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="db-settings-actions">
+            <button class="db-btn-text" onclick="closeProfileModal()">Discard Changes</button>
+            <button class="db-btn-primary" onclick="closeProfileModal()">Save Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div class="db-modal-overlay" id="logoutModal">
+    <div class="db-modal-content">
+      <div class="db-modal-icon-wrap">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </div>
+      <h2 class="db-modal-title">Log out?</h2>
+      <p class="db-modal-text">Are you sure you want to log out?<br/>You can always log back in anytime.</p>
+      <div class="db-modal-actions">
+        <button class="db-btn-danger" onclick="window.location.href='../../index.html'">Yes, Log Out</button>
+        <button class="db-btn-outline" onclick="closeLogoutModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Toggle Profile Menu
+    function toggleProfileMenu() {
+      const menu = document.getElementById('profileMenu');
+      const btn = document.getElementById('profileMenuBtn');
+      if (menu) {
+        menu.classList.toggle('show');
+        if (btn) btn.classList.toggle('active');
+      }
+    }
+
+    function showProfileModal() {
+      switchProfileTab('personal');
+      // Close profile menu if open
+      const menu = document.getElementById('profileMenu');
+      if (menu && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+      }
+      const modal = document.getElementById('profileModalOverlay');
+      if (modal) {
+        modal.classList.add('show');
+      }
+    }
+
+    function showSettingsModal() {
+      switchProfileTab('settings');
+      // Close profile menu if open
+      const menu = document.getElementById('profileMenu');
+      if (menu && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+      }
+      const modal = document.getElementById('profileModalOverlay');
+      if (modal) {
+        modal.classList.add('show');
+      }
+    }
+
+    function switchProfileTab(tabName) {
+      // Hide all contents
+      const contents = document.querySelectorAll('.profile-tab-content');
+      contents.forEach(content => content.style.display = 'none');
+      
+      // Remove active class from all tabs
+      const tabs = document.querySelectorAll('.db-profile-tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      // Show requested content and activate tab
+      if (tabName === 'personal') {
+        document.getElementById('tab-personal').style.display = 'block';
+        tabs[0].classList.add('active');
+      } else if (tabName === 'settings') {
+        document.getElementById('tab-settings').style.display = 'block';
+        tabs[1].classList.add('active');
+      }
+    }
+
+    function closeProfileModal() {
+      const modal = document.getElementById('profileModalOverlay');
+      if (modal) {
+        modal.classList.remove('show');
+      }
+    }
+
+    function showLogoutModal() {
+      // Close profile menu if open
+      const menu = document.getElementById('profileMenu');
+      if (menu && menu.classList.contains('show')) {
+        menu.classList.remove('show');
+      }
+      
+      const modal = document.getElementById('logoutModal');
+      if (modal) {
+        modal.classList.add('show');
+      }
+    }
+
+    function closeLogoutModal() {
+      const modal = document.getElementById('logoutModal');
+      if (modal) {
+        modal.classList.remove('show');
+      }
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const profileContainer = document.querySelector('.db-profile-dropdown');
+      const menu = document.getElementById('profileMenu');
+      const btn = document.getElementById('profileMenuBtn');
+      
+      if (profileContainer && menu) {
+        if (!profileContainer.contains(event.target)) {
+          if (menu.classList.contains('show')) {
+            menu.classList.remove('show');
+            if (btn) btn.classList.remove('active');
+          }
+        }
+      }
+    });
+
+    // Handle profile image upload preview
+    document.getElementById('profileImageInput')?.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        // Validate file size (Max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+          alert('File size exceeds 5MB limit. Please choose a smaller image.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePhotoImg').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Terms Modal Logic
+    function showTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.add('show');
+    }
+    function closeTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.remove('show');
+    }
+    document.addEventListener('click', function(event) {
+      const modal = document.getElementById('termsModal');
+      if (modal && event.target === modal) {
+        closeTermsModal();
+      }
+    });
+  </script>
+</body>
+</html>

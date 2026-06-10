@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About HostelHub — Discover verified accommodations near your university." />
+  <title>About Us | HostelHub</title>
+
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/landing.css" />
+  <link rel="stylesheet" href="css/about.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <!-- Logo -->
+      <a href="index.html" class="navbar__logo" aria-label="HostelHub Home">
+        <div class="navbar__logo-icon" aria-hidden="true">
+          <img src="assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+        </div>
+        <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="navbar__nav" aria-label="Main navigation">
+        <a href="index.html"    class="navbar__link">Home</a>
+        <a href="about.html"    class="navbar__link active">About Us</a>
+        <a href="index.html#how-it-works" class="navbar__link">How It Works</a>
+        <a href="index.html#contact" class="navbar__link">Contact Us</a>
+      </nav>
+
+      <!-- CTA icon-text links -->
+      <div class="navbar__actions">
+        <a href="pages/auth/login.html" id="btn-for-students" class="navbar__cta-link">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <polyline points="16 11 18 13 22 9"/>
+          </svg>
+          For Students
+        </a>
+        <a href="pages/auth/login.html" id="btn-for-landlords" class="navbar__cta-link">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="1"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+          For Landlords
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="navbar__hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar__drawer" id="nav-drawer" aria-hidden="true">
+      <a href="index.html"    class="navbar__link">Home</a>
+      <a href="about.html"    class="navbar__link active">About Us</a>
+      <a href="index.html#how-it-works" class="navbar__link">How It Works</a>
+      <a href="index.html#contact" class="navbar__link">Contact Us</a>
+      <a href="pages/auth/login.html" class="navbar__cta-link w-full">For Students</a>
+      <a href="pages/auth/login.html" class="navbar__cta-link w-full">For Landlords</a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="about-hero">
+    <div class="container about-hero__inner">
+      <h1 class="about-hero__title">Your Campus Home, Minus the Stress</h1>
+      <p class="about-hero__subtitle">
+        HostelHub connects students directly with verified landlords. No fake agents, hidden fees - just safe, affordable off-campus housing close to school
+      </p>
+      <div class="about-hero__actions">
+        <a href="pages/auth/login.html" class="btn--primary">Explore our Spaces</a>
+        <a href="#" class="btn--outline">Watch our Story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       OUR STORY
+  ═══════════════════════════════════════════ -->
+  <section class="our-story">
+    <div class="container our-story__inner">
+      <div class="our-story__left">
+        <h2>Our Story</h2>
+        <h3>Bridging the Gap, Building Trust</h3>
+        <p>
+          Finding a hostel off-campus shouldn't mean risking your school fees to fake house agents or trekking for hours just to inspect a room. At the same time, landlords struggle to reach students directly because they don't live near the campus.
+        </p>
+        <p>
+          HostelHub was created to solve this exact problem. We are a trusted digital marketplace built specifically for the student community. We bring transparency back to accommodation by allowing students to browse verified listings, read real student reviews, and speak directly to property owners.
+        </p>
+      </div>
+      <div class="our-story__right">
+        <!-- 24 GLOBAL CITIES -->
+        <div class="stat-card stat-card--blue">
+          <div class="stat-card__number">24</div>
+          <div class="stat-card__label">GLOBAL CITIES</div>
+        </div>
+        <!-- 4.9 AVG RATING -->
+        <div class="stat-card stat-card--green">
+          <div class="stat-card__number">4.9</div>
+          <div class="stat-card__label">AVG. RATING</div>
+        </div>
+        <!-- 12k+ RESIDENTS -->
+        <div class="stat-card stat-card--blue">
+          <div class="stat-card__number">12k+</div>
+          <div class="stat-card__label">RESIDENTS</div>
+        </div>
+        <!-- 98% RETENTION -->
+        <div class="stat-card stat-card--green">
+          <div class="stat-card__number">98%</div>
+          <div class="stat-card__label">RETENTION</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       WHAT WE STAND FOR
+  ═══════════════════════════════════════════ -->
+  <section class="what-we-stand-for">
+    <div class="container">
+      <h2>What We Stand For</h2>
+      <div class="what-we-stand-for__grid">
+        
+        <!-- Card 1 -->
+        <div class="stand-card">
+          <div class="stand-card__icon stand-card__icon--blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div class="stand-card__content">
+            <h3>Zero Agent Extortion</h3>
+            <p>We eliminate the middleman. Students negotiate directly with landlords, ensuring you only pay the actual house rent without arbitrary markups.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="stand-card">
+          <div class="stand-card__icon stand-card__icon--green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <div class="stand-card__content">
+            <h3>100% Verified Listings</h3>
+            <p>Community isn't accidental; it's engineered. We curate diverse environments that bring together thinkers, creators, and leaders, creating a network that lasts far beyond graduation.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="stand-card">
+          <div class="stand-card__icon stand-card__icon--blue">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div class="stand-card__content">
+            <h3>Student-Led Transparency</h3>
+            <p>No surprises. Read honest reviews and ratings from fellow students about the environment, utilities, and room quality before making your choice.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="stand-card">
+          <div class="stand-card__icon stand-card__icon--green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div class="stand-card__content">
+            <h3>Proximity Focused</h3>
+            <p>Cut down your daily transportation costs. Easily filter and discover secure accommodation options closest to your campus gates.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       READY CTA
+  ═══════════════════════════════════════════ -->
+  <section class="ready-cta">
+    <div class="container ready-cta__inner">
+      <h2>Ready for a better habitat?</h2>
+      <p>Join thousands of students and young professionals who have found their focus with us.</p>
+      <a href="pages/auth/login.html" class="btn--primary">Get Started Today</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__left">
+        <a href="index.html" class="navbar__logo site-footer__logo">
+          <div class="site-footer__logo-icon">
+            <img src="assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+          </div>
+          <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+        </a>
+        <p class="site-footer__copyright">&copy; 2026 Hostel Hub. All rights reserved.</p>
+      </div>
+
+      <div class="site-footer__center">
+        <a href="terms.html">Terms, Privacy & Policies</a>
+        <a href="contact.html">Contact Support</a>
+        <a href="about.html">About Us</a>
+      </div>
+
+      <div class="site-footer__right">
+        <svg class="site-footer__globe" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Terms & Privacy Modal -->
+  <div class="terms-modal-overlay" id="termsModal">
+    <div class="terms-modal-content">
+      <button class="terms-modal-close" aria-label="Close Modal" onclick="closeTermsModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="terms-modal-header">
+        <h2 class="terms-modal-title">Terms & Privacy</h2>
+        <p class="terms-modal-subtitle">Stay updated with our latest Terms and Privacy Conditions</p>
+      </div>
+      <div class="terms-modal-body">
+        <div class="terms-section">
+          <h3>Last Updated: [Date]</h3>
+          <p>By creating an account or using this platform, you agree to the following:<br>
+          Information We Collect<br>
+          We collect information such as your name, email address, phone number, booking details, and payment information to provide our services.</p>
+        </div>
+        <div class="terms-section">
+          <h3>How We Use Your Information</h3>
+          <p>Your information is used to:</p>
+          <ul>
+            <li>Create and manage your account</li>
+            <li>Process bookings and payments</li>
+            <li>Improve platform performance</li>
+            <li>Provide customer support</li>
+            <li>Send important updates</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Data Protection</h3>
+          <p>We take reasonable measures to protect your personal information. However, no online service can guarantee complete security.</p>
+        </div>
+        <div class="terms-section">
+          <h3>User Responsibilities</h3>
+          <p>By using this platform, you agree to:</p>
+          <ul>
+            <li>Provide accurate information</li>
+            <li>Keep your login credentials secure</li>
+            <li>Use the platform lawfully and respectfully</li>
+            <li>Avoid fraudulent or misleading activities</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Account Suspension</h3>
+          <p>We may suspend or remove accounts that violate platform policies or engage in fraudulent activities.<br>
+          Changes to This Policy<br>
+          We may update these terms from time to time. Continued use of the platform indicates acceptance of any updates.</p>
+        </div>
+        <div class="terms-section">
+          <h3>Contact Us</h3>
+          <p>For questions or support, contact:<br>
+          support@hostelhub.com</p>
+        </div>
+      </div>
+      <div class="terms-modal-footer">
+        <button class="terms-modal-btn" onclick="closeTermsModal()">Agree & Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script>
+    function showTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.add('show');
+    }
+    function closeTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.remove('show');
+    }
+    document.addEventListener('click', function(event) {
+      const modal = document.getElementById('termsModal');
+      if (modal && event.target === modal) {
+        closeTermsModal();
+      }
+    });
+
+    // ── Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('navbar--scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Mobile hamburger
+    const hamburger = document.getElementById('hamburger-btn');
+    const drawer    = document.getElementById('nav-drawer');
+    hamburger.addEventListener('click', () => {
+      const open = drawer.classList.toggle('navbar__drawer--open');
+      hamburger.setAttribute('aria-expanded', open);
+      drawer.setAttribute('aria-hidden', !open);
+    });
+  </script>
+</body>
+</html>
