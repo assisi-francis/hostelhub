@@ -400,3 +400,117 @@
     transform: rotate(360deg);
   }
 }
+
+/* ── TERMS MODAL ── */
+.terms-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+}
+
+.terms-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.terms-modal-content {
+  background: #fdfdfd;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.terms-modal-overlay.show .terms-modal-content {
+  transform: translateY(0);
+}
+
+.terms-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+}
+
+.terms-modal-header {
+  padding: 32px 32px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.terms-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.terms-modal-subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.terms-modal-body {
+  padding: 24px 32px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+.terms-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.terms-section ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.terms-modal-footer {
+  padding: 24px 32px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.terms-modal-btn {
+  width: 100%;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.terms-modal-btn:hover {
+  background: #642bc2;
+}

@@ -1,0 +1,282 @@
+/* ── ABOUT PAGE SPECIFIC STYLES ── */
+
+.about-hero {
+  position: relative;
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('../assets/images/hostel_courtyard.png') center/cover no-repeat;
+  text-align: center;
+  color: #fff;
+  padding-top: 64px;
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.about-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.about-hero__title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.about-hero__subtitle {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  opacity: 0.95;
+  max-width: 700px;
+}
+
+.about-hero__actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn--outline {
+  background: transparent;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn--outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+}
+
+/* ── OUR STORY SECTION ── */
+.our-story {
+  padding: 100px 0 40px;
+  background: #fcfcfc;
+}
+
+.our-story__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.our-story__left h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.our-story__left h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 32px;
+}
+
+.our-story__left p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.our-story__left p:last-child {
+  margin-bottom: 0;
+}
+
+.our-story__right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.stat-card {
+  background: #fff;
+  border: 1px solid #f3f4f6;
+  border-radius: 12px;
+  padding: 36px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.stat-card__number {
+  font-size: 2.8rem;
+  font-weight: 800;
+}
+
+.stat-card__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card--blue .stat-card__number {
+  color: #2563eb;
+}
+
+.stat-card--green .stat-card__number {
+  color: #10b981;
+}
+
+@media (max-width: 992px) {
+  .our-story__inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-hero__title {
+    font-size: 2.5rem;
+  }
+  .about-hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn--primary, .btn--outline {
+    width: 100%;
+  }
+  .our-story__right {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── WHAT WE STAND FOR ── */
+.what-we-stand-for {
+  padding: 20px 0 80px;
+  background: #fdfdfd;
+  text-align: center;
+}
+
+.what-we-stand-for h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 48px;
+}
+
+.what-we-stand-for__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  text-align: left;
+}
+
+.stand-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+  border: 1px solid #f3f4f6;
+  display: flex;
+  gap: 20px;
+}
+
+.stand-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stand-card__icon--blue {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+.stand-card__icon--green {
+  background: #d1fae5;
+  color: #10b981;
+}
+
+.stand-card__content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+.stand-card__content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #6b7280;
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .what-we-stand-for__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── READY CTA ── */
+.ready-cta {
+  padding: 80px 0 100px;
+  background: #fff;
+  text-align: center;
+}
+
+.ready-cta__inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ready-cta h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 16px;
+}
+
+.ready-cta p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #6b7280;
+  margin-bottom: 32px;
+}

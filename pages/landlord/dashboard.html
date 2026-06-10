@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landlord Dashboard | HostelHub</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/global.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+  <link rel="stylesheet" href="../../css/student-dashboard.css" />
+  <link rel="stylesheet" href="../../css/landlord-dashboard.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <header class="db-navbar">
+    <!-- Left: Logo -->
+    <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;">
+      <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="28" height="28" />
+      <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+    </a>
+
+    <!-- Center: Navigation Links -->
+    <nav class="db-navbar__center">
+      <a href="dashboard.html" class="db-nav-link db-nav-link--active">Home</a>
+      <a href="listings.html" class="db-nav-link">Listings</a>
+      <a href="messages.html" class="db-nav-link">Messages</a>
+      <a href="verification.html" class="db-nav-link">Verification</a>
+    </nav>
+
+    <!-- Right: Icons -->
+    <div class="db-navbar__right">
+      <button class="db-icon-btn" aria-label="Notifications">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </button>
+      <!-- User Profile Dropdown Container -->
+      <div class="db-profile-dropdown" style="position: relative;">
+        <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <!-- Dropdown Menu -->
+        <div class="db-profile-menu" id="profileMenu">
+          <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showProfileModal();">
+            <span>Profile</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showSettingsModal();">
+            <span>Settings</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showLogoutModal();">
+            <span>Log Out</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="ld-hero">
+    <div class="container ld-hero__inner">
+      <div class="ld-hero__welcome">Welcome back, Uche</div>
+      <h1 class="ld-hero__title">Find Your Perfect Hostel</h1>
+
+      <div class="ld-hero__search-wrap">
+        <div class="ld-hero__search-box">
+          <input type="text" class="ld-hero__search-input" placeholder="Wanderer" value="Wanderer" />
+          <svg class="ld-hero__search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <button class="ld-hero__filter-btn" aria-label="Filter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════ -->
+  <main class="ld-main">
+    <div class="container">
+      
+      <!-- Overview Section -->
+      <section class="ld-overview">
+        <h2 class="ld-section-title">Overview</h2>
+        <div class="ld-overview__grid">
+          
+          <!-- Card 1 -->
+          <div class="ld-metric-card">
+            <div class="ld-metric-info">
+              <div class="ld-metric-label">Total Listings</div>
+              <div class="ld-metric-value">12</div>
+            </div>
+            <div class="ld-metric-icon ld-metric-icon--purple">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="ld-metric-card">
+            <div class="ld-metric-info">
+              <div class="ld-metric-label">Total Views</div>
+              <div class="ld-metric-value">12</div>
+            </div>
+            <div class="ld-metric-icon ld-metric-icon--blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="ld-metric-card">
+            <div class="ld-metric-info">
+              <div class="ld-metric-label">Total Enquiries</div>
+              <div class="ld-metric-value">12</div>
+            </div>
+            <div class="ld-metric-icon ld-metric-icon--orange">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="ld-metric-card">
+            <div class="ld-metric-info">
+              <div class="ld-metric-label">Active Listings</div>
+              <div class="ld-metric-value">5</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Activities Section -->
+      <section>
+        <h2 class="ld-section-title">Activities</h2>
+        <div class="ld-activities">
+          
+          <!-- Today Group -->
+          <div class="ld-activity-group">
+            <div class="ld-activity-date">Today</div>
+            <div class="ld-activity-list">
+              <!-- Item 1 -->
+              <div class="ld-activity-item">
+                <img src="../../assets/images/avatar_adeola.png" alt="Adeola" class="ld-activity-avatar" />
+                <div class="ld-activity-content">
+                  <div class="ld-activity-title">Adeola</div>
+                  <div class="ld-activity-desc">Good Day Sir. Please, is the single..</div>
+                </div>
+                <div class="ld-activity-time">2m ago</div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="ld-activity-item">
+                <div class="ld-activity-avatar ld-activity-avatar--system">S</div>
+                <div class="ld-activity-content">
+                  <div class="ld-activity-title">System Alert</div>
+                  <div class="ld-activity-desc">Your badge is ready!</div>
+                </div>
+                <div class="ld-activity-time">2m ago</div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="ld-activity-item">
+                <div class="ld-activity-avatar ld-activity-avatar--system">S</div>
+                <div class="ld-activity-content">
+                  <div class="ld-activity-title">System Alert</div>
+                  <div class="ld-activity-desc">Your verification request has bee..</div>
+                </div>
+                <div class="ld-activity-time">2m ago</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monday Group -->
+          <div class="ld-activity-group">
+            <div class="ld-activity-date">Monday</div>
+            <div class="ld-activity-list">
+              <!-- Item 1 -->
+              <div class="ld-activity-item">
+                <img src="../../assets/images/apartment_1_1780949972151.png" alt="Property" class="ld-activity-avatar" />
+                <div class="ld-activity-content">
+                  <div class="ld-activity-title">New Property Added</div>
+                  <div class="ld-activity-desc">Your verification request has bee..</div>
+                </div>
+                <div class="ld-activity-time">7days ago</div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="ld-activity-item">
+                <img src="../../assets/images/apartment_2_1780950000279.png" alt="Property" class="ld-activity-avatar" />
+                <div class="ld-activity-content">
+                  <div class="ld-activity-title">New Property Added</div>
+                  <div class="ld-activity-desc">Your verification request has bee..</div>
+                </div>
+                <div class="ld-activity-time">7days ago</div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="ld-activity-item">
+                <img src="../../assets/images/apartment_3_1780950024765.png" alt="Property" class="ld-activity-avatar" />
+                <div class="ld-activity-content">
+                  <div class="ld-activity-title">New Property Added</div>
+                  <div class="ld-activity-desc">Your verification request has bee..</div>
+                </div>
+                <div class="ld-activity-time">7days ago</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Recent Listings Section -->
+      <section class="db-section" style="margin-top: 60px;">
+        <div class="db-section-header">
+          <h2 class="db-section-title">Recent Listings</h2>
+          <a href="#" class="db-section-link">View All Hostels</a>
+        </div>
+        <div class="db-card-row">
+          <!-- Card 1 -->
+          <article class="db-card">
+            <div class="db-card-image-wrap">
+              <img src="../../assets/images/hero.jpg" alt="Hostel Room" class="db-card-image">
+              <span class="db-card-badge db-card-badge--available">Available</span>
+              <button class="db-card-fav" aria-label="Favorite">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </button>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title-row">
+                <h3 class="db-card-title">The Wanderer's Den</h3>
+              </div>
+              <div class="db-card-info">
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Yaba, Lagos
+                </span>
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  5 min to gate
+                </span>
+              </div>
+              <div class="db-card-footer">
+                <div class="db-card-price">₦150,000<span>/year</span></div>
+                <button class="db-card-btn">Edit</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="db-card">
+            <div class="db-card-image-wrap">
+              <img src="../../assets/images/spencer-davis-0ShTs8iPY28-unsplash.jpg" alt="Hostel Room" class="db-card-image">
+              <span class="db-card-badge db-card-badge--available">Available</span>
+              <button class="db-card-fav" aria-label="Favorite">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </button>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title-row" style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 class="db-card-title">Bello Suite</h3>
+                <span class="badge" style="background:#d1fae5; color:#10b981; font-size:0.7rem; padding:2px 6px; border-radius:4px; display:flex; align-items:center; gap:4px; font-weight:600;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg> Verified Landlord</span>
+              </div>
+              <div class="db-card-info">
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Yaba, Lagos
+                </span>
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  5 min to gate
+                </span>
+              </div>
+              <div class="db-card-footer">
+                <div class="db-card-price">₦150,000<span>/year</span></div>
+                <button class="db-card-btn">Edit</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="db-card">
+            <div class="db-card-image-wrap">
+              <img src="../../assets/images/apartment_1_1780949972151.png" alt="Hostel Room" class="db-card-image">
+              <span class="db-card-badge db-card-badge--available">Available</span>
+              <button class="db-card-fav" aria-label="Favorite">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </button>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title-row">
+                <h3 class="db-card-title">Bright-Brigade</h3>
+              </div>
+              <div class="db-card-info">
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Yaba, Lagos
+                </span>
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  5 min to gate
+                </span>
+              </div>
+              <div class="db-card-footer">
+                <div class="db-card-price">₦150,000<span>/year</span></div>
+                <button class="db-card-btn">Edit</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="db-card">
+            <div class="db-card-image-wrap">
+              <img src="../../assets/images/apartment_2_1780950000279.png" alt="Hostel Room" class="db-card-image">
+              <span class="db-card-badge" style="background:#ffedd5; color:#ea580c;">Reserved</span>
+              <button class="db-card-fav" aria-label="Favorite">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </button>
+            </div>
+            <div class="db-card-body">
+              <div class="db-card-title-row">
+                <h3 class="db-card-title">Emerald Court</h3>
+              </div>
+              <div class="db-card-info">
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  Yaba, Lagos
+                </span>
+                <span class="db-info-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  5 min to gate
+                </span>
+              </div>
+              <div class="db-card-footer">
+                <div class="db-card-price">₦150,000<span>/year</span></div>
+                <button class="db-card-btn">Edit</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER TRUST BADGES
+  ═══════════════════════════════════════════ -->
+  <section class="trust-bar" aria-label="Trust indicators">
+    <div class="container trust-bar__grid">
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <strong>Verified Only</strong>
+        <p>Every hostel is physically inspected for safety and quality.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <strong>Student Safe</strong>
+        <p>Strict focus on student-safe and scholar-friendly environments.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <strong>Fair Pricing</strong>
+        <p>Direct-to-hostel pricing with no hidden brokerage fees.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="trust-item__icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+        <strong>500+ Campus</strong>
+        <p>Wide network covering all major academic hubs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__left">
+        <a href="../../index.html" class="navbar__logo site-footer__logo">
+          <div class="site-footer__logo-icon">
+            <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+          </div>
+          <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
+        </a>
+        <p class="site-footer__copyright">&copy; 2026 Hostel Hub. All rights reserved.</p>
+      </div>
+
+      <div class="site-footer__center">
+        <a href="../../terms.html">Terms, Privacy & Policies</a>
+        <a href="../../contact.html">Contact Support</a>
+        <a href="../../about.html">About Us</a>
+      </div>
+
+      <div class="site-footer__right">
+        <svg class="site-footer__globe" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Terms & Privacy Modal -->
+  <div class="terms-modal-overlay" id="termsModal">
+    <div class="terms-modal-content">
+      <button class="terms-modal-close" aria-label="Close Modal" onclick="closeTermsModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="terms-modal-header">
+        <h2 class="terms-modal-title">Terms & Privacy</h2>
+        <p class="terms-modal-subtitle">Stay updated with our latest Terms and Privacy Conditions</p>
+      </div>
+      <div class="terms-modal-body">
+        <div class="terms-section">
+          <h3>Last Updated: [Date]</h3>
+          <p>By creating an account or using this platform, you agree to the following:<br>
+          Information We Collect<br>
+          We collect information such as your name, email address, phone number, booking details, and payment information to provide our services.</p>
+        </div>
+        <div class="terms-section">
+          <h3>How We Use Your Information</h3>
+          <p>Your information is used to:</p>
+          <ul>
+            <li>Create and manage your account</li>
+            <li>Process bookings and payments</li>
+            <li>Improve platform performance</li>
+            <li>Provide customer support</li>
+            <li>Send important updates</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Data Protection</h3>
+          <p>We take reasonable measures to protect your personal information. However, no online service can guarantee complete security.</p>
+        </div>
+        <div class="terms-section">
+          <h3>User Responsibilities</h3>
+          <p>By using this platform, you agree to:</p>
+          <ul>
+            <li>Provide accurate information</li>
+            <li>Keep your login credentials secure</li>
+            <li>Use the platform lawfully and respectfully</li>
+            <li>Avoid fraudulent or misleading activities</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Account Suspension</h3>
+          <p>We may suspend or remove accounts that violate platform policies or engage in fraudulent activities.<br>
+          Changes to This Policy<br>
+          We may update these terms from time to time. Continued use of the platform indicates acceptance of any updates.</p>
+        </div>
+        <div class="terms-section">
+          <h3>Contact Us</h3>
+          <p>For questions or support, contact:<br>
+          support@hostelhub.com</p>
+        </div>
+      </div>
+      <div class="terms-modal-footer">
+        <button class="terms-modal-btn" onclick="closeTermsModal()">Agree & Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/utils.js"></script>
+  <script>
+    function showTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.add('show');
+    }
+    function closeTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.remove('show');
+    }
+    document.addEventListener('click', function(event) {
+      const modal = document.getElementById('termsModal');
+      if (modal && event.target === modal) {
+        closeTermsModal();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -11,6 +11,7 @@
   
   <!-- Dashboard base styles for navbar/footer -->
   <link rel="stylesheet" href="../../css/student-dashboard.css" />
+  <link rel="stylesheet" href="../../css/landlord-dashboard.css" />
 
   <!-- Page-specific styling -->
   <link rel="stylesheet" href="../../css/student-messages.css" />
@@ -20,16 +21,17 @@
   <!-- Navbar -->
   <header class="db-navbar">
     <!-- Left: Logo -->
-    <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; text-decoration: none; color: var(--color-text);">
+    <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;">
       <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="28" height="28" />
       <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
     </a>
 
     <!-- Center: Navigation Links -->
     <nav class="db-navbar__center">
-      <a href="dashboard.html" class="db-nav-link">Explore</a>
-      <a href="saved.html" class="db-nav-link">Saved</a>
+      <a href="dashboard.html" class="db-nav-link">Home</a>
+      <a href="listings.html" class="db-nav-link">Listings</a>
       <a href="messages.html" class="db-nav-link db-nav-link--active">Messages</a>
+      <a href="verification.html" class="db-nav-link">Verification</a>
     </nav>
 
     <!-- Right: Icons -->
@@ -56,7 +58,7 @@
           </a>
           <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showSettingsModal();">
             <span>Settings</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
           <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showLogoutModal();">
             <span>Log Out</span>
@@ -97,7 +99,7 @@
     <!-- Page Header -->
     <header class="msg-header">
       <h1 class="msg-title">Messages</h1>
-      <p class="msg-subtitle">Communicate directly with verified landlords and property managers.</p>
+      <p class="msg-subtitle">Communicate directly with interested students and potential tenants.</p>
     </header>
 
     <!-- Messaging Interface -->
@@ -162,7 +164,7 @@
             <p>The Wanderer's Den</p>
           </div>
           <div class="msg-chat-actions">
-            <button class="msg-icon-btn" aria-label="Call Landlord"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
+            <button class="msg-icon-btn" aria-label="Call Student"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
             <button class="msg-icon-btn" aria-label="More Options"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
           </div>
         </header>
@@ -189,7 +191,7 @@
             <p>Edu-Inn</p>
           </div>
           <div class="msg-chat-actions">
-            <button class="msg-icon-btn" aria-label="Call Landlord"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
+            <button class="msg-icon-btn" aria-label="Call Student"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
             <button class="msg-icon-btn" aria-label="More Options"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
           </div>
         </header>
@@ -215,7 +217,7 @@
             <p>Bright-Brigade</p>
           </div>
           <div class="msg-chat-actions">
-            <button class="msg-icon-btn" aria-label="Call Landlord"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
+            <button class="msg-icon-btn" aria-label="Call Student"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
             <button class="msg-icon-btn" aria-label="More Options"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button>
           </div>
         </header>
@@ -235,32 +237,95 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="db-footer">
-    <div class="db-footer-inner">
-      <div class="db-footer-left">
-        <a href="../../index.html" class="db-footer-logo" style="text-decoration: none;">
-          <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
-          <span>Hostel<span style="color: var(--color-primary)">Hub</span></span>
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <div class="site-footer__left">
+        <a href="../../index.html" class="navbar__logo site-footer__logo">
+          <div class="site-footer__logo-icon">
+            <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="24" height="24" />
+          </div>
+          <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
         </a>
-        <p class="db-footer-copyright">&copy; 2026 Hostel Hub. All rights reserved.</p>
-      </div>
-      
-      <div class="db-footer-links">
-        <a href="../../terms.html" class="db-footer-link">Terms, Privacy & Policies</a>
-        <a href="../../contact.html" class="db-footer-link">Contact Support</a>
-        <a href="../../about.html" class="db-footer-link">About Us</a>
+        <p class="site-footer__copyright">&copy; 2026 Hostel Hub. All rights reserved.</p>
       </div>
 
-      <div class="db-footer-right">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
+      <div class="site-footer__center">
+        <a href="../../terms.html">Terms, Privacy & Policies</a>
+        <a href="../../contact.html">Contact Support</a>
+        <a href="../../about.html">About Us</a>
+      </div>
+
+      <div class="site-footer__right">
+        <svg class="site-footer__globe" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       </div>
     </div>
   </footer>
+
+  <!-- Terms & Privacy Modal -->
+  <div class="terms-modal-overlay" id="termsModal">
+    <div class="terms-modal-content">
+      <button class="terms-modal-close" aria-label="Close Modal" onclick="closeTermsModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="terms-modal-header">
+        <h2 class="terms-modal-title">Terms & Privacy</h2>
+        <p class="terms-modal-subtitle">Stay updated with our latest Terms and Privacy Conditions</p>
+      </div>
+      <div class="terms-modal-body">
+        <div class="terms-section">
+          <h3>Last Updated: [Date]</h3>
+          <p>By creating an account or using this platform, you agree to the following:<br>
+          Information We Collect<br>
+          We collect information such as your name, email address, phone number, booking details, and payment information to provide our services.</p>
+        </div>
+        <div class="terms-section">
+          <h3>How We Use Your Information</h3>
+          <p>Your information is used to:</p>
+          <ul>
+            <li>Create and manage your account</li>
+            <li>Process bookings and payments</li>
+            <li>Improve platform performance</li>
+            <li>Provide customer support</li>
+            <li>Send important updates</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Data Protection</h3>
+          <p>We take reasonable measures to protect your personal information. However, no online service can guarantee complete security.</p>
+        </div>
+        <div class="terms-section">
+          <h3>User Responsibilities</h3>
+          <p>By using this platform, you agree to:</p>
+          <ul>
+            <li>Provide accurate information</li>
+            <li>Keep your login credentials secure</li>
+            <li>Use the platform lawfully and respectfully</li>
+            <li>Avoid fraudulent or misleading activities</li>
+          </ul>
+        </div>
+        <div class="terms-section">
+          <h3>Account Suspension</h3>
+          <p>We may suspend or remove accounts that violate platform policies or engage in fraudulent activities.<br>
+          Changes to This Policy<br>
+          We may update these terms from time to time. Continued use of the platform indicates acceptance of any updates.</p>
+        </div>
+        <div class="terms-section">
+          <h3>Contact Us</h3>
+          <p>For questions or support, contact:<br>
+          support@hostelhub.com</p>
+        </div>
+      </div>
+      <div class="terms-modal-footer">
+        <button class="terms-modal-btn" onclick="closeTermsModal()">Agree & Continue</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Script for switching chats -->
   <script>
@@ -514,6 +579,22 @@
           document.getElementById('profilePhotoImg').src = e.target.result;
         }
         reader.readAsDataURL(file);
+      }
+    });
+
+    // Terms Modal Logic
+    function showTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.add('show');
+    }
+    function closeTermsModal() {
+      const modal = document.getElementById('termsModal');
+      if (modal) modal.classList.remove('show');
+    }
+    document.addEventListener('click', function(event) {
+      const modal = document.getElementById('termsModal');
+      if (modal && event.target === modal) {
+        closeTermsModal();
       }
     });
   </script>
