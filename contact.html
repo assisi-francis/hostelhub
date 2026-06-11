@@ -83,7 +83,6 @@
       <nav class="navbar__nav">
         <a href="index.html" class="navbar__link">Home</a>
         <a href="about.html" class="navbar__link">About Us</a>
-        <a href="index.html#how-it-works" class="navbar__link">How It Works</a>
         <a href="contact.html" class="navbar__link active">Contact Us</a>
       </nav>
 
@@ -155,5 +154,26 @@
     </div>
   </footer>
 
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/components.js"></script>
+  <script>
+    // ── Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (navbar) navbar.classList.toggle('navbar--scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Mobile hamburger
+    const hamburger = document.getElementById('hamburger-btn');
+    const drawer    = document.getElementById('nav-drawer');
+    if (hamburger && drawer) {
+      hamburger.addEventListener('click', () => {
+        const open = drawer.classList.toggle('navbar__drawer--open');
+        hamburger.setAttribute('aria-expanded', open);
+        drawer.setAttribute('aria-hidden', !open);
+      });
+    }
+  </script>
 </body>
 </html>

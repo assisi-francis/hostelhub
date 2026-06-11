@@ -24,9 +24,13 @@ const Auth = {
   },
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = getUrl('/pages/auth/login.html');
+    if (typeof Utils !== 'undefined' && Utils.logout) {
+      Utils.logout();
+    } else {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = getUrl('/pages/auth/login.html');
+    }
   },
 
   getUser() {
@@ -140,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalBtnText = submitBtn.textContent;
 
       submitBtn.disabled    = true;
-      submitBtn.textContent = 'Logging in…';
+      submitBtn.innerHTML = '<span class="btn-spinner"></span> Logging in…';
 
       try {
         await Auth.login(email, password);
@@ -174,9 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const signupForm = document.getElementById('signup-form');
   if (signupForm) {
-    const fullnameGroup = document.getElementById('fullname-group');
-    const fullnameInput = document.getElementById('fullname');
-    const fullnameError = document.getElementById('fullname-error');
+    const firstnameGroup = document.getElementById('firstname-group');
+    const firstnameInput = document.getElementById('firstName');
+    const firstnameError = document.getElementById('firstname-error');
+
+    const lastnameGroup = document.getElementById('lastname-group');
+    const lastnameInput = document.getElementById('lastName');
+    const lastnameError = document.getElementById('lastname-error');
 
     const emailGroup    = document.getElementById('email-group');
     const emailInput    = document.getElementById('email');
@@ -195,13 +203,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const schoolInput    = document.getElementById('school');
     const schoolError    = document.getElementById('school-error');
 
-    function validateFullName() {
-      const val = fullnameInput.value.trim();
+    function validateFirstName() {
+      const val = firstnameInput.value.trim();
       if (!val) {
-        showFieldError(fullnameGroup, fullnameInput, fullnameError, 'Full name is required.');
+        showFieldError(firstnameGroup, firstnameInput, firstnameError, 'First name is required.');
         return false;
       }
-      clearFieldError(fullnameGroup, fullnameInput, fullnameError);
+      clearFieldError(firstnameGroup, firstnameInput, firstnameError);
+      return true;
+    }
+
+    function validateLastName() {
+      const val = lastnameInput.value.trim();
+      if (!val) {
+        showFieldError(lastnameGroup, lastnameInput, lastnameError, 'Last name is required.');
+        return false;
+      }
+      clearFieldError(lastnameGroup, lastnameInput, lastnameError);
       return true;
     }
 
@@ -274,13 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return true;
     }
 
-    fullnameInput.addEventListener('blur', validateFullName);
+    firstnameInput.addEventListener('blur', validateFirstName);
+    lastnameInput.addEventListener('blur', validateLastName);
     emailInput.addEventListener('blur', validateEmail);
     phoneInput.addEventListener('blur', validatePhone);
     passwordInput.addEventListener('blur', validatePassword);
     schoolInput.addEventListener('blur', validateSchool);
 
-    fullnameInput.addEventListener('input', () => clearFieldError(fullnameGroup, fullnameInput, fullnameError));
+    firstnameInput.addEventListener('input', () => clearFieldError(firstnameGroup, firstnameInput, firstnameError));
+    lastnameInput.addEventListener('input', () => clearFieldError(lastnameGroup, lastnameInput, lastnameError));
     emailInput.addEventListener('input', () => clearFieldError(emailGroup, emailInput, emailError));
     phoneInput.addEventListener('input', () => clearFieldError(phoneGroup, phoneInput, phoneError));
     passwordInput.addEventListener('input', () => clearFieldError(passwordGroup, passwordInput, passwordError));
@@ -297,14 +317,16 @@ document.addEventListener('DOMContentLoaded', () => {
     signupForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const fullnameOk = validateFullName();
+      const firstNameOk = validateFirstName();
+      const lastNameOk  = validateLastName();
       const emailOk    = validateEmail();
       const phoneOk    = validatePhone();
       const passwordOk = validatePassword();
       const schoolOk   = validateSchool();
 
-      if (!fullnameOk || !emailOk || !phoneOk || !passwordOk || !schoolOk) {
-        Utils.syncAria(fullnameInput);
+      if (!firstNameOk || !lastNameOk || !emailOk || !phoneOk || !passwordOk || !schoolOk) {
+        Utils.syncAria(firstnameInput);
+        Utils.syncAria(lastnameInput);
         Utils.syncAria(emailInput);
         Utils.syncAria(phoneInput);
         Utils.syncAria(passwordInput);
@@ -313,7 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const data = {
-        fullname:    fullnameInput.value.trim(),
+        firstName:   firstnameInput.value.trim(),
+        lastName:    lastnameInput.value.trim(),
         email:       emailInput.value.trim(),
         phone:       phoneInput.value.trim(),
         phoneNumber: phoneInput.value.trim(), // alias for API compatibility
@@ -326,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalBtnText = submitBtn.textContent;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Creating account...';
+      submitBtn.innerHTML = '<span class="btn-spinner"></span> Creating account...';
 
       try {
         await API.registerStudent(data);
@@ -369,9 +392,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const leftTitle     = document.getElementById('auth-left-title');
     const leftText      = document.getElementById('auth-left-text');
 
-    const fullnameGroup = document.getElementById('fullname-group');
-    const fullnameInput = document.getElementById('fullname');
-    const fullnameError = document.getElementById('fullname-error');
+    const firstnameGroup = document.getElementById('firstname-group');
+    const firstnameInput = document.getElementById('firstName');
+    const firstnameError = document.getElementById('firstname-error');
+
+    const lastnameGroup = document.getElementById('lastname-group');
+    const lastnameInput = document.getElementById('lastName');
+    const lastnameError = document.getElementById('lastname-error');
 
     const emailGroup    = document.getElementById('email-group');
     const emailInput    = document.getElementById('email');
@@ -413,13 +440,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Validators ---
-    function validateLLFullName() {
-      const val = fullnameInput.value.trim();
+    function validateLLFirstName() {
+      const val = firstnameInput.value.trim();
       if (!val) {
-        showFieldError(fullnameGroup, fullnameInput, fullnameError, 'Full name is required.');
+        showFieldError(firstnameGroup, firstnameInput, firstnameError, 'First name is required.');
         return false;
       }
-      clearFieldError(fullnameGroup, fullnameInput, fullnameError);
+      clearFieldError(firstnameGroup, firstnameInput, firstnameError);
+      return true;
+    }
+
+    function validateLLLastName() {
+      const val = lastnameInput.value.trim();
+      if (!val) {
+        showFieldError(lastnameGroup, lastnameInput, lastnameError, 'Last name is required.');
+        return false;
+      }
+      clearFieldError(lastnameGroup, lastnameInput, lastnameError);
       return true;
     }
 
@@ -493,13 +530,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Real-time listeners ---
-    fullnameInput.addEventListener('blur',  validateLLFullName);
+    firstnameInput.addEventListener('blur',  validateLLFirstName);
+    lastnameInput.addEventListener('blur',  validateLLLastName);
     emailInput.addEventListener('blur',     validateLLEmail);
     phoneInput.addEventListener('blur',     validateLLPhone);
     passwordInput.addEventListener('blur',  validateLLPassword);
     locationInput.addEventListener('blur',  validateLLLocation);
 
-    fullnameInput.addEventListener('input', () => { clearFieldError(fullnameGroup, fullnameInput, fullnameError); hideBanner(); });
+    firstnameInput.addEventListener('input', () => { clearFieldError(firstnameGroup, firstnameInput, firstnameError); hideBanner(); });
+    lastnameInput.addEventListener('input', () => { clearFieldError(lastnameGroup, lastnameInput, lastnameError); hideBanner(); });
     emailInput.addEventListener('input',    () => { clearFieldError(emailGroup, emailInput, emailError); hideBanner(); });
     phoneInput.addEventListener('input',    () => { clearFieldError(phoneGroup, phoneInput, phoneError); hideBanner(); });
     passwordInput.addEventListener('input', () => { clearFieldError(passwordGroup, passwordInput, passwordError); hideBanner(); });
@@ -518,17 +557,19 @@ document.addEventListener('DOMContentLoaded', () => {
     landlordForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const fullnameOk = validateLLFullName();
+      const firstNameOk = validateLLFirstName();
+      const lastNameOk  = validateLLLastName();
       const emailOk    = validateLLEmail();
       const phoneOk    = validateLLPhone();
       const passwordOk = validateLLPassword();
       const locationOk = validateLLLocation();
 
       // If any field is invalid, show the global banner and update the left panel
-      if (!fullnameOk || !emailOk || !phoneOk || !passwordOk || !locationOk) {
+      if (!firstNameOk || !lastNameOk || !emailOk || !phoneOk || !passwordOk || !locationOk) {
         showBanner('Please fill in all fields to create your account.');
         setErrorState();
-        Utils.syncAria(fullnameInput);
+        Utils.syncAria(firstnameInput);
+        Utils.syncAria(lastnameInput);
         Utils.syncAria(emailInput);
         Utils.syncAria(phoneInput);
         Utils.syncAria(passwordInput);
@@ -539,7 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
       hideBanner();
 
       const payload = {
-        fullname:    fullnameInput.value.trim(),
+        firstName:   firstnameInput.value.trim(),
+        lastName:    lastnameInput.value.trim(),
         email:       emailInput.value.trim(),
         phone:       phoneInput.value.trim(),
         phoneNumber: phoneInput.value.trim(),
@@ -552,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalBtnText = submitBtn.textContent;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Creating account...';
+      submitBtn.innerHTML = '<span class="btn-spinner"></span> Creating account...';
 
       try {
         await API.registerLandlord(payload);
@@ -626,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalBtnText = submitBtn.textContent;
 
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending link...';
+      submitBtn.innerHTML = '<span class="btn-spinner"></span> Sending link...';
 
       try {
         await API.forgotPassword(email);

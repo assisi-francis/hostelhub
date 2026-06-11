@@ -5,77 +5,71 @@ const API = {
 
   // ── AUTH ──────────────────────────────────────────────
   async login(email, password) {
-    // Specific check for credentials that trigger the screenshot error state
-    if (email === 'danielomaka@example.com' && password === 'daniel123') {
-      throw new Error('Incorrect email or password. Please try again.');
-    }
-
+    const { logInUser, getUserProfile } = await import('./firebase-auth.js');
     try {
-      const data = await request('POST', '/auth/login', { email, password });
-      // API returns: { success, accessToken, expiresIn, user }
+      const fbUser = await logInUser(email, password);
+      const profile = await getUserProfile(fbUser.uid);
+      if (!profile) throw new Error("Profile not found");
       return {
-        token: data.accessToken,
-        user: data.user,
+        token: fbUser.accessToken,
+        user: profile
       };
     } catch (err) {
-      // Fallback for demonstration if the backend server is not running
-      console.warn('Backend server not detected. Using mock authentication.');
-
-      // Simulate redirection by role based on email hint or defaults to student
-      if (email.includes('landlord')) {
-        return {
-          token: 'mock-jwt-token-landlord',
-          user: { fullname: 'Kwame Mensah', email, role: 'landlord' }
-        };
-      } else if (email.includes('admin')) {
-        return {
-          token: 'mock-jwt-token-admin',
-          user: { fullname: 'Admin Administrator', email, role: 'admin' }
-        };
-      } else {
-        return {
-          token: 'mock-jwt-token-student',
-          user: { fullname: 'Amaka Osei', email, role: 'student' }
-        };
-      }
+      console.error(err);
+      throw new Error(err.message || 'Incorrect email or password. Please try again.');
     }
   },
 
-  // POST /auth/register with role='student'
-  // Fields: fullname, email, phoneNumber, password, role
   async registerStudent(data) {
-    const payload = {
-      fullname:    data.name || data.fullname,
-      email:       data.email,
-      phoneNumber: data.phone || data.phoneNumber,
-      password:    data.password,
-      role:        'student',
+    const { signUpUser } = await import('./firebase-auth.js');
+    const fullname = data.firstName + ' ' + data.lastName;
+    const additionalData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone || data.phoneNumber || '',
+      school: data.school || ''
     };
-    return request('POST', '/auth/register', payload);
+    return signUpUser(data.email, data.password, fullname, 'student', additionalData);
   },
 
-  // POST /auth/register with role='landlord'
-  // Fields: fullname, email, phoneNumber, password, role
   async registerLandlord(data) {
-    const payload = {
-      fullname:    data.name || data.fullname,
-      email:       data.email,
-      phoneNumber: data.phone || data.phoneNumber,
-      password:    data.password,
-      role:        'landlord',
+    const { signUpUser } = await import('./firebase-auth.js');
+    const fullname = data.firstName + ' ' + data.lastName;
+    const additionalData = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone || data.phoneNumber || ''
     };
-    return request('POST', '/auth/register', payload);
+    return signUpUser(data.email, data.password, fullname, 'landlord', additionalData);
   },
 
-  forgotPassword: (email) =>
-    request('POST', '/auth/forgot-password', { email }),
+  async forgotPassword(email) {
+    const { resetPassword } = await import('./firebase-auth.js');
+    return resetPassword(email);
+  },
 
   // ── HOSTELS ───────────────────────────────────────────
-  getHostels: (filters = {}) =>
-    request('GET', '/hostels', null, filters),
+  async getHostels(filters = {}) {
+    const { getAllListings } = await import('./firebase-db.js');
+    return getAllListings();
+  },
 
-  getHostelById: (id) =>
-    request('GET', `/hostels/${id}`),
+  async getHostelById(id) {
+    const { doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js");
+    const { db } = await import('./firebase-config.js');
+    const docSnap = await getDoc(doc(db, "listings", id));
+    return docSnap.exists() ? { id: docSnap.id, ...docSnap.data() } : null;
+  },
+
+  async updateAvatar(base64Str) {
+    const { uploadAvatar } = await import('./firebase-db.js');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) throw new Error("Not logged in");
+    const url = await uploadAvatar(base64Str, user.uid);
+    user.avatar = url;
+    localStorage.setItem('user', JSON.stringify(user));
+    return url;
+  },
 
   // ── REVIEWS ───────────────────────────────────────────
   getReviews: (hostelId) =>
@@ -85,11 +79,20 @@ const API = {
     request('POST', `/hostels/${hostelId}/reviews`, data, {}, true),
 
   // ── LANDLORD ──────────────────────────────────────────
-  getMyListings: () =>
-    request('GET', '/landlord/hostels', null, {}, true),
+  async getMyListings() {
+    const { getLandlordListings } = await import('./firebase-db.js');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) throw new Error("Not logged in");
+    return getLandlordListings(user.uid);
+  },
 
-  addHostel: (data) =>
-    request('POST', '/landlord/hostels', data, {}, true),
+  async addHostel(data) {
+    const { createListing } = await import('./firebase-db.js');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) throw new Error("Not logged in");
+    data.landlordId = user.uid;
+    return createListing(data);
+  },
 
   updateHostel: (id, data) =>
     request('PUT', `/landlord/hostels/${id}`, data, {}, true),

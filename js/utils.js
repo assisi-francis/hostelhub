@@ -55,5 +55,21 @@ const Utils = {
                       input.classList.contains('user-invalid-fallback');
     
     input.setAttribute('aria-invalid', isInvalid ? 'true' : 'false');
+  },
+
+  // Perform a full logout (localStorage + Firebase)
+  async logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    try {
+      const isPagesDir = window.location.pathname.includes('/pages/');
+      const authPath = isPagesDir ? '../../js/firebase-auth.js' : 'js/firebase-auth.js';
+      const { logOutUser } = await import(authPath);
+      await logOutUser();
+    } catch (e) {
+      console.warn("Firebase logout failed or module not found", e);
+    }
+    const isPagesDir = window.location.pathname.includes('/pages/');
+    window.location.href = isPagesDir ? '../../index.html' : 'index.html';
   }
 };

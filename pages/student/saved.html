@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    function checkAuth() {
+      if (!localStorage.getItem('user')) {
+        window.location.replace('../../index.html');
+      }
+    }
+    checkAuth();
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        checkAuth();
+      }
+    });
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Saved Hostels - HostelHub</title>
@@ -42,8 +55,9 @@
       </button>
       <!-- User Profile Dropdown Container -->
       <div class="db-profile-dropdown" style="position: relative;">
-        <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()" style="overflow: hidden; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;">
+          <img id="navbarAvatarImg" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
+          <svg id="navbarAvatarSvg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
@@ -320,7 +334,7 @@
             <div class="db-profile-photo-actions">
               <!-- Hidden file input -->
               <input type="file" id="profileImageInput" accept="image/*" style="display: none;" />
-              <button class="db-btn-primary" onclick="document.getElementById('profileImageInput').click()">Upload New</button>
+              <button id="uploadAvatarBtn" class="db-btn-primary" onclick="document.getElementById('profileImageInput').click()">Upload New</button>
               <button class="db-btn-light-danger" onclick="document.getElementById('profilePhotoImg').src = '../../assets/images/avatar_adeola.png'">Delete</button>
             </div>
           </div>
@@ -329,19 +343,19 @@
         <form class="db-profile-form">
           <div class="db-form-group">
             <label>Full Name</label>
-            <input type="text" value="Adeola Rotimi" readonly />
+            <input type="text" id="profileFullName" value="" readonly />
           </div>
           <div class="db-form-group">
             <label>Email Address</label>
-            <input type="email" value="adeolarotimi@gmail.com" readonly />
+            <input type="email" id="profileEmail" value="" readonly />
           </div>
           <div class="db-form-group">
             <label>Phone Number</label>
-            <input type="text" value="0801234567" readonly />
+            <input type="text" id="profilePhone" value="" readonly />
           </div>
           <div class="db-form-group">
             <label>University / School</label>
-            <input type="text" value="University of Lagos" readonly />
+            <input type="text" id="profileSchool" value="" readonly />
           </div>
         </form>
         </div>
@@ -398,7 +412,7 @@
       <h2 class="db-modal-title">Log out?</h2>
       <p class="db-modal-text">Are you sure you want to log out?<br/>You can always log back in anytime.</p>
       <div class="db-modal-actions">
-        <button class="db-btn-danger" onclick="window.location.href='../../index.html'">Yes, Log Out</button>
+        <button class="db-btn-danger" onclick="Utils.logout()">Yes, Log Out</button>
         <button class="db-btn-outline" onclick="closeLogoutModal()">Cancel</button>
       </div>
     </div>
@@ -515,11 +529,101 @@
 
         const reader = new FileReader();
         reader.onload = function(e) {
-          document.getElementById('profilePhotoImg').src = e.target.result;
+          const img = new Image();
+          img.onload = async function() {
+            // Compress using Canvas
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 256;
+            const MAX_HEIGHT = 256;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+              }
+            } else {
+              if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+              }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+            // Update UI instantly
+            document.getElementById('profilePhotoImg').src = compressedBase64;
+            document.getElementById('navbarAvatarImg').src = compressedBase64;
+            document.getElementById('navbarAvatarImg').style.display = 'block';
+            document.getElementById('navbarAvatarSvg').style.display = 'none';
+
+            const uploadBtn = document.getElementById('uploadAvatarBtn');
+            const originalBtnText = uploadBtn ? uploadBtn.innerHTML : 'Upload New';
+            if (uploadBtn) {
+              uploadBtn.innerHTML = '<span class="btn-spinner"></span> Saving...';
+              uploadBtn.disabled = true;
+            }
+
+            if (typeof Utils !== 'undefined' && Utils.showToast) {
+              Utils.showToast("Uploading profile picture...", "info");
+            } else {
+              console.log("Uploading profile picture...");
+            }
+
+            try {
+              await API.updateAvatar(compressedBase64);
+              if (typeof Utils !== 'undefined' && Utils.showToast) {
+                Utils.showToast("Profile picture updated successfully!", "success");
+              }
+            } catch (err) {
+              console.error("Failed to upload avatar:", err);
+              if (typeof Utils !== 'undefined' && Utils.showToast) {
+                Utils.showToast("Failed to save avatar.", "error");
+              } else {
+                alert("Failed to save avatar.");
+              }
+            } finally {
+              if (uploadBtn) {
+                uploadBtn.innerHTML = originalBtnText;
+                uploadBtn.disabled = false;
+              }
+            }
+          };
+          img.src = e.target.result;
         }
         reader.readAsDataURL(file);
       }
     });
+
+    // Populate user profile details on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        const user = JSON.parse(userStr);
+        const fullName = (user.firstName && user.lastName) ? `${user.firstName} ${user.lastName}` : user.name;
+        document.getElementById('profileFullName').value = fullName || '';
+        document.getElementById('profileEmail').value = user.email || '';
+        document.getElementById('profilePhone').value = user.phone || 'N/A';
+        document.getElementById('profileSchool').value = user.school || 'N/A';
+        
+        if (user.avatar) {
+          document.getElementById('profilePhotoImg').src = user.avatar;
+          document.getElementById('navbarAvatarImg').src = user.avatar;
+          document.getElementById('navbarAvatarImg').style.display = 'block';
+          document.getElementById('navbarAvatarSvg').style.display = 'none';
+        } else {
+          document.getElementById('profilePhotoImg').src = '../../assets/images/avatar_adeola.png'; // Fallback
+        }
+      }
+    });
   </script>
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/api.js"></script>
 </body>
 </html>
