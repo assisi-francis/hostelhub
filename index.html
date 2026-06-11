@@ -882,13 +882,17 @@
       e.target.reset();
     });
 
-    // ── Hero search → login
+    // ── Hero search → login or dashboard
     document.querySelector('.hero__search-box').addEventListener('submit', (e) => {
       e.preventDefault();
-      window.location.href = 'pages/auth/login.html';
+      const userStr = localStorage.getItem('user');
+      window.location.href = userStr ? 'index.html' : 'pages/auth/login.html';
     });
     document.getElementById('hero-search').addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') window.location.href = 'pages/auth/login.html';
+      if (e.key === 'Enter') {
+        const userStr = localStorage.getItem('user');
+        window.location.href = userStr ? 'index.html' : 'pages/auth/login.html';
+      }
     });
   </script>
 

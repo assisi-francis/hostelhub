@@ -7,7 +7,8 @@
   justify-content: space-between;
   height: 80px;
   background-color: var(--color-white);
-  padding: 0 var(--space-xl);
+  padding-left: max(var(--space-xl), calc((100% - 1400px) / 2));
+  padding-right: max(var(--space-xl), calc((100% - 1400px) / 2));
   border-bottom: 1px solid var(--color-border);
   position: sticky;
   top: 0;
@@ -775,9 +776,15 @@
   border-bottom: none;
 }
 
-.db-profile-menu-item:hover {
-  background: #f9fafb;
-  color: var(--color-primary);
+@media (hover: hover) {
+  .db-profile-menu-item:hover {
+    background: #f9fafb;
+    color: var(--color-primary);
+  }
+  .db-profile-menu-item:hover svg {
+    transform: translateX(4px);
+    color: var(--color-primary);
+  }
 }
 
 .db-profile-menu-item svg {
@@ -785,10 +792,7 @@
   transition: transform 0.2s, color 0.2s;
 }
 
-.db-profile-menu-item:hover svg {
-  transform: translateX(4px);
-  color: var(--color-primary);
-}
+
 
 /* ── LOGOUT MODAL ── */
 .db-modal-overlay {
@@ -1214,4 +1218,10 @@ input:checked + .db-slider:before {
 
 .db-btn-text:hover {
   color: #6b7280;
+}
+
+
+/* Fix for tap-to-click on dropdown menu items */
+.db-profile-menu-item * {
+  pointer-events: none;
 }

@@ -5,6 +5,11 @@ body {
 }
 
 /* NAVBAR ADJUSTMENTS */
+.db-navbar {
+  padding-left: max(var(--space-lg), calc((100% - 1200px) / 2 + var(--space-lg))) !important;
+  padding-right: max(var(--space-lg), calc((100% - 1200px) / 2 + var(--space-lg))) !important;
+}
+
 .navbar__nav--center {
   flex: 1;
   display: flex;
@@ -869,21 +874,24 @@ body {
 }
 
 .ld-amenities-back-btn {
-  background: none;
+  background: transparent;
   border: none;
   color: #4b5563;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   margin-left: -8px;
-  transition: color 0.2s;
+  transition: all 0.2s ease;
   z-index: 2;
 }
 
 .ld-amenities-back-btn:hover {
   color: #111827;
+  background-color: #f3f4f6;
 }
 
 .ld-amenities-title {
@@ -907,7 +915,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-color: #d1d5db;
+  padding: 14px 0;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.95rem;
+  color: #374151;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ld-amenity-option:last-child {
+  border-bottom: none;
+}
+
+.ld-amenity-option:hover {
+  opacity: 0.8;
 }
 
 .ld-checkbox {
@@ -940,7 +961,7 @@ body {
 }
 
 .ld-amenities-footer {
-  padding: 24px 24px 0;
+  padding: 24px;
   display: flex;
   justify-content: center;
 }
@@ -1268,4 +1289,334 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* --- Profile Modal Styles Ported from Student --- */
+/* ── PROFILE MODAL ── */
+.db-profile-modal-content {
+  background: #fafafa;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(20px);
+  transition: transform 0.3s;
+  overflow: hidden;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.db-modal-overlay.show .db-profile-modal-content {
+  transform: translateY(0);
+}
+
+.db-profile-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 40px 10px;
+  background: #fafafa;
+}
+
+.db-profile-modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.db-profile-modal-subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.db-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #9ca3af;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.db-modal-close:hover {
+  color: #374151;
+}
+
+.db-profile-tabs {
+  display: flex;
+  padding: 0 40px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-top: 10px;
+  background: #fafafa;
+}
+
+.db-profile-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.db-profile-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.db-profile-tab svg {
+  stroke-width: 2.5;
+}
+
+.db-profile-modal-body {
+  padding: 30px 40px 50px;
+  background: #fafafa;
+}
+
+.db-profile-photo-section {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.db-profile-photo-large {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #f3f4f6;
+}
+
+.db-profile-photo-info h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.db-profile-photo-info p {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin-bottom: 16px;
+}
+
+.db-profile-photo-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.db-btn-primary {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.db-btn-primary:hover {
+  background: #4a00b0;
+}
+
+.db-btn-light-danger {
+  background: #fef2f2;
+  color: #ef4444;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.db-btn-light-danger:hover {
+  background: #fee2e2;
+}
+
+.db-profile-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.db-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.db-form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.db-form-group input {
+  padding: 14px 16px;
+  border: 1px solid #f3f4f6;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #6b7280;
+  background: var(--color-white);
+  transition: border-color 0.2s;
+}
+
+.db-form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .db-profile-form {
+    grid-template-columns: 1fr;
+  }
+  .db-profile-photo-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  .db-profile-modal-header,
+  .db-profile-tabs,
+  .db-profile-modal-body {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* ── SETTINGS TAB ── */
+.db-settings-section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 20px;
+}
+
+.db-settings-card {
+  background: var(--color-white);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.db-settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+}
+
+.db-settings-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0;
+}
+
+.db-settings-text h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.db-settings-text p {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+/* Toggle Switch */
+.db-toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.db-toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.db-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d1d5db;
+  transition: .4s;
+}
+
+.db-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .db-slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .db-slider:before {
+  transform: translateX(24px);
+}
+
+.db-slider.round {
+  border-radius: 34px;
+}
+
+.db-slider.round:before {
+  border-radius: 50%;
+}
+
+.db-settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+}
+
+.db-btn-text {
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.db-btn-text:hover {
+  color: #6b7280;
+}
+
+
+/* Fix for tap-to-click on dropdown menu items */
+.db-profile-menu-item * {
+  pointer-events: none;
 }

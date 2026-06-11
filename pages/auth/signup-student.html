@@ -43,19 +43,34 @@
 
         <form id="signup-form" novalidate>
           
-          <!-- Full Name Field Group -->
-          <div class="form-group" id="fullname-group">
-            <label for="fullname" class="form-label">Full Name</label>
-            <input
-              type="text"
-              id="fullname"
-              name="fullname"
-              class="form-input"
-              placeholder="e.g. Amaka Osei"
-              required
-              aria-describedby="fullname-error"
-            />
-            <div id="fullname-error" class="form-error" aria-live="polite"></div>
+          <!-- Name Field Group -->
+          <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+            <div class="form-group" id="firstname-group" style="flex: 1; margin-bottom: 0;">
+              <label for="firstName" class="form-label">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                class="form-input"
+                placeholder="e.g. Amaka"
+                required
+                aria-describedby="firstname-error"
+              />
+              <div id="firstname-error" class="form-error" aria-live="polite"></div>
+            </div>
+            <div class="form-group" id="lastname-group" style="flex: 1; margin-bottom: 0;">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                class="form-input"
+                placeholder="e.g. Osei"
+                required
+                aria-describedby="lastname-error"
+              />
+              <div id="lastname-error" class="form-error" aria-live="polite"></div>
+            </div>
           </div>
 
           <!-- Email Field Group -->
