@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    function checkAuth() {
-      if (!localStorage.getItem('user')) {
-        window.location.replace('../../index.html');
-      }
-    }
-    checkAuth();
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-        checkAuth();
-      }
-    });
-  </script>
+  <script src="../../js/auth-guard.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verification | HostelHub</title>
@@ -169,7 +157,6 @@
           </svg>
         </button>
 
-        <!-- Dropdown Menu -->
         <div class="db-profile-menu" id="profileMenu">
           <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showProfileModal();">
             <span>Profile</span>
@@ -381,7 +368,6 @@
         </div>
       </div>
 
-      <!-- Header -->
       <div class="ld-verify-modal-header" style="text-align: center; margin-top: 48px;">
         <h2>Upload National ID</h2>
         <p>Upload clear and valid documents.</p>
@@ -438,7 +424,6 @@
         </div>
       </div>
 
-      <!-- Header -->
       <div class="ld-verify-modal-header" style="text-align: center; margin-top: 48px;">
         <h2>Upload Property Proof</h2>
         <p>Upload clear and valid documents.</p>
@@ -634,7 +619,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
   
-  <!-- Profile Modal -->
   <div class="db-modal-overlay" id="profileModalOverlay" onclick="if(event.target === this) closeProfileModal()">
     <div class="db-profile-modal-content">
       <div class="db-profile-modal-header">
@@ -657,7 +641,6 @@
       </div>
 
       <div class="db-profile-modal-body">
-        <!-- Personal Info Tab Content -->
         <div id="tab-personal" class="profile-tab-content" style="display: block;">
           <div class="db-profile-photo-section">
           <img src="../../assets/images/avatar_adeola.png" alt="Profile Photo" class="db-profile-photo-large" id="profilePhotoImg" />
@@ -689,7 +672,6 @@
         </form>
         </div>
 
-        <!-- Settings Tab Content -->
         <div id="tab-settings" class="profile-tab-content" style="display: none;">
           <h3 class="db-settings-section-title">Notifications</h3>
           

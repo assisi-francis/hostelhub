@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    function checkAuth() {
-      if (!localStorage.getItem('user')) {
-        window.location.replace('../../index.html');
-      }
-    }
-    checkAuth();
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-        checkAuth();
-      }
-    });
-  </script>
+  <script src="../../js/auth-guard.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Landlord Dashboard | HostelHub</title>
@@ -34,13 +22,11 @@
        NAVBAR
   ═══════════════════════════════════════════ -->
   <header class="db-navbar">
-    <!-- Left: Logo -->
     <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;">
       <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="28" height="28" />
       <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
     </a>
 
-    <!-- Center: Navigation Links -->
     <nav class="db-navbar__center">
       <a href="dashboard.html" class="db-nav-link db-nav-link--active">Home</a>
       <a href="listings.html" class="db-nav-link">Listings</a>
@@ -48,7 +34,6 @@
       <a href="verification.html" class="db-nav-link">Verification</a>
     </nav>
 
-    <!-- Right: Icons -->
     <div class="db-navbar__right">
       <button class="db-icon-btn" aria-label="Notifications">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -56,7 +41,6 @@
           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
       </button>
-      <!-- User Profile Dropdown Container -->
       <div class="db-profile-dropdown" style="position: relative;">
         <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()" style="overflow: hidden; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;">
           <img id="navbarAvatarImg" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
@@ -65,7 +49,6 @@
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
-        <!-- Dropdown Menu -->
         <div class="db-profile-menu" id="profileMenu">
           <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showProfileModal();">
             <span>Profile</span>
@@ -115,7 +98,6 @@
         <h2 class="ld-section-title">Overview</h2>
         <div class="ld-overview__grid">
           
-          <!-- Card 1 -->
           <div class="ld-metric-card">
             <div class="ld-metric-info">
               <div class="ld-metric-label">Total Listings</div>
@@ -126,7 +108,6 @@
             </div>
           </div>
 
-          <!-- Card 2 -->
           <div class="ld-metric-card">
             <div class="ld-metric-info">
               <div class="ld-metric-label">Total Views</div>
@@ -137,7 +118,6 @@
             </div>
           </div>
 
-          <!-- Card 3 -->
           <div class="ld-metric-card">
             <div class="ld-metric-info">
               <div class="ld-metric-label">Total Enquiries</div>
@@ -148,7 +128,6 @@
             </div>
           </div>
 
-          <!-- Card 4 -->
           <div class="ld-metric-card">
             <div class="ld-metric-info">
               <div class="ld-metric-label">Active Listings</div>
@@ -246,7 +225,6 @@
           <a href="#" class="db-section-link">View All Hostels</a>
         </div>
         <div class="db-card-row">
-          <!-- Card 1 -->
           <article class="db-card">
             <div class="db-card-image-wrap">
               <img src="../../assets/images/hero.jpg" alt="Hostel Room" class="db-card-image">
@@ -271,12 +249,11 @@
               </div>
               <div class="db-card-footer">
                 <div class="db-card-price">₦150,000<span>/year</span></div>
-                <button class="db-card-btn">Edit</button>
+                <button class="db-card-btn" onclick="editListing(this)">Edit</button>
               </div>
             </div>
           </article>
 
-          <!-- Card 2 -->
           <article class="db-card">
             <div class="db-card-image-wrap">
               <img src="../../assets/images/spencer-davis-0ShTs8iPY28-unsplash.jpg" alt="Hostel Room" class="db-card-image">
@@ -302,12 +279,11 @@
               </div>
               <div class="db-card-footer">
                 <div class="db-card-price">₦150,000<span>/year</span></div>
-                <button class="db-card-btn">Edit</button>
+                <button class="db-card-btn" onclick="editListing(this)">Edit</button>
               </div>
             </div>
           </article>
 
-          <!-- Card 3 -->
           <article class="db-card">
             <div class="db-card-image-wrap">
               <img src="../../assets/images/apartment_1_1780949972151.png" alt="Hostel Room" class="db-card-image">
@@ -332,12 +308,11 @@
               </div>
               <div class="db-card-footer">
                 <div class="db-card-price">₦150,000<span>/year</span></div>
-                <button class="db-card-btn">Edit</button>
+                <button class="db-card-btn" onclick="editListing(this)">Edit</button>
               </div>
             </div>
           </article>
 
-          <!-- Card 4 -->
           <article class="db-card">
             <div class="db-card-image-wrap">
               <img src="../../assets/images/apartment_2_1780950000279.png" alt="Hostel Room" class="db-card-image">
@@ -362,7 +337,7 @@
               </div>
               <div class="db-card-footer">
                 <div class="db-card-price">₦150,000<span>/year</span></div>
-                <button class="db-card-btn">Edit</button>
+                <button class="db-card-btn" onclick="editListing(this)">Edit</button>
               </div>
             </div>
           </article>
@@ -491,7 +466,160 @@
   </div>
 
   
-  <!-- Profile Modal -->
+  <div class="ld-modal-overlay" id="addListingModal">
+    <div class="ld-modal-content">
+      <button class="ld-modal-close" aria-label="Close Modal" onclick="closeAddListingModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="ld-modal-header">
+        <h2 class="ld-modal-title">Add Listing</h2>
+        <p class="ld-modal-subtitle">Manage your profile details and preference settings.</p>
+      </div>
+      
+      <div class="ld-modal-body">
+        <!-- Basic Information -->
+        <section class="ld-form-section">
+          <h3 class="ld-form-section-title">Basic Information</h3>
+          <div class="ld-form-row">
+            <div class="ld-form-group">
+              <label>Property Name</label>
+              <input type="text" placeholder="Adeola Rotimi" />
+            </div>
+            <div class="ld-form-group">
+              <label>Address</label>
+              <input type="text" placeholder="adeolarotimi@gmail.com" />
+            </div>
+          </div>
+          <div class="ld-form-row">
+            <div class="ld-form-group">
+              <label>Phone Number</label>
+              <input type="text" placeholder="0801234567" />
+            </div>
+            <div class="ld-form-group">
+              <label>University / School</label>
+              <input type="text" placeholder="University of Lagos" />
+            </div>
+          </div>
+          <div class="ld-form-group">
+            <label>Description</label>
+            <div class="ld-textarea-wrap">
+              <textarea placeholder="Tell students about your listing..." rows="4"></textarea>
+              <span class="ld-textarea-count">0/300</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Photos -->
+        <section class="ld-form-section">
+          <h3 class="ld-form-section-title">Photos</h3>
+          <div class="ld-photos-grid" id="listingPhotosGrid">
+            <input type="file" id="listingPhotoUpload" accept="image/*" multiple style="display: none;" onchange="handlePhotoUpload(event)" />
+            <div class="ld-photo-item">
+              <img src="../../assets/images/apartment_1_1780949972151.png" alt="Photo" />
+              <button class="ld-photo-remove" onclick="this.parentElement.remove()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            </div>
+            <div class="ld-photo-item">
+              <img src="../../assets/images/spencer-davis-0ShTs8iPY28-unsplash.jpg" alt="Photo" />
+              <button class="ld-photo-remove" onclick="this.parentElement.remove()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+            </div>
+            <div class="ld-photo-upload" id="photoUploadBtn" onclick="document.getElementById('listingPhotoUpload').click()">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="ld-form-section">
+          <h3 class="ld-form-section-title">Pricing</h3>
+          <div class="ld-form-row">
+            <div class="ld-form-group">
+              <label>Rent Amount <span>(per year)</span></label>
+              <input type="text" placeholder="Enter Amount" />
+            </div>
+            <div class="ld-form-group">
+              <label>Caution Fee</label>
+              <input type="text" placeholder="Enter Fee" />
+            </div>
+          </div>
+        </section>
+
+        <!-- Availability & Amenities -->
+        <div class="ld-form-row">
+          <section class="ld-form-section" style="flex: 1;">
+            <h3 class="ld-form-section-title">Availability Status</h3>
+            <div class="ld-status-pills">
+              <button class="ld-pill ld-pill--available active" onclick="selectStatus(this)">Available</button>
+              <button class="ld-pill ld-pill--occupied" onclick="selectStatus(this)">Occupied</button>
+              <button class="ld-pill ld-pill--reserved" onclick="selectStatus(this)">Reserved</button>
+            </div>
+          </section>
+          <section class="ld-form-section" style="flex: 1;">
+            <h3 class="ld-form-section-title">Amenities</h3>
+            <div class="ld-amenity-pills" id="amenityPillsContainer">
+              <button class="ld-pill ld-pill--amenity">Wifi</button>
+              <button class="ld-pill ld-pill--amenity">Water</button>
+              <button class="ld-pill ld-pill--amenity">Security</button>
+              <button class="ld-pill ld-pill--amenity">Electricity</button>
+              <button class="ld-pill ld-pill--add" onclick="showAmenitiesModal()">+ Add</button>
+            </div>
+          </section>
+        </div>
+      </div>
+      
+      <div class="ld-modal-footer">
+        <button class="ld-btn-outline" onclick="closeAddListingModal()">Cancel</button>
+        <button class="ld-btn-solid" onclick="saveListing()">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Amenities Selection Modal -->
+  <div class="ld-modal-overlay" id="amenitiesModal" style="z-index: 10000;">
+    <div class="ld-amenities-modal-content">
+      <div class="ld-amenities-header">
+        <button class="ld-amenities-back-btn" aria-label="Go Back" onclick="closeAmenitiesModal()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        </button>
+        <h2 class="ld-amenities-title">Amenities</h2>
+        <div style="width: 24px;"></div> <!-- placeholder to balance the back button -->
+      </div>
+      
+      <div class="ld-amenities-body">
+        <label class="ld-amenity-option">
+          <span>Wifi</span>
+          <input type="checkbox" class="ld-checkbox" value="Wifi" checked>
+        </label>
+        <label class="ld-amenity-option">
+          <span>Water</span>
+          <input type="checkbox" class="ld-checkbox" value="Water" checked>
+        </label>
+        <label class="ld-amenity-option">
+          <span>Security</span>
+          <input type="checkbox" class="ld-checkbox" value="Security" checked>
+        </label>
+        <label class="ld-amenity-option">
+          <span>Electricity</span>
+          <input type="checkbox" class="ld-checkbox" value="Electricity" checked>
+        </label>
+        <label class="ld-amenity-option">
+          <span>Floor Pantry</span>
+          <input type="checkbox" class="ld-checkbox" value="Floor Pantry">
+        </label>
+        <label class="ld-amenity-option">
+          <span>Air-Condition</span>
+          <input type="checkbox" class="ld-checkbox" value="Air-Condition">
+        </label>
+      </div>
+
+      <div class="ld-amenities-footer">
+        <button class="ld-btn-solid ld-amenities-apply" onclick="applyAmenities()">Apply</button>
+      </div>
+    </div>
+  </div>
+
   <div class="db-modal-overlay" id="profileModalOverlay" onclick="if(event.target === this) closeProfileModal()">
     <div class="db-profile-modal-content">
       <div class="db-profile-modal-header">
@@ -514,7 +642,6 @@
       </div>
 
       <div class="db-profile-modal-body">
-        <!-- Personal Info Tab Content -->
         <div id="tab-personal" class="profile-tab-content" style="display: block;">
           <div class="db-profile-photo-section">
           <img src="../../assets/images/avatar_adeola.png" alt="Profile Photo" class="db-profile-photo-large" id="profilePhotoImg" />
@@ -546,7 +673,6 @@
         </form>
         </div>
 
-        <!-- Settings Tab Content -->
         <div id="tab-settings" class="profile-tab-content" style="display: none;">
           <h3 class="db-settings-section-title">Notifications</h3>
           
@@ -587,6 +713,7 @@
 
   <script src="../../js/utils.js"></script>
   <script src="../../js/api.js"></script>
+  <script src="../../js/listing-modal.js"></script>
   <script>
     function showTermsModal() {
       const modal = document.getElementById('termsModal');
