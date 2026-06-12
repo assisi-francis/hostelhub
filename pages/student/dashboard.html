@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    function checkAuth() {
-      if (!localStorage.getItem('user')) {
-        window.location.replace('../../index.html');
-      }
-    }
-    checkAuth();
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-        checkAuth();
-      }
-    });
-  </script>
+  <script src="../../js/auth-guard.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard - HostelHub</title>
@@ -29,20 +17,17 @@
 
   <!-- Navbar -->
   <header class="db-navbar">
-    <!-- Left: Logo -->
     <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em;">
       <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="28" height="28" />
       <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
     </a>
 
-    <!-- Center: Navigation Links -->
     <nav class="db-navbar__center">
       <a href="dashboard.html" class="db-nav-link db-nav-link--active">Explore</a>
       <a href="saved.html" class="db-nav-link">Saved</a>
       <a href="messages.html" class="db-nav-link">Messages</a>
     </nav>
 
-    <!-- Right: Icons -->
     <div class="db-navbar__right">
       <button class="db-icon-btn" aria-label="Notifications">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -50,7 +35,6 @@
           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
       </button>
-      <!-- User Profile Dropdown Container -->
       <div class="db-profile-dropdown" style="position: relative;">
         <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()" style="overflow: hidden; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;">
           <img id="navbarAvatarImg" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
@@ -59,7 +43,6 @@
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
-        <!-- Dropdown Menu -->
         <div class="db-profile-menu" id="profileMenu">
           <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showProfileModal();">
             <span>Profile</span>
@@ -130,7 +113,6 @@
         <a href="#" class="db-section-link">View All Hostels</a>
       </div>
       <div class="db-card-row">
-        <!-- Card 1 -->
         <article class="db-card">
           <div class="db-card-image-wrap">
             <img src="../../assets/images/hero.jpg" alt="Hostel Room" class="db-card-image">
@@ -155,12 +137,11 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
 
-        <!-- Card 2 -->
         <article class="db-card">
           <div class="db-card-image-wrap">
             <img src="../../assets/images/spencer-davis-0ShTs8iPY28-unsplash.jpg" alt="Hostel Room" class="db-card-image">
@@ -185,12 +166,11 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
 
-        <!-- Card 3 -->
         <article class="db-card">
           <div class="db-card-image-wrap">
             <img src="../../assets/images/background.jpg" alt="Hostel Room" class="db-card-image">
@@ -215,12 +195,11 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
 
-        <!-- Card 4 -->
         <article class="db-card">
           <div class="db-card-image-wrap">
             <img src="../../assets/images/hostel_courtyard.png" alt="Hostel Room" class="db-card-image">
@@ -245,7 +224,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -274,7 +253,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦200,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -304,7 +283,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦350,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -343,7 +322,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -371,7 +350,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -399,7 +378,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -428,7 +407,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦90,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -457,7 +436,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦450,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -503,7 +482,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -536,7 +515,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦150,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -569,7 +548,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦200,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -602,7 +581,7 @@
             </div>
             <div class="db-card-footer">
               <div class="db-card-price">₦350,000<span>/year</span></div>
-              <button class="db-card-btn">View Details</button>
+              <button class="db-card-btn" onclick="viewDetails(this)">View Details</button>
             </div>
           </div>
         </article>
@@ -732,7 +711,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="db-footer">
     <div class="db-footer-inner">
       <div class="db-footer-left">
@@ -833,7 +811,58 @@
       });
     });
   </script>
-  <!-- Profile Modal -->
+  
+  <div class="db-modal-overlay" id="detailsModal">
+    <div class="db-modal-content" style="max-width: 600px; padding: 0; overflow: hidden;">
+      <button class="db-modal-close" style="position: absolute; top: 16px; right: 16px; background: white; border-radius: 50%; padding: 4px; z-index: 10;" onclick="closeDetailsModal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <img id="dm-image" src="" alt="Property" style="width: 100%; height: 250px; object-fit: cover; display: block;" />
+      
+      <div style="padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <h2 id="dm-title" style="font-size: 1.5rem; color: #111827; margin: 0; font-weight: 700;">Title</h2>
+          <span id="dm-badge" class="db-card-badge" style="position: static;">Badge</span>
+        </div>
+        
+        <div style="display: flex; gap: 16px; color: #6b7280; font-size: 0.9rem; margin-bottom: 24px;">
+          <span style="display: flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="dm-location">Location</span>
+          </span>
+          <span style="display: flex; align-items: center; gap: 6px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span id="dm-distance">Distance</span>
+          </span>
+        </div>
+        
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-size: 1.1rem; color: #374151; margin: 0 0 8px 0; font-weight: 600;">Description</h3>
+          <p style="color: #4b5563; line-height: 1.6; margin: 0;">A beautiful and affordable student accommodation featuring 24/7 power supply, secure environment, and easy access to campus. Perfect for students looking for a quiet place to study and live.</p>
+        </div>
+        
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-size: 1.1rem; color: #374151; margin: 0 0 12px 0; font-weight: 600;">Amenities</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="background: #f3f4f6; color: #374151; padding: 6px 12px; border-radius: 100px; font-size: 0.85rem; font-weight: 500;">WiFi</span>
+            <span style="background: #f3f4f6; color: #374151; padding: 6px 12px; border-radius: 100px; font-size: 0.85rem; font-weight: 500;">Water Supply</span>
+            <span style="background: #f3f4f6; color: #374151; padding: 6px 12px; border-radius: 100px; font-size: 0.85rem; font-weight: 500;">Security</span>
+            <span style="background: #f3f4f6; color: #374151; padding: 6px 12px; border-radius: 100px; font-size: 0.85rem; font-weight: 500;">Kitchen</span>
+          </div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e5e7eb; padding-top: 24px;">
+          <div id="dm-price" class="db-card-price" style="font-size: 1.5rem; font-weight: 700; color: var(--color-primary); margin:0;">Price</div>
+          <button class="db-btn-primary" style="padding: 10px 24px;">Contact Landlord</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="db-modal-overlay" id="profileModalOverlay" onclick="if(event.target === this) closeProfileModal()">
     <div class="db-profile-modal-content">
       <div class="db-profile-modal-header">
@@ -856,7 +885,6 @@
       </div>
 
       <div class="db-profile-modal-body">
-        <!-- Personal Info Tab Content -->
         <div id="tab-personal" class="profile-tab-content" style="display: block;">
           <div class="db-profile-photo-section">
           <img src="../../assets/images/avatar_adeola.png" alt="Profile Photo" class="db-profile-photo-large" id="profilePhotoImg" />
@@ -892,7 +920,6 @@
         </form>
         </div>
 
-        <!-- Settings Tab Content -->
         <div id="tab-settings" class="profile-tab-content" style="display: none;">
           <h3 class="db-settings-section-title">Notifications</h3>
           
@@ -931,7 +958,6 @@
     </div>
   </div>
 
-  <!-- Logout Confirmation Modal -->
   <div class="db-modal-overlay" id="logoutModal">
     <div class="db-modal-content">
       <div class="db-modal-icon-wrap">
@@ -950,211 +976,8 @@
     </div>
   </div>
 
-  <!-- Script for toggling Profile Menu & Modals -->
-  <script>
-    function toggleProfileMenu() {
-      const menu = document.getElementById('profileMenu');
-      const btn = document.getElementById('profileMenuBtn');
-      if (menu) {
-        menu.classList.toggle('show');
-        if (btn) btn.classList.toggle('active');
-      }
-    }
-
-    function showProfileModal() {
-      switchProfileTab('personal');
-      // Close profile menu if open
-      const menu = document.getElementById('profileMenu');
-      if (menu && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-      }
-      const modal = document.getElementById('profileModalOverlay');
-      if (modal) {
-        modal.classList.add('show');
-      }
-    }
-
-    function showSettingsModal() {
-      switchProfileTab('settings');
-      // Close profile menu if open
-      const menu = document.getElementById('profileMenu');
-      if (menu && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-      }
-      const modal = document.getElementById('profileModalOverlay');
-      if (modal) {
-        modal.classList.add('show');
-      }
-    }
-
-    function switchProfileTab(tabName) {
-      // Hide all contents
-      const contents = document.querySelectorAll('.profile-tab-content');
-      contents.forEach(content => content.style.display = 'none');
-      
-      // Remove active class from all tabs
-      const tabs = document.querySelectorAll('.db-profile-tab');
-      tabs.forEach(tab => tab.classList.remove('active'));
-      
-      // Show requested content and activate tab
-      if (tabName === 'personal') {
-        document.getElementById('tab-personal').style.display = 'block';
-        tabs[0].classList.add('active');
-      } else if (tabName === 'settings') {
-        document.getElementById('tab-settings').style.display = 'block';
-        tabs[1].classList.add('active');
-      }
-    }
-
-    function closeProfileModal() {
-      const modal = document.getElementById('profileModalOverlay');
-      if (modal) {
-        modal.classList.remove('show');
-      }
-    }
-
-    function showLogoutModal() {
-      // Close profile menu if open
-      const menu = document.getElementById('profileMenu');
-      if (menu && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-      }
-      
-      const modal = document.getElementById('logoutModal');
-      if (modal) {
-        modal.classList.add('show');
-      }
-    }
-
-    function closeLogoutModal() {
-      const modal = document.getElementById('logoutModal');
-      if (modal) {
-        modal.classList.remove('show');
-      }
-    }
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const profileContainer = document.querySelector('.db-profile-dropdown');
-      const menu = document.getElementById('profileMenu');
-      const btn = document.getElementById('profileMenuBtn');
-      
-      if (profileContainer && menu) {
-        if (!profileContainer.contains(event.target)) {
-          if (menu.classList.contains('show')) {
-            menu.classList.remove('show');
-            if (btn) btn.classList.remove('active');
-          }
-        }
-      }
-    });
-
-    // Handle profile image upload preview
-    document.getElementById('profileImageInput').addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        // Validate file size (Max 5MB)
-        if (file.size > 5 * 1024 * 1024) {
-          alert('File size exceeds 5MB limit. Please choose a smaller image.');
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = new Image();
-          img.onload = async function() {
-            // Compress using Canvas
-            const canvas = document.createElement('canvas');
-            const MAX_WIDTH = 256;
-            const MAX_HEIGHT = 256;
-            let width = img.width;
-            let height = img.height;
-
-            if (width > height) {
-              if (width > MAX_WIDTH) {
-                height *= MAX_WIDTH / width;
-                width = MAX_WIDTH;
-              }
-            } else {
-              if (height > MAX_HEIGHT) {
-                width *= MAX_HEIGHT / height;
-                height = MAX_HEIGHT;
-              }
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-            
-            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-
-            // Update UI instantly
-            document.getElementById('profilePhotoImg').src = compressedBase64;
-            document.getElementById('navbarAvatarImg').src = compressedBase64;
-            document.getElementById('navbarAvatarImg').style.display = 'block';
-            document.getElementById('navbarAvatarSvg').style.display = 'none';
-
-            const uploadBtn = document.getElementById('uploadAvatarBtn');
-            const originalBtnText = uploadBtn ? uploadBtn.innerHTML : 'Upload New';
-            if (uploadBtn) {
-              uploadBtn.innerHTML = '<span class="btn-spinner"></span> Saving...';
-              uploadBtn.disabled = true;
-            }
-
-            if (typeof Utils !== 'undefined' && Utils.showToast) {
-              Utils.showToast("Uploading profile picture...", "info");
-            } else {
-              console.log("Uploading profile picture...");
-            }
-
-            try {
-              await API.updateAvatar(compressedBase64);
-              if (typeof Utils !== 'undefined' && Utils.showToast) {
-                Utils.showToast("Profile picture updated successfully!", "success");
-              }
-            } catch (err) {
-              console.error("Failed to upload avatar:", err);
-              if (typeof Utils !== 'undefined' && Utils.showToast) {
-                Utils.showToast("Failed to save avatar.", "error");
-              } else {
-                alert("Failed to save avatar.");
-              }
-            } finally {
-              if (uploadBtn) {
-                uploadBtn.innerHTML = originalBtnText;
-                uploadBtn.disabled = false;
-              }
-            }
-          };
-          img.src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Populate user profile details on load
-    document.addEventListener('DOMContentLoaded', () => {
-      const userStr = localStorage.getItem('user');
-      if (userStr) {
-        const user = JSON.parse(userStr);
-        const fullName = (user.firstName && user.lastName) ? `${user.firstName} ${user.lastName}` : user.name;
-        document.getElementById('profileFullName').value = fullName || '';
-        document.getElementById('profileEmail').value = user.email || '';
-        document.getElementById('profilePhone').value = user.phone || 'N/A';
-        document.getElementById('profileSchool').value = user.school || 'N/A';
-        
-        if (user.avatar) {
-          document.getElementById('profilePhotoImg').src = user.avatar;
-          document.getElementById('navbarAvatarImg').src = user.avatar;
-          document.getElementById('navbarAvatarImg').style.display = 'block';
-          document.getElementById('navbarAvatarSvg').style.display = 'none';
-        } else {
-          document.getElementById('profilePhotoImg').src = '../../assets/images/avatar_adeola.png'; // Fallback
-        }
-      }
-    });
-  </script>
+  <script src="../../js/student-details.js"></script>
+  <script src="../../js/profile.js"></script>
   <script src="../../js/utils.js"></script>
   <script src="../../js/api.js"></script>
 </body>

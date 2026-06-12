@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    function checkAuth() {
-      if (!localStorage.getItem('user')) {
-        window.location.replace('../../index.html');
-      }
-    }
-    checkAuth();
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
-        checkAuth();
-      }
-    });
-  </script>
+  <script src="../../js/auth-guard.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Messages - HostelHub</title>
@@ -32,20 +20,17 @@
 
   <!-- Navbar -->
   <header class="db-navbar">
-    <!-- Left: Logo -->
     <a href="../../index.html" class="db-navbar__left" style="gap: 10px; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; text-decoration: none; color: var(--color-text);">
       <img src="../../assets/icons/logo.svg" alt="HostelHub Logo" width="28" height="28" />
       <span>Hostel<span style="color: #7b38ed;">Hub</span></span>
     </a>
 
-    <!-- Center: Navigation Links -->
     <nav class="db-navbar__center">
       <a href="dashboard.html" class="db-nav-link">Explore</a>
       <a href="saved.html" class="db-nav-link">Saved</a>
       <a href="messages.html" class="db-nav-link db-nav-link--active">Messages</a>
     </nav>
 
-    <!-- Right: Icons -->
     <div class="db-navbar__right">
       <button class="db-icon-btn" aria-label="Notifications">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -53,7 +38,6 @@
           <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
       </button>
-      <!-- User Profile Dropdown Container -->
       <div class="db-profile-dropdown" style="position: relative;">
         <button class="db-icon-btn" aria-label="User Profile" id="profileMenuBtn" onclick="toggleProfileMenu()" style="overflow: hidden; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;">
           <img id="navbarAvatarImg" src="" style="width: 100%; height: 100%; object-fit: cover; display: none;" />
@@ -62,7 +46,6 @@
             <circle cx="12" cy="7" r="4"></circle>
           </svg>
         </button>
-        <!-- Dropdown Menu -->
         <div class="db-profile-menu" id="profileMenu">
           <a href="#" class="db-profile-menu-item" onclick="event.preventDefault(); showProfileModal();">
             <span>Profile</span>
@@ -81,10 +64,8 @@
     </div>
   </header>
 
-  <!-- Main Content Container -->
   <main class="msg-container">
     
-    <!-- Search Bar Section -->
     <div class="msg-search-wrapper">
       <div class="msg-search-input-group">
         <input type="text" class="msg-search-input" placeholder="Search messages, names, or properties..." aria-label="Search messages" />
@@ -108,7 +89,6 @@
       </button>
     </div>
 
-    <!-- Page Header -->
     <header class="msg-header">
       <h1 class="msg-title">Messages</h1>
       <p class="msg-subtitle">Communicate directly with verified landlords and property managers.</p>
@@ -249,7 +229,6 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="db-footer">
     <div class="db-footer-inner">
       <div class="db-footer-left">
@@ -297,7 +276,6 @@
       listItem.classList.add('active');
     }
   </script>
-  <!-- Profile Modal -->
   <div class="db-modal-overlay" id="profileModalOverlay" onclick="if(event.target === this) closeProfileModal()">
     <div class="db-profile-modal-content">
       <div class="db-profile-modal-header">
@@ -320,7 +298,6 @@
       </div>
 
       <div class="db-profile-modal-body">
-        <!-- Personal Info Tab Content -->
         <div id="tab-personal" class="profile-tab-content" style="display: block;">
           <div class="db-profile-photo-section">
           <img src="../../assets/images/avatar_adeola.png" alt="Profile Photo" class="db-profile-photo-large" id="profilePhotoImg" />
@@ -356,7 +333,6 @@
         </form>
         </div>
 
-        <!-- Settings Tab Content -->
         <div id="tab-settings" class="profile-tab-content" style="display: none;">
           <h3 class="db-settings-section-title">Notifications</h3>
           
@@ -395,7 +371,6 @@
     </div>
   </div>
 
-  <!-- Logout Confirmation Modal -->
   <div class="db-modal-overlay" id="logoutModal">
     <div class="db-modal-content">
       <div class="db-modal-icon-wrap">
@@ -414,210 +389,7 @@
     </div>
   </div>
 
-  <script>
-    function toggleProfileMenu() {
-      const menu = document.getElementById('profileMenu');
-      const btn = document.getElementById('profileMenuBtn');
-      if (menu) {
-        menu.classList.toggle('show');
-        if (btn) btn.classList.toggle('active');
-      }
-    }
-
-    function showProfileModal() {
-      switchProfileTab('personal');
-      // Close profile menu if open
-      const menu = document.getElementById('profileMenu');
-      if (menu && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-      }
-      const modal = document.getElementById('profileModalOverlay');
-      if (modal) {
-        modal.classList.add('show');
-      }
-    }
-
-    function showSettingsModal() {
-      switchProfileTab('settings');
-      // Close profile menu if open
-      const menu = document.getElementById('profileMenu');
-      if (menu && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-      }
-      const modal = document.getElementById('profileModalOverlay');
-      if (modal) {
-        modal.classList.add('show');
-      }
-    }
-
-    function switchProfileTab(tabName) {
-      // Hide all contents
-      const contents = document.querySelectorAll('.profile-tab-content');
-      contents.forEach(content => content.style.display = 'none');
-      
-      // Remove active class from all tabs
-      const tabs = document.querySelectorAll('.db-profile-tab');
-      tabs.forEach(tab => tab.classList.remove('active'));
-      
-      // Show requested content and activate tab
-      if (tabName === 'personal') {
-        document.getElementById('tab-personal').style.display = 'block';
-        tabs[0].classList.add('active');
-      } else if (tabName === 'settings') {
-        document.getElementById('tab-settings').style.display = 'block';
-        tabs[1].classList.add('active');
-      }
-    }
-
-    function closeProfileModal() {
-      const modal = document.getElementById('profileModalOverlay');
-      if (modal) {
-        modal.classList.remove('show');
-      }
-    }
-
-    function showLogoutModal() {
-      // Close profile menu if open
-      const menu = document.getElementById('profileMenu');
-      if (menu && menu.classList.contains('show')) {
-        menu.classList.remove('show');
-      }
-      
-      const modal = document.getElementById('logoutModal');
-      if (modal) {
-        modal.classList.add('show');
-      }
-    }
-
-    function closeLogoutModal() {
-      const modal = document.getElementById('logoutModal');
-      if (modal) {
-        modal.classList.remove('show');
-      }
-    }
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-      const profileContainer = document.querySelector('.db-profile-dropdown');
-      const menu = document.getElementById('profileMenu');
-      const btn = document.getElementById('profileMenuBtn');
-      
-      if (profileContainer && menu) {
-        if (!profileContainer.contains(event.target)) {
-          if (menu.classList.contains('show')) {
-            menu.classList.remove('show');
-            if (btn) btn.classList.remove('active');
-          }
-        }
-      }
-    });
-
-    // Handle profile image upload preview
-    document.getElementById('profileImageInput').addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        // Validate file size (Max 5MB)
-        if (file.size > 5 * 1024 * 1024) {
-          alert('File size exceeds 5MB limit. Please choose a smaller image.');
-          return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = new Image();
-          img.onload = async function() {
-            // Compress using Canvas
-            const canvas = document.createElement('canvas');
-            const MAX_WIDTH = 256;
-            const MAX_HEIGHT = 256;
-            let width = img.width;
-            let height = img.height;
-
-            if (width > height) {
-              if (width > MAX_WIDTH) {
-                height *= MAX_WIDTH / width;
-                width = MAX_WIDTH;
-              }
-            } else {
-              if (height > MAX_HEIGHT) {
-                width *= MAX_HEIGHT / height;
-                height = MAX_HEIGHT;
-              }
-            }
-
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-            
-            const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-
-            // Update UI instantly
-            document.getElementById('profilePhotoImg').src = compressedBase64;
-            document.getElementById('navbarAvatarImg').src = compressedBase64;
-            document.getElementById('navbarAvatarImg').style.display = 'block';
-            document.getElementById('navbarAvatarSvg').style.display = 'none';
-
-            const uploadBtn = document.getElementById('uploadAvatarBtn');
-            const originalBtnText = uploadBtn ? uploadBtn.innerHTML : 'Upload New';
-            if (uploadBtn) {
-              uploadBtn.innerHTML = '<span class="btn-spinner"></span> Saving...';
-              uploadBtn.disabled = true;
-            }
-
-            if (typeof Utils !== 'undefined' && Utils.showToast) {
-              Utils.showToast("Uploading profile picture...", "info");
-            } else {
-              console.log("Uploading profile picture...");
-            }
-
-            try {
-              await API.updateAvatar(compressedBase64);
-              if (typeof Utils !== 'undefined' && Utils.showToast) {
-                Utils.showToast("Profile picture updated successfully!", "success");
-              }
-            } catch (err) {
-              console.error("Failed to upload avatar:", err);
-              if (typeof Utils !== 'undefined' && Utils.showToast) {
-                Utils.showToast("Failed to save avatar.", "error");
-              } else {
-                alert("Failed to save avatar.");
-              }
-            } finally {
-              if (uploadBtn) {
-                uploadBtn.innerHTML = originalBtnText;
-                uploadBtn.disabled = false;
-              }
-            }
-          };
-          img.src = e.target.result;
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Populate user profile details on load
-    document.addEventListener('DOMContentLoaded', () => {
-      const userStr = localStorage.getItem('user');
-      if (userStr) {
-        const user = JSON.parse(userStr);
-        const fullName = (user.firstName && user.lastName) ? `${user.firstName} ${user.lastName}` : user.name;
-        document.getElementById('profileFullName').value = fullName || '';
-        document.getElementById('profileEmail').value = user.email || '';
-        document.getElementById('profilePhone').value = user.phone || 'N/A';
-        document.getElementById('profileSchool').value = user.school || 'N/A';
-        
-        if (user.avatar) {
-          document.getElementById('profilePhotoImg').src = user.avatar;
-          document.getElementById('navbarAvatarImg').src = user.avatar;
-          document.getElementById('navbarAvatarImg').style.display = 'block';
-          document.getElementById('navbarAvatarSvg').style.display = 'none';
-        } else {
-          document.getElementById('profilePhotoImg').src = '../../assets/images/avatar_adeola.png'; // Fallback
-        }
-      }
-    });
-  </script>
+  <script src="../../js/profile.js"></script>
   <script src="../../js/utils.js"></script>
   <script src="../../js/api.js"></script>
 </body>
